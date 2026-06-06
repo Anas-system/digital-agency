@@ -1,15 +1,29 @@
-/* Poore browser ki default margin aur padding ko zero kar diya */
+/* 1. Pure Browser ki default spaces ko mitao */
 * {
-  margin: 0 !important;
-  padding: 0 !important;
-  box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
 }
 
+/* 2. HTML, Body aur React ke main Root element ko full block karo */
 html, body, #root {
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  background-color: #0f172a !important; /* Pura background dark blue ho jayega */
-  overflow-x: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    background-color: #0d1527 !important; /* Aapka dark blue color */
+    overflow-x: hidden !important; /* Isse horizontal side scroll bar gayab ho jayegi */
+}
+
+/* 3. Mobile Responsive View handler */
+@media (max-width: 768px) {
+    .nav-desktop {
+        display: none !important;
+    }
+    .hamburger-btn {
+        display: block !important;
+    }
+    .tabs-scroll {
+        justify-content: flex-start !important;
+    }
 }
