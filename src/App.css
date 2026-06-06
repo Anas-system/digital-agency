@@ -1,3 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Isse horizontal scrollbar aur side ka white space gayab ho jayega */
+    background-color: #0f172a; /* Aapke background ka dark color taaki agar thoda space bache bhi toh white na dikhe */
+}
 /* 1. Pure Browser ki default spaces ko mitao */
 * {
     margin: 0 !important;
