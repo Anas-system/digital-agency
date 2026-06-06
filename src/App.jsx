@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+// Gayab hue saare pagon ko wapas laane ke liye yahan import kiya
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
+import FindUsPage from './pages/FindUsPage';
+import Footer from './components/Footer';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -6,7 +11,7 @@ function App() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#0f172a', fontFamily: '"Segoe UI", Roboto, sans-serif', color: '#fff', display: 'flex', flexDirection: 'column' }}>
       
-      {/* 1. NAVBAR SECTION (Rocket Removed, Admin Panel changed to Login, Fixed Layout) */}
+      {/* 1. NAVBAR SECTION (Rocket Removed, Login Button, Mobile Friendly) */}
       <nav style={{ backgroundColor: '#0b1329', padding: '1rem 1.5rem', position: 'relative', zIndex: 100 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
           
@@ -45,16 +50,30 @@ function App() {
       </nav>
 
       {/* 2. HERO / FRONT PAGE SECTION */}
-      <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '100px 24px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '120px 24px 80px 24px' }}>
         <h1 style={{ fontSize: '56px', fontWeight: '800', marginBottom: '20px', letterSpacing: '-1px', background: 'linear-gradient(to right, #fff, #38bdf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
           Welcome to DigiGrow
         </h1>
-        <p style={{ fontSize: '20px', color: '#94a3b8', maxWidth: '600px', lineHeight: '1.6', marginBottom: '40px' }}>
+        <p style={{ fontSize: '20px', color: '#94a3b8', maxWidth: '600px', lineHeight: '1.6' }}>
           Expert Digital Marketing Solutions for Your Business. Scale your digital footprint and dominate your market niche with our expert strategies.
         </p>
-
-        {/* Note: "Get Started" aur "Learn More" buttons tumne pichle message me hatane ko bole the, isliye unhe yahan se poora remove kar diya hai! */}
       </div>
+
+      {/* 3. BAKI KE SARE SECTIONS WAPAS AA GAYE */}
+      <div id="about">
+        <AboutPage />
+      </div>
+
+      <div id="services">
+        <ServicesPage />
+      </div>
+
+      <div id="find-us">
+        <FindUsPage />
+      </div>
+
+      {/* Footer agar tumhare paas tha toh */}
+      <Footer />
 
       {/* Responsive CSS Style */}
       <style>{`
