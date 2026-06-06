@@ -1,17 +1,35 @@
 import React, { useState } from 'react';
-// Gayab hue saare pagon ko wapas laane ke liye yahan import kiya
+// Saare pages ko import kiya
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import FindUsPage from './pages/FindUsPage';
+import Admin from './pages/Admin'; // Admin panel wapas laya
 import Footer from './components/Footer';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  // Yeh state check karegi ki user front page par hai ya login/admin panel par
+  const [showAdmin, setShowAdmin] = useState(false);
+
+  // Agar user ne Login dabaya, toh use direct Admin screen dikhao
+  if (showAdmin) {
+    return (
+      <div style={{ minHeight: '100vh', backgroundColor: '#0f172a', color: '#fff', padding: '20px' }}>
+        <button 
+          onClick={() => setShowAdmin(false)} 
+          style={{ backgroundColor: '#ef4444', color: '#fff', padding: '0.5rem 1rem', borderRadius: '0.375rem', border: 'none', cursor: 'pointer', fontWeight: '600', marginBottom: '20px' }}
+        >
+          ← Back to Website (Logout)
+        </button>
+        <Admin />
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#0f172a', fontFamily: '"Segoe UI", Roboto, sans-serif', color: '#fff', display: 'flex', flexDirection: 'column' }}>
       
-      {/* 1. NAVBAR SECTION (Rocket Removed, Login Button, Mobile Friendly) */}
+      {/* 1. NAVBAR SECTION */}
       <nav style={{ backgroundColor: '#0b1329', padding: '1rem 1.5rem', position: 'relative', zIndex: 100 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
           
@@ -25,7 +43,13 @@ function App() {
             <a href="#about" style={{ color: '#94a3b8', textDecoration: 'none' }}>About</a>
             <a href="#services" style={{ color: '#94a3b8', textDecoration: 'none' }}>Services</a>
             <a href="#find-us" style={{ color: '#94a3b8', textDecoration: 'none' }}>Find Us</a>
-            <a href="/admin" style={{ backgroundColor: '#0ea5e9', color: '#fff', padding: '0.5rem 1.25rem', borderRadius: '0.375rem', textDecoration: 'none', fontWeight: '600' }}>Login</a>
+            {/* Link ki jagah button banaya jo bina page crash kiye login kholega */}
+            <button 
+              onClick={() => setShowAdmin(true)} 
+              style={{ backgroundColor: '#0ea5e9', color: '#fff', padding: '0.5rem 1.25rem', borderRadius: '0.375rem', border: 'none', cursor: 'pointer', fontWeight: '600' }}
+            >
+              Login
+            </button>
           </div>
 
           {/* Mobile Menu Button (☰) */}
@@ -44,7 +68,12 @@ function App() {
             <a href="#about" onClick={() => setIsOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.1rem' }}>About</a>
             <a href="#services" onClick={() => setIsOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.1rem' }}>Services</a>
             <a href="#find-us" onClick={() => setIsOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.1rem' }}>Find Us</a>
-            <a href="/admin" onClick={() => setIsOpen(false)} style={{ backgroundColor: '#0ea5e9', color: '#fff', padding: '0.6rem', borderRadius: '0.375rem', textDecoration: 'none', fontWeight: '600', textAlign: 'center' }}>Login</a>
+            <button 
+              onClick={() => { setIsOpen(false); setShowAdmin(true); }} 
+              style={{ backgroundColor: '#0ea5e9', color: '#fff', padding: '0.6rem', borderRadius: '0.375rem', border: 'none', cursor: 'pointer', fontWeight: '600', textAlign: 'center' }}
+            >
+              Login
+            </button>
           </div>
         )}
       </nav>
@@ -59,7 +88,7 @@ function App() {
         </p>
       </div>
 
-      {/* 3. BAKI KE SARE SECTIONS WAPAS AA GAYE */}
+      {/* 3. BAKI KE SARE SECTIONS */}
       <div id="about">
         <AboutPage />
       </div>
@@ -72,7 +101,6 @@ function App() {
         <FindUsPage />
       </div>
 
-      {/* Footer agar tumhare paas tha toh */}
       <Footer />
 
       {/* Responsive CSS Style */}
