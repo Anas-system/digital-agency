@@ -1,42 +1,73 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Home from './pages/Home';
-import AboutPage from './pages/AboutPage';
-import ServicesPage from './pages/ServicesPage';
-import FindUsPage from './pages/FindUsPage';
-import Admin from './pages/Admin';
+import React, { useState } from 'react';
 
 function App() {
-  return (
-    <Router>
-      <div style={{ minHeight: '100vh', backgroundColor: '#f8fafc', display: 'flex', flexDirection: 'column', fontFamily: '"Segoe UI", Roboto, sans-serif', margin: 0, padding: 0 }}>
-        {/* Professional Navigation Bar */}
-        <nav style={{ backgroundColor: '#0f172a', color: '#f8fafc', padding: '16px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}>
-          <Link to="/" style={{ color: '#38bdf8', textDecoration: 'none', fontSize: '24px', fontWeight: '8xl', display: 'flex', alignItems: 'center', gap: '8px', letterSpacing: '0.5px' }}>
-            🚀 <span style={{ color: '#ffffff', fontWeight: '700' }}>Digi</span><span style={{ color: '#38bdf8', fontWeight: '800' }}>Grow</span>
-          </Link>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
-            <Link to="/about" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', transition: '0.2s' }}>About</Link>
-            <Link to="/services" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', transition: '0.2s' }}>Services</Link>
-            <Link to="/find-us" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', transition: '0.2s' }}>Find Us</Link>
-            <Link to="/admin" style={{ backgroundColor: '#2563eb', color: '#ffffff', textDecoration: 'none', padding: '10px 20px', borderRadius: '6px', fontWeight: '600', fontSize: '14px', boxShadow: '0 2px 4px rgba(37,99,235,0.2)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              Admin Panel ⚙️
-            </Link>
-          </div>
-        </nav>
+  const [isOpen, setIsOpen] = useState(false);
 
-        {/* Core Content View */}
-        <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/find-us" element={<FindUsPage />} />
-            <Route path="/admin" element={<Admin />} />
-          </Routes>
+  return (
+    <div style={{ minHeight: '100vh', backgroundColor: '#0f172a', fontFamily: '"Segoe UI", Roboto, sans-serif', color: '#fff', display: 'flex', flexDirection: 'column' }}>
+      
+      {/* 1. NAVBAR SECTION (Rocket Removed, Admin Panel changed to Login, Fixed Layout) */}
+      <nav style={{ backgroundColor: '#0b1329', padding: '1rem 1.5rem', position: 'relative', zIndex: 100 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
+          
+          {/* Logo */}
+          <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#fff' }}>
+            Digi <span style={{ color: '#0ea5e9' }}>Grow</span>
+          </div>
+
+          {/* Desktop Links (Laptop ke liye) */}
+          <div className="desktop-menu" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            <a href="#about" style={{ color: '#94a3b8', textDecoration: 'none' }}>About</a>
+            <a href="#services" style={{ color: '#94a3b8', textDecoration: 'none' }}>Services</a>
+            <a href="#find-us" style={{ color: '#94a3b8', textDecoration: 'none' }}>Find Us</a>
+            <a href="/admin" style={{ backgroundColor: '#0ea5e9', color: '#fff', padding: '0.5rem 1.25rem', borderRadius: '0.375rem', textDecoration: 'none', fontWeight: '600' }}>Login</a>
+          </div>
+
+          {/* Mobile Menu Button (☰) */}
+          <button 
+            onClick={() => setIsOpen(!isOpen)} 
+            className="mobile-burger-btn"
+            style={{ backgroundColor: 'transparent', border: 'none', color: '#fff', fontSize: '1.75rem', cursor: 'pointer', display: 'none' }}
+          >
+            {isOpen ? '✕' : '☰'}
+          </button>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {isOpen && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', backgroundColor: '#111b35', padding: '1.5rem', position: 'absolute', top: '100%', left: 0, right: 0, boxShadow: '0 10px 15px -3px rgba(0,0,0,0.3)', zIndex: 101 }}>
+            <a href="#about" onClick={() => setIsOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.1rem' }}>About</a>
+            <a href="#services" onClick={() => setIsOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.1rem' }}>Services</a>
+            <a href="#find-us" onClick={() => setIsOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.1rem' }}>Find Us</a>
+            <a href="/admin" onClick={() => setIsOpen(false)} style={{ backgroundColor: '#0ea5e9', color: '#fff', padding: '0.6rem', borderRadius: '0.375rem', textDecoration: 'none', fontWeight: '600', textAlign: 'center' }}>Login</a>
+          </div>
+        )}
+      </nav>
+
+      {/* 2. HERO / FRONT PAGE SECTION */}
+      <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '100px 24px' }}>
+        <h1 style={{ fontSize: '56px', fontWeight: '800', marginBottom: '20px', letterSpacing: '-1px', background: 'linear-gradient(to right, #fff, #38bdf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          Welcome to DigiGrow
+        </h1>
+        <p style={{ fontSize: '20px', color: '#94a3b8', maxWidth: '600px', lineHeight: '1.6', marginBottom: '40px' }}>
+          Expert Digital Marketing Solutions for Your Business. Scale your digital footprint and dominate your market niche with our expert strategies.
+        </p>
+
+        {/* Note: "Get Started" aur "Learn More" buttons tumne pichle message me hatane ko bole the, isliye unhe yahan se poora remove kar diya hai! */}
       </div>
-    </Router>
+
+      {/* Responsive CSS Style */}
+      <style>{`
+        @media (max-width: 768px) {
+          .desktop-menu {
+            display: none !important;
+          }
+          .mobile-burger-btn {
+            display: block !important;
+          }
+        }
+      `}</style>
+    </div>
   );
 }
 
