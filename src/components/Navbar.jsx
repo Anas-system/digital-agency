@@ -7,12 +7,12 @@ const Navbar = () => {
     <nav style={{ backgroundColor: '#0b1329', padding: '1rem 1.5rem', position: 'relative', zIndex: 100 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
         
-        {/* Logo (Rocket removed) */}
+        {/* Logo (Rocket Completely Removed) */}
         <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#fff' }}>
           Digi <span style={{ color: '#0ea5e9' }}>Grow</span>
         </div>
 
-        {/* Laptop/Desktop Menu (Screens bade hone par dikhenge) */}
+        {/* Laptop/Desktop Menu */}
         <div className="desktop-menu" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           <a href="#about" style={{ color: '#94a3b8', textDecoration: 'none' }}>About</a>
           <a href="#services" style={{ color: '#94a3b8', textDecoration: 'none' }}>Services</a>
@@ -30,7 +30,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Dropdown (Jab menu button par click hoga) */}
+      {/* Mobile Dropdown */}
       {isOpen && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', backgroundColor: '#111b35', padding: '1.5rem', position: 'absolute', top: '100%', left: 0, right: 0, boxShadow: '0 10px 15px -3px rgba(0,0,0,0.3)', zIndex: 101 }}>
           <a href="#about" onClick={() => setIsOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.1rem' }}>About</a>
@@ -40,7 +40,7 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Strict CSS for Fixing Mobile view */}
+      {/* Strict CSS for Responsive Mobile View */}
       <style>{`
         @media (max-width: 768px) {
           .desktop-menu {
