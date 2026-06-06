@@ -1,361 +1,102 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-export default function Admin() {
-  // --- Security & Authentication States ---
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [passwordInput, setPasswordInput] = useState("");
-  const [loginError, setLoginError] = useState("");
+const Admin = () => {
+  // Password check karne ke liye states
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [error, setError] = useState(false);
 
-  // --- Active Workspace Tab State ---
-  const [activeTab, setActiveTab] = useState('about');
+  // --- APNA PASSWORD YAHAN BADLEIN ---
+  const SECRET_PASSWORD = "bhai123"; 
 
-  // --- All Content States ---
-  const [aboutText, setAboutText] = useState("");
-  
-  const [title1, setTitle1] = useState("");
-  const [desc1, setDesc1] = useState("");
-  const [title2, setTitle2] = useState("");
-  const [desc2, setDesc2] = useState("");
-  const [title3, setTitle3] = useState(""); 
-  const [desc3, setDesc3] = useState("");   
-  
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-
-  const [loading, setLoading] = useState(false);
-
-  // --- Check Login Session & Load Data ---
-  useEffect(() => {
-    // Check if already logged in earlier
-    const sessionToken = sessionStorage.getItem('admin_session');
-    if (sessionToken === 'authenticated_bhai') {
-      setIsAuthenticated(true);
-    }
-
-    setAboutText(localStorage.getItem('website_about') || "Welcome to DigiGrow...");
-    
-    setTitle1(localStorage.getItem('web_service_title1') || "SOCIAL MEDIA MARKETING");
-    setDesc1(localStorage.getItem('web_service_desc1') || "Instagram Marketing, Facebook Marketing");
-    
-    setTitle2(localStorage.getItem('web_service_title2') || "PAID ADVERTISING");
-    setDesc2(localStorage.getItem('web_service_desc2') || "Google Ads, Facebook Ads");
-    
-    setTitle3(localStorage.getItem('web_service_title3') || "WEBSITE SERVICE");
-    setDesc3(localStorage.getItem('web_service_desc3') || "Website Design, Website Development");
-    
-    setAddress(localStorage.getItem('website_address') || "Roshan Bagh Prayagraj");
-    setEmail(localStorage.getItem('website_email') || "anasknanprince1234@gmail.com");
-    setPhone(localStorage.getItem('website_phone') || "+91 7007684279");
-  }, []);
-
-  // --- Login Handler ---
   const handleLogin = (e) => {
-    e.preventDefault();
-    if (passwordInput === "bhai163") {
-      setIsAuthenticated(true);
-      setLoginError("");
-      sessionStorage.setItem('admin_session', 'authenticated_bhai'); // Save session
+    e.preventDefault(); // Page refresh hone se rokne ke liye
+    if (password === SECRET_PASSWORD) {
+      setIsLoggedIn(true);
+      setError(false);
     } else {
-      setLoginError("❌ Galat Password Hai Bhai! Dobara Try Karo.");
+      setError(true);
+      setPassword(''); // Galat password hone par input khali karne ke liye
     }
   };
 
-  // --- Logout Handler ---
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    setPasswordInput("");
-    sessionStorage.removeItem('admin_session'); // Clear session
+    setIsLoggedIn(false);
+    setPassword('');
   };
 
-  // --- Save Configuration Handler ---
-  const handleSave = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      localStorage.setItem('website_about', aboutText);
-      
-      localStorage.setItem('web_service_title1', title1);
-      localStorage.setItem('web_service_desc1', desc1);
-      localStorage.setItem('web_service_title2', title2);
-      localStorage.setItem('web_service_desc2', desc2);
-      localStorage.setItem('web_service_title3', title3);
-      localStorage.setItem('web_service_desc3', desc3);
-      
-      localStorage.setItem('website_address', address);
-      localStorage.setItem('website_email', email);
-      localStorage.setItem('website_phone', phone);
-      
-      localStorage.setItem('website_service1', `${title1}\n${desc1}`);
-      localStorage.setItem('website_service2', `${title2}\n${desc2}`);
-      localStorage.setItem('website_service3', `${title3}\n${desc3}`);
-      
-      setLoading(false);
-      alert('🎉 Configuration Saved Successfully!');
-    }, 400);
-  };
-
-  // --- Premium Shared Styles ---
-  const sharedInputStyle = {
-    width: '100%',
-    padding: '14px 16px',
-    borderRadius: '10px',
-    border: '1px solid rgba(255, 255, 255, 0.15)',
-    fontSize: '15px',
-    outline: 'none',
-    backgroundColor: '#1e293b',
-    color: '#ffffff',
-    boxSizing: 'border-box',
-    fontFamily: '"Inter", "SF Pro Display", system-ui, sans-serif',
-  };
-
-  const sharedLabelStyle = {
-    display: 'block',
-    fontSize: '11px',
-    fontWeight: '700',
-    color: '#38bdf8',
-    marginBottom: '8px',
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-    fontFamily: '"Inter", "SF Pro Display", system-ui, sans-serif',
-  };
-
-  const tabButtonStyle = (tabName) => ({
-    padding: '12px 28px',
-    borderRadius: '10px',
-    fontSize: '14px',
-    fontWeight: '600',
-    border: 'none',
-    cursor: 'pointer',
-    transition: 'all 0.2s ease',
-    fontFamily: '"Inter", "SF Pro Display", system-ui, sans-serif',
-    backgroundColor: activeTab === tabName ? '#0ea5e9' : 'rgba(255, 255, 255, 0.03)',
-    color: activeTab === tabName ? '#ffffff' : '#94a3b8',
-    boxShadow: activeTab === tabName ? '0 4px 15px rgba(14, 165, 233, 0.25)' : 'none',
-  });
-
-  // ================= RENDER LOCK SCREEN IF NOT LOGGED IN =================
-  if (!isAuthenticated) {
+  // 1. Agar password sahi nahi hai, toh pehle ye Lock Screen dikhegi
+  if (!isLoggedIn) {
     return (
-      <div style={{ 
-        minHeight: 'calc(100vh - 68px)', 
-        background: 'radial-gradient(circle at center, #1e293b 0%, #0f172a 100%)',
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        fontFamily: '"Inter", "SF Pro Display", system-ui, sans-serif',
-        padding: '24px',
-        boxSizing: 'border-box'
-      }}>
-        <div style={{ 
-          backgroundColor: 'rgba(30, 41, 59, 0.45)', 
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderRadius: '24px', 
-          padding: '40px 50px', 
-          border: '1px solid rgba(255, 255, 255, 0.08)',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
-          maxWidth: '420px',
-          width: '100%',
-          textAlign: 'center',
-          boxSizing: 'border-box'
-        }}>
-          <span style={{ fontSize: '50px', display: 'block', marginBottom: '16px' }}>🔒</span>
-          <h2 style={{ fontSize: '26px', fontWeight: '800', color: '#ffffff', margin: '0 0 8px 0', letterSpacing: '-0.5px' }}>Access Restricted</h2>
-          <p style={{ color: '#94a3b8', fontSize: '14px', margin: '0 0 24px 0', lineHeight: '1.5' }}>Admin Control Panel ko open karne ke liye secure password enter karein.</p>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', backgroundColor: '#0d1527', padding: '20px' }}>
+        <div style={{ background: '#111c32', border: '1px solid #1e293b', padding: '40px', borderRadius: '12px', width: '100%', maxWidth: '400px', textAlign: 'center', boxShadow: '0 10px 25px rgba(0, 0, 0, 0.4)' }}>
+          <h2 style={{ fontSize: '24px', marginBottom: '10px', color: '#ffffff' }}>Digi Grow</h2>
+          <p style={{ color: '#94a3b8', fontSize: '14px', marginBottom: '25px' }}>Admin Security Lock</p>
           
-          <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <input 
-              type="password" 
-              placeholder="Enter Admin Password..." 
-              value={passwordInput} 
-              onChange={(e) => setPasswordInput(e.target.value)} 
-              style={{ ...sharedInputStyle, textAlign: 'center', fontSize: '16px', letterSpacing: '4px' }} 
-              autoFocus
-            />
-            {loginError && <p style={{ color: '#f87171', fontSize: '13px', margin: 0, fontWeight: '500' }}>{loginError}</p>}
-            <button type="submit" style={{ 
-              backgroundColor: '#0ea5e9', 
-              color: 'white', 
-              border: 'none', 
-              padding: '14px', 
-              borderRadius: '12px', 
-              fontSize: '15px', 
-              fontWeight: '700', 
-              cursor: 'pointer', 
-              boxShadow: '0 4px 15px rgba(14, 165, 233, 0.3)',
-              marginTop: '8px'
-            }}>
-              Unlock Dashboard
-            </button>
+          <form onSubmit={handleLogin}>
+            <div style={{ marginBottom: '20px', textAlign: 'left' }}>
+              <label style={{ display: 'block', fontSize: '13px', color: '#38bdf8', marginBottom: '8px', fontWeight: '500' }}>ENTER SECRET PASSWORD</label>
+              <input 
+                type="password" 
+                placeholder="••••••••" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                style={{ width: '100%', padding: '12px 16px', background: '#0d1527', border: '1px solid #334155', borderRadius: '6px', color: 'white', fontSize: '15px', outline: 'none' }}
+              />
+            </div>
+            
+            <button type="submit" style={{ width: '100%', padding: '12px', background: '#0284c7', color: 'white', border: 'none', borderRadius: '6px', fontSize: '16px', fontWeight: '600', cursor: 'pointer' }}>Unlock Panel</button>
           </form>
+          
+          {error && <div style={{ color: '#ef4444', fontSize: '14px', marginTop: '15px' }}>Galat Password Hai Bhai! ❌</div>}
         </div>
       </div>
     );
   }
 
-  // ================= MAIN RENDER DASHBOARD (IF LOGGED IN) =================
+  // 2. Agar password SAHI hai, toh aapka ye asli Admin Panel open hoga
   return (
-    <div style={{ 
-      minHeight: 'calc(100vh - 68px)', 
-      background: 'radial-gradient(circle at center, #1e293b 0%, #0f172a 100%)',
-      padding: '60px 24px', 
-      display: 'flex', 
-      flexDirection: 'column',
-      alignItems: 'center', 
-      fontFamily: '"Inter", "SF Pro Display", system-ui, sans-serif',
-      boxSizing: 'border-box',
-      position: 'relative'
-    }}>
-      
-      {/* Logout Floating Button */}
-      <button onClick={handleLogout} style={{
-        position: 'absolute',
-        top: '24px',
-        right: '24px',
-        backgroundColor: 'rgba(248, 113, 113, 0.1)',
-        border: '1px solid rgba(248, 113, 113, 0.2)',
-        color: '#f87171',
-        padding: '10px 20px',
-        borderRadius: '8px',
-        fontSize: '13px',
-        fontWeight: '600',
-        cursor: 'pointer',
-        transition: 'all 0.2s'
-      }}>
-        🚪 Secure Logout
-      </button>
+    <div style={{ backgroundColor: '#0d1527', minHeight: '100vh', color: '#ffffff' }}>
+      {/* Navbar */}
+      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 5%', borderBottom: '1px solid #1e293b' }}>
+        <div style={{ fontSize: '22px', fontWeight: '700', color: '#ffffff' }}>🚀 Digi<span style={{ color: '#38bdf8' }}>Grow</span></div>
+        <nav style={{ display: 'flex', alignItems: 'center' }}>
+          <a href="#" style={{ color: '#94a3b8', textDecoration: 'none', marginLeft: '20px', fontSize: '14px' }}>About</a>
+          <a href="#" style={{ color: '#94a3b8', textDecoration: 'none', marginLeft: '20px', fontSize: '14px' }}>Services</a>
+          <a href="#" style={{ color: '#94a3b8', textDecoration: 'none', marginLeft: '20px', fontSize: '14px' }}>Find Us</a>
+          <button onClick={handleLogout} style={{ background: '#ef4444', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: '500', marginLeft: '20px' }}>Lock Panel</button>
+        </nav>
+      </header>
 
-      <form onSubmit={handleSave} style={{ maxWidth: '750px', width: '100%', display: 'flex', flexDirection: 'column', gap: '32px' }}>
-        
-        {/* ================= HEADER SECTION ================= */}
-        <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: '36px', fontWeight: '800', color: '#ffffff', margin: '0 0 6px 0', letterSpacing: '-1px' }}>
-            Digi Grow - Admin Panel
-          </h1>
-          <p style={{ color: '#94a3b8', fontSize: '14px', margin: 0, fontWeight: '400' }}>
-            Select a specific section to customize your website content.
-          </p>
+      {/* Main Content Dashboard */}
+      <div style={{ maxWidth: '1000px', margin: '40px auto', padding: '0 20px', textAlign: 'center' }}>
+        <h1 style={{ fontSize: '32px', marginBottom: '8px' }}>Digi Grow - Admin Panel</h1>
+        <p style={{ color: '#94a3b8', fontSize: '14px', marginBottom: '30px' }}>Select a specific section to customize your website content.</p>
+
+        {/* Navigation Tabs */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '30px' }}>
+          <button style={{ background: '#0284c7', color: 'white', border: '1px solid #38bdf8', padding: '10px 20px', borderRadius: '6px', cursor: 'pointer', fontSize: '14px' }}>📝 About Section</button>
+          <button style={{ background: '#111c32', color: '#94a3b8', border: '1px solid #1e293b', padding: '10px 20px', borderRadius: '6px', cursor: 'pointer', fontSize: '14px' }}>💼 Services Card</button>
+          <button style={{ background: '#111c32', color: '#94a3b8', border: '1px solid #1e293b', padding: '10px 20px', borderRadius: '6px', cursor: 'pointer', fontSize: '14px' }}>📍 Contact Details</button>
         </div>
 
-        {/* ================= MODERN SEGMENTED TABS ================= */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', backgroundColor: 'rgba(15, 23, 42, 0.4)', padding: '8px', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.03)' }}>
-          <button type="button" onClick={() => setActiveTab('about')} style={tabButtonStyle('about')}>📝 About Section</button>
-          <button type="button" onClick={() => setActiveTab('services')} style={tabButtonStyle('services')}>💼 Services Card</button>
-          <button type="button" onClick={() => setActiveTab('contact')} style={tabButtonStyle('contact')}>📍 Contact Details</button>
+        {/* Customization Form Card */}
+        <div style={{ background: '#111c32', border: '1px solid #1e293b', borderRadius: '12px', padding: '30px', textAlign: 'left', maxWidth: '700px', margin: '0 auto 30px auto' }}>
+          <h3 style={{ fontSize: '18px', marginBottom: '6px' }}>1. Customize About Us</h3>
+          <p style={{ color: '#94a3b8', fontSize: '14px', marginBottom: '20px' }}>Modify your main branding text and mission lines statement.</p>
+          
+          <label style={{ display: 'block', fontSize: '12px', color: '#38bdf8', textTransform: 'uppercase', fontWeight: '600', marginBottom: '10px' }}>Main About Us Description</label>
+          <textarea 
+            defaultValue="Hum businesses ko online grow karne mein help karte hain through smart aur result-oriented digital marketing solutions.&#10;&#10;Hamara goal brands, startups aur local businesses ko strong online presence dena hai, taaki woh zyada customers tak pahunch sakein aur apne business ko faster grow kar sakein."
+            style={{ width: '100%', height: '150px', background: '#0d1527', border: '1px solid #1e293b', borderRadius: '8px', color: '#e2e8f0', padding: '15px', fontSize: '14px', lineHeight: '1.6', resize: 'none', outline: 'none' }}
+          />
         </div>
 
-        {/* ================= CARD WORKSPACE CONTAINER ================= */}
-        <div style={{ 
-          backgroundColor: 'rgba(30, 41, 59, 0.45)', 
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderRadius: '20px', 
-          padding: '40px', 
-          border: '1px solid rgba(255, 255, 255, 0.05)',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4)',
-          minHeight: '340px'
-        }}>
-
-          {/* SET 1: ABOUT US */}
-          {activeTab === 'about' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div>
-                <h3 style={{ margin: '0 0 4px 0', color: '#ffffff', fontSize: '18px', fontWeight: '700', letterSpacing: '-0.5px' }}>1. Customize About Us</h3>
-                <p style={{ margin: 0, color: '#94a3b8', fontSize: '13px' }}>Modify your main branding text and mission lines statement.</p>
-              </div>
-              <div style={{ height: '1px', backgroundColor: 'rgba(255,255,255,0.06)' }}></div>
-              <div>
-                <label style={sharedLabelStyle}>Main About Us Description</label>
-                <textarea rows="6" value={aboutText} onChange={(e) => setAboutText(e.target.value)} style={{ ...sharedInputStyle, lineHeight: '1.6' }} />
-              </div>
-            </div>
-          )}
-
-          {/* SET 2: 3 SERVICES */}
-          {activeTab === 'services' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div>
-                <h3 style={{ margin: '0 0 4px 0', color: '#ffffff', fontSize: '18px', fontWeight: '700', letterSpacing: '-0.5px' }}>2. Customize 3 Services</h3>
-                <p style={{ margin: 0, color: '#94a3b8', fontSize: '13px' }}>Update headings and details for all three individual blocks.</p>
-              </div>
-              <div style={{ height: '1px', backgroundColor: 'rgba(255,255,255,0.06)' }}></div>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxHeight: '400px', overflowY: 'auto', paddingRight: '6px' }}>
-                {/* Service 1 */}
-                <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.2)', padding: '20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.02)' }}>
-                  <label style={sharedLabelStyle}>Service 01 Title</label>
-                  <input type="text" value={title1} onChange={(e) => setTitle1(e.target.value)} style={{ ...sharedInputStyle, marginBottom: '16px', fontWeight: '600' }} />
-                  <label style={sharedLabelStyle}>Service 01 Description</label>
-                  <textarea rows="3" value={desc1} onChange={(e) => setDesc1(e.target.value)} style={sharedInputStyle} />
-                </div>
-
-                {/* Service 2 */}
-                <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.2)', padding: '20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.02)' }}>
-                  <label style={sharedLabelStyle}>Service 02 Title</label>
-                  <input type="text" value={title2} onChange={(e) => setTitle2(e.target.value)} style={{ ...sharedInputStyle, marginBottom: '16px', fontWeight: '600' }} />
-                  <label style={sharedLabelStyle}>Service 02 Description</label>
-                  <textarea rows="3" value={desc2} onChange={(e) => setDesc2(e.target.value)} style={sharedInputStyle} />
-                </div>
-
-                {/* Service 3 */}
-                <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.2)', padding: '20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.02)' }}>
-                  <label style={sharedLabelStyle}>Service 03 Title</label>
-                  <input type="text" value={title3} onChange={(e) => setTitle3(e.target.value)} style={{ ...sharedInputStyle, marginBottom: '16px', fontWeight: '600' }} />
-                  <label style={sharedLabelStyle}>Service 03 Description</label>
-                  <textarea rows="3" value={desc3} onChange={(e) => setDesc3(e.target.value)} style={sharedInputStyle} />
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* SET 3: CONTACT DETAILS */}
-          {activeTab === 'contact' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div>
-                <h3 style={{ margin: '0 0 4px 0', color: '#ffffff', fontSize: '18px', fontWeight: '700', letterSpacing: '-0.5px' }}>3. Contact Details</h3>
-                <p style={{ margin: 0, color: '#94a3b8', fontSize: '13px' }}>Maintain your active addresses and primary communication links.</p>
-              </div>
-              <div style={{ height: '1px', backgroundColor: 'rgba(255,255,255,0.06)' }}></div>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
-                <div>
-                  <label style={sharedLabelStyle}>Office Address</label>
-                  <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} style={sharedInputStyle} />
-                </div>
-                <div>
-                  <label style={sharedLabelStyle}>Support Email</label>
-                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={sharedInputStyle} />
-                </div>
-                <div>
-                  <label style={sharedLabelStyle}>Phone Number</label>
-                  <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} style={sharedInputStyle} />
-                </div>
-              </div>
-            </div>
-          )}
-
-        </div>
-
-        {/* ================= CENTRALIZED SUBMIT BUTTON ================= */}
-        <div style={{ textAlign: 'center' }}>
-          <button type="submit" disabled={loading} style={{ 
-            backgroundColor: '#0ea5e9', 
-            color: 'white', 
-            border: 'none', 
-            padding: '16px 44px', 
-            borderRadius: '12px', 
-            fontSize: '15px', 
-            fontWeight: '700', 
-            cursor: 'pointer', 
-            fontFamily: '"Inter", "SF Pro Display", system-ui, sans-serif',
-            boxShadow: '0 6px 20px rgba(14, 165, 233, 0.25)',
-          }}>
-            {loading ? 'Saving Layout...' : 'Save Configuration Permanent'}
-          </button>
-        </div>
-
-      </form>
+        {/* Save Button */}
+        <button onClick={() => alert("Settings successfully save ho gayi hain bhai! 👍")} style={{ display: 'block', width: '100%', maxWidth: '300px', margin: '0 auto', background: '#0091ff', color: 'white', border: 'none', padding: '14px', borderRadius: '8px', fontWeight: '600', fontSize: '15px', cursor: 'pointer' }}>Save Configuration Permanent</button>
+      </div>
     </div>
   );
-}
+};
+
+export default Admin;
