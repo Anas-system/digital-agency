@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- 🌟 Mobile browser ke top aur bottom bar ko dark karne waali line 🌟 -->
-    <meta name="theme-color" content="#0f172a" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+/* 1. Browser ki sabhi default khali jagah ko zero karne ke liye */
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100vw !important; /* Poori screen ki width lega */
+    max-width: 100% !important;
+    min-height: 100vh !important;
+    overflow-x: hidden !important; /* Side scroll bilkul band */
+    background-color: #0c1524 !important; /* Jo aapki website ka dark navy blue/black color hai wo */
+}
 
-    <title>DigiGrow - Digital Agency</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
+/* 2. Kisi bhi main wrapper div ke padding/margin ko reset karne ke liye */
+#root, .App, main, header, nav, section {
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
