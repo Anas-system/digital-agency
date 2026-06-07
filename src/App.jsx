@@ -6,7 +6,6 @@ import ServicesPage from './pages/ServicesPage';
 import FindUsPage from './pages/FindUsPage';
 import Admin from './pages/Admin';
 
-// 🚀 CLEAN CHASSIS: Removed Bottom Badges & Kept Premium Core Graphics
 function Home() {
   const canvasRef = useRef(null);
 
@@ -25,9 +24,11 @@ function Home() {
     };
 
     const handleResize = () => {
-      canvas.width = canvas.parentElement.clientWidth;
-      canvas.height = canvas.parentElement.clientHeight;
-      init();
+      if (canvas && canvas.parentElement) {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+        init();
+      }
     };
 
     const handleMouseMove = (event) => {
@@ -109,24 +110,24 @@ function Home() {
       }
     };
 
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-      }
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
     canvas.width = canvas.parentElement.clientWidth || window.innerWidth;
     canvas.height = canvas.parentElement.clientHeight || window.innerHeight;
 
     init();
     animate();
 
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+      }
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
-      if (canvas.parentElement) {
+      if (canvas && canvas.parentElement) {
         canvas.parentElement.removeEventListener('mousemove', handleMouseMove);
         canvas.parentElement.removeEventListener('mouseleave', handleMouseLeave);
       }
@@ -150,7 +151,6 @@ function Home() {
       overflow: 'hidden'
     }}>
       
-      {/* Dynamic Interactive Backdrop */}
       <canvas 
         ref={canvasRef} 
         style={{ 
@@ -164,9 +164,7 @@ function Home() {
         }} 
       />
 
-      {/* Center Layout Text Content */}
       <div style={{ zIndex: 2, maxWidth: '880px', padding: '0 10px' }}>
-        
         <h1 style={{ 
           fontSize: 'calc(36px + 2.4vw)', 
           fontWeight: '900', 
@@ -198,7 +196,6 @@ function Home() {
         }}>
           Expert Digital Marketing Solutions For Your Business. Scale your digital footprint and dominate your market niche with our expert strategies.
         </p>
-
       </div>
     </div>
   );
@@ -232,15 +229,15 @@ function App() {
         }
       `}</style>
 
-      <Navbar />
+      <Navbar/>
       
       <div style={{ flex: '1', width: '100%', height: 'calc(100vh - 75px)', overflowY: 'auto', overflowX: 'hidden' }}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/find-us" element={<FindUsPage />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route element="{<Home" path="/"/>} />
+          <Route element="{<AboutPage" path="/about"/>} />
+          <Route element="{<ServicesPage" path="/services"/>} />
+          <Route element="{<FindUsPage" path="/find-us"/>} />
+          <Route element="{<Admin" path="/admin"/>} />
         </Routes>
       </div>
     </div>
