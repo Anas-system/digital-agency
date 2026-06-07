@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-// 🚀 Version 5 ke mutabik Switch aur Router imports
-import { Switch, Route, Link } from 'react-router-dom';
+// 🚀 Version 6 ke sahi imports (Routes aur Route)
+import { Routes, Route, Link } from 'react-router-dom';
 
 // 1. DYNAMIC NAVBAR MODULE
 function Navbar() {
@@ -213,7 +213,7 @@ function ServicesPage() {
   }, []);
 
   return (
-    <div style={{ padding: '60px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyY: 'center' }}>
+    <div style={{ padding: '60px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '40px' }}>Our Services</h2>
       <div style={{ display: 'flex', gap: '25px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1100px', width: '100%' }}>
         {[1, 2, 3].map(num => (
@@ -351,20 +351,19 @@ function Admin() {
   );
 }
 
-// 7. GLOBAL ROUTER CONTROLLER (v5 Switch & Route architecture)
+// 7. GLOBAL ROUTER CONTROLLER (🚀 Version 6 Rules Restored)
 function App() {
   return (
     <div style={{ backgroundColor: '#090f1c', height: '100vh', width: '100vw', margin: 0, padding: 0, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, overflow: 'hidden' }}>
       <Navbar />
       <div style={{ flex: '1', width: '100%', height: 'calc(100vh - 75px)', overflowY: 'auto', overflowX: 'hidden' }}>
-        {/* 🚀 VERSION 5 COMPATIBLE ROUTING ENGINE */}
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={AboutPage} />
-          <Route path="/services" component={ServicesPage} />
-          <Route path="/find-us" component={FindUsPage} />
-          <Route path="/admin" component={Admin} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/find-us" element={<FindUsPage />} />
+          <Route path="/admin" element={<Admin />} />
+        </Routes>
       </div>
     </div>
   );
