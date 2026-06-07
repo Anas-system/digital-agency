@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
-// 1. EMBEDDED DYNAMIC NAVBAR MODULE
+// 1. DYNAMIC NAVBAR MODULE
 function Navbar() {
   return (
     <nav style={{ 
@@ -173,7 +173,7 @@ function Home() {
   );
 }
 
-// 3. ABOUTPAGE MODULE WITH MATCHING FONTS
+// 3. ABOUTPAGE MODULE
 function AboutPage() {
   const [aboutText, setAboutText] = useState("Hum aapke business ko online scale karne aur brand value build karne mein madad karte hain through custom, data-driven aur result-oriented digital marketing strategies.");
   useEffect(() => {
@@ -248,7 +248,7 @@ function FindUsPage() {
   );
 }
 
-// 6. ADMIN SECURITY PROTECTION MODULE
+// 6. ADMIN SECURITY MODULE
 function Admin() {
   const [passwordInput, setPasswordInput] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -361,12 +361,13 @@ function Admin() {
   );
 }
 
-// 7. GLOBAL ROUTER CONTROLLER FRAME
+// 7. GLOBAL MASTER ROUTER
 function App() {
   return (
     <div style={{ backgroundColor: '#090f1c', height: '100vh', width: '100vw', margin: 0, padding: 0, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, overflow: 'hidden' }}>
       <Navbar />
       <div style={{ flex: '1', width: '100%', height: 'calc(100vh - 75px)', overflowY: 'auto', overflowX: 'hidden' }}>
+        {/* 🚀 PERFECT REDIRECT SYNTAX */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />
