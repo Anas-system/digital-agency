@@ -1,42 +1,19 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+
+.star-background {
+  min-height: 100vh;
+  background-color: #050a14;
+  background-image: radial-gradient(white, rgba(255,255,255,.2) 1px, transparent 1px);
+  background-size: 50px 50px;
+  color: white;
 }
 
-html, body {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Isse horizontal scrollbar aur side ka white space gayab ho jayega */
-    background-color: #0f172a; /* Aapke background ka dark color taaki agar thoda space bache bhi toh white na dikhe */
-}
-/* 1. Pure Browser ki default spaces ko mitao */
-* {
-    margin: 0 !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-}
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 30px 8%; }
+.logo { font-size: 28px; font-weight: 800; }
+.nav-links { display: flex; gap: 30px; align-items: center; }
+.nav-links a { color: white; text-decoration: none; }
+.login-btn { padding: 8px 25px; background-color: #0ea5e9; border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; }
 
-/* 2. HTML, Body aur React ke main Root element ko full block karo */
-html, body, #root {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-    min-height: 100vh !important;
-    background-color: #0d1527 !important; /* Aapka dark blue color */
-    overflow-x: hidden !important; /* Isse horizontal side scroll bar gayab ho jayegi */
-}
-
-/* 3. Mobile Responsive View handler */
-@media (max-width: 768px) {
-    .nav-desktop {
-        display: none !important;
-    }
-    .hamburger-btn {
-        display: block !important;
-    }
-    .tabs-scroll {
-        justify-content: flex-start !important;
-    }
-}
+.hero-content { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 70vh; text-align: center; }
+.hero-content h1 { font-size: 60px; }
+.brand { color: #0ea5e9; }

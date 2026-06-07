@@ -8,4 +8,31 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     {/* 🚀 YAHA SE BROWSER_ROUTER HATA DIYA HAI TAKI DOBARA COINCIDE NA HO */}
     <App />
   </React.StrictMode>,
-)
+)/* Responsive Fixes */
+@media (max-width: 768px) {
+  .navbar {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    padding: 15px !important;
+    width: 100%;
+  }
+
+  .nav-links {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 0;
+    margin: 15px 0 !important;
+  }
+
+  .nav-links li a {
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  .login-btn {
+    margin-top: 5px;
+  }
+}

@@ -1,563 +1,754 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
 
-// 1. DYNAMIC NAVBAR MODULE (🚀 Fixed Alignment & Active Page Highlighting)
-function Navbar() {
-  const location = useLocation(); // Current active page url track karne ke liye
+// ===================================================
+// 1. PREMIUM SOFT-DARK SYSTEM DESIGN STYLES WITH GLOW
+// ===================================================
+const styles = {
+  main: { 
+    backgroundColor: '#0b0f19', 
+    minHeight: '100vh', 
+    color: '#f1f5f9', 
+    fontFamily: "'Source Serif 4', Georgia, 'Times New Roman', serif",
+    overflowX: 'hidden', 
+    position: 'relative',
+    scrollBehavior: 'smooth',
+    WebkitTapHighlightColor: 'transparent',
+    width: '100%'
+  },
+  canvasContainer: {
+    position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+    height: '100%', width: '100%',
+    zIndex: 1, pointerEvents: 'none'
+  },
+  ambientLighting: {
+    position: 'fixed', top: '10%', left: '50%', transform: 'translate(-50%, -50%)',
+    width: '120vw', height: '60vh',
+    background: 'radial-gradient(circle at 50% 30%, rgba(56,189,248,0.12) 0%, rgba(99,102,241,0.04) 50%, transparent 100%)',
+    pointerEvents: 'none', zIndex: 2
+  },
+  header: {
+    backdropFilter: 'blur(24px)',
+    WebkitBackdropFilter: 'blur(24px)',
+    borderBottom: '1px solid rgba(56, 189, 248, 0.15)',
+    position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+    backgroundColor: 'rgba(11, 15, 25, 0.8)', 
+    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.05)',
+    transition: 'all 0.3s ease',
+    width: '100%'
+  },
+  // FIXED ALIGNMENT: Proper spacing structure to avoid edge spilling
+  navbar: { 
+    display: 'flex', 
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
+    padding: '16px 5%',
+    maxWidth: '1280px',
+    margin: '0 auto',
+    gap: '20px',
+    boxSizing: 'border-box'
+  },
+  logoWrapper: { 
+    display: 'flex', 
+    alignItems: 'center', 
+    cursor: 'pointer', 
+    textDecoration: 'none',
+    outline: 'none',
+    border: 'none',
+    WebkitTapHighlightColor: 'transparent',
+    flexShrink: 0
+  },
+  logoText: { 
+    fontSize: '26px', 
+    fontWeight: '800', 
+    letterSpacing: '-1px',
+    color: '#38bdf8', 
+    userSelect: 'none',
+    textShadow: '0 0 20px rgba(56,189,248,0.3)'
+  },
+  // FIXED LAYER SHIFT: Combined flexible structure preventing overlapping
+  navRightContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px', 
+    listStyle: 'none',
+    padding: 0,
+    margin: 0,
+    flexWrap: 'nowrap'
+  },
+  linkButton: { 
+    color: '#94a3b8', 
+    background: 'transparent',
+    backgroundColor: 'transparent',
+    border: '1px solid transparent', 
+    fontSize: '14px', 
+    fontWeight: '500', 
+    transition: 'all 0.25s ease', 
+    padding: '8px 16px', 
+    position: 'relative', 
+    letterSpacing: '0.3px', 
+    cursor: 'pointer',
+    fontFamily: "'Source Serif 4', serif",
+    outline: 'none',
+    borderRadius: '20px', 
+    boxShadow: 'none',
+    WebkitTapHighlightColor: 'transparent',
+    whiteSpace: 'nowrap'
+  },
+  activeLink: { 
+    color: '#38bdf8 !important', 
+    fontWeight: '600',
+    background: 'rgba(56, 189, 248, 0.12) !important',
+    backgroundColor: 'rgba(56, 189, 248, 0.12) !important',
+    border: '1px solid rgba(56, 189, 248, 0.3) !important',
+    textShadow: '0 0 10px rgba(56,189,248,0.4)',
+    boxShadow: '0 4px 15px rgba(56, 189, 248, 0.08)'
+  },
+  auditBtn: { 
+    padding: '8px 18px', 
+    background: 'linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%)', 
+    border: '1px solid rgba(255,255,255,0.1)', 
+    borderRadius: '20px', 
+    color: 'white', 
+    fontWeight: '600', 
+    cursor: 'pointer', 
+    fontSize: '13px',
+    boxShadow: '0 4px 14px rgba(14,165,233,0.2)', 
+    transition: 'all 0.3s ease',
+    fontFamily: "'Source Serif 4', serif",
+    whiteSpace: 'nowrap',
+    outline: 'none',
+    WebkitTapHighlightColor: 'transparent',
+    marginLeft: '6px',
+    flexShrink: 0
+  },
+  scrollSection: {
+    minHeight: '100vh', 
+    paddingTop: '150px', 
+    paddingBottom: '80px',
+    paddingLeft: '5%',
+    paddingRight: '5%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+    zIndex: 10,
+    boxSizing: 'border-box',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.02)',
+    width: '100%'
+  },
+  viewWrapper: { 
+    width: '100%',
+    maxWidth: '1440px',
+    margin: '0 auto',
+    boxSizing: 'border-box'
+  },
+  heroSection: { display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', width: '100%', position: 'relative', zIndex: 20 },
+  sectionHeader: { textAlign: 'center', marginBottom: '50px', width: '100%' },
+  hugeTitle: { fontSize: 'clamp(32px, 7vw, 64px)', fontWeight: '700', lineHeight: '1.25', letterSpacing: '-1px', marginBottom: '24px', width: '100%', color: '#ffffff' },
+  gradientBlueText: { color: '#38bdf8' },
+  subtitleText: { color: '#94a3b8', fontSize: 'clamp(15px, 3.8vw, 20px)', maxWidth: '760px', lineHeight: '1.7', margin: '0 auto', fontWeight: '300', width: '100%' },
+  topBadge: {
+    background: 'linear-gradient(135deg, rgba(56,189,248,0.1) 0%, rgba(99,102,241,0.1) 100%)',
+    border: '1px solid rgba(56,189,248,0.3)',
+    borderRadius: '30px',
+    padding: '6px 16px',
+    fontSize: '13px',
+    fontWeight: '600',
+    color: '#38bdf8',
+    letterSpacing: '0.5px',
+    marginBottom: '24px',
+    display: 'inline-block',
+    boxShadow: '0 4px 20px rgba(56,189,248,0.15)',
+    textTransform: 'uppercase'
+  },
+  
+  glassCard: {
+    backgroundColor: 'rgba(17, 24, 39, 0.45)', 
+    backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+    border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '20px', padding: 'clamp(20px, 5vw, 40px)',
+    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.25)', transition: 'all 0.3s ease', width: '100%',
+    boxSizing: 'border-box'
+  },
+  metricCard: {
+    backgroundColor: 'rgba(30, 41, 59, 0.35)', border: '1px solid rgba(255, 255, 255, 0.03)',
+    borderRadius: '14px', padding: '25px', transition: 'all 0.3s ease', position: 'relative', overflow: 'hidden', width: '100%', boxSizing: 'border-box'
+  },
+  gridContainer: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', width: '100%', marginTop: '40px', boxSizing: 'border-box' },
+  toast: {
+    position: 'fixed', bottom: '30px', right: '30px', backgroundColor: '#0b1329',
+    borderLeft: '4px solid #38bdf8', borderTop: '1px solid rgba(255,255,255,0.04)',
+    borderRight: '1px solid rgba(255, 255, 255, 0.04)', borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
+    padding: '14px 20px', borderRadius: '6px', boxShadow: '0 20px 45px rgba(0,0,0,0.6)',
+    zIndex: 9999, display: 'flex', alignItems: 'center', gap: '10px', color: '#fff', fontSize: '14px'
+  },
+  
+  adminOverlay: {
+    position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+    backgroundColor: 'rgba(3, 7, 18, 0.85)', backdropFilter: 'blur(16px)',
+    zIndex: 99999, display: 'flex', alignItems: 'center',
+    justifyContent: 'center', padding: '20px', boxSizing: 'border-box'
+  },
+  adminModal: {
+    backgroundColor: '#0f172a', border: '1px solid rgba(255,255,255,0.1)',
+    borderRadius: '16px', padding: '30px', maxWidth: '650px', width: '100%',
+    boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)', maxHeight: '90vh', overflowY: 'auto'
+  },
+  adminInput: {
+    width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)',
+    backgroundColor: '#020617', color: '#fff', fontSize: '14px', outline: 'none', marginTop: '6px',
+    marginBottom: '16px', fontFamily: 'sans-serif'
+  },
+  adminLabel: { fontSize: '12px', color: '#38bdf8', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' },
+  adminSectionDivider: { borderTop: '1px solid rgba(255,255,255,0.1)', margin: '20px 0 15px 0', paddingTop: '10px', color: '#e2e8f0', fontSize: '14px', fontWeight: 'bold' }
+};
 
-  // Function to return active color dynamically
-  const getLinkStyle = (path) => {
-    const isActive = location.pathname === path;
-    return {
-      color: isActive ? '#ffffff' : '#94a3b8',
-      fontWeight: isActive ? '700' : '500',
-      textDecoration: 'none',
-      fontSize: '15px',
-      fontFamily: "'serif', Georgia, Times",
-      transition: 'color 0.2s ease',
-      position: 'relative',
-      paddingBottom: '4px',
-      borderBottom: isActive ? '2px solid #00a2ff' : '2px solid transparent' // Active link ke niche premium blue line
-    };
-  };
+const responsiveStyles = `
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #0b0f19 !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  * {
+    box-sizing: border-box !important;
+  }
+  .nav-custom-btn {
+    background-color: transparent !important;
+    background: transparent !important;
+  }
+  .nav-custom-btn:hover {
+    color: #38bdf8 !important;
+    background-color: rgba(56, 189, 248, 0.06) !important;
+    border: 1px solid rgba(56, 189, 248, 0.15) !important;
+  }
+  .login-btn-glow:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 0 35px rgba(14,165,233,0.55) !important;
+  }
+  
+  /* FIXED RESPONSIVE GRID OVERLAP LOGIC */
+  @media (max-width: 768px) {
+    .navbar-container-box {
+      flex-direction: column !important;
+      gap: 14px !important;
+      padding: 14px 4% !important;
+    }
+    .right-nav-wrapper {
+      width: 100% !important;
+      flex-direction: row !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 6px !important;
+      flex-wrap: wrap !important;
+    }
+    .right-nav-wrapper li {
+      display: inline-block !important;
+    }
+    .right-nav-wrapper button {
+      padding: 6px 10px !important;
+      font-size: 13px !important;
+    }
+  }
+`;
 
-  return (
-    <nav className="main-navbar" style={{ 
-      display: 'flex', 
-      justifyContent: 'space-between', 
-      alignItems: 'center', 
-      padding: '0 5%', 
-      height: '75px', 
-      backgroundColor: '#09111e', 
-      borderBottom: '1px solid rgba(255, 255, 255, 0.04)', 
-      color: '#fff',
-      boxSizing: 'border-box',
-      position: 'relative',
-      zIndex: 10
-    }}>
-      {/* Responsive Alignment Ke Liye Custom CSS Injector */}
-      <style>{`
-        @media (max-width: 650px) {
-          .main-navbar {
-            flex-direction: column !important;
-            height: auto !important;
-            padding: 15px 10px !important;
-            gap: 15px !important;
-          }
-          .nav-links-box {
-            gap: 18px !important;
-            flex-wrap: wrap !important;
-            justify-content: center !important;
-            width: 100% !important;
-          }
-          .login-btn-nav {
-            padding: 6px 14px !important;
-            font-size: 13px !important;
-          }
-        }
-      `}</style>
+// ==========================================================
+// 2. EXCLUSIVE SOFT WHITE ANIMATION FOR HOME ONLY
+// ==========================================================
+const HomeWhiteAnimationEngine = () => {
+  const canvasRef = useRef(null);
 
-      <Link to="/" style={{ textDecoration: 'none' }}>
-        <span style={{ fontSize: '22px', fontWeight: '800', color: '#ffffff', letterSpacing: '-0.5px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
-          DigiGrow
-        </span>
-      </Link>
-      
-      {/* Links box jo active path ke according highlight hoga aur space out rahega */}
-      <div className="nav-links-box" style={{ display: 'flex', gap: '25px', alignItems: 'center' }}>
-        <Link to="/" style={getLinkStyle('/')}>Home</Link>
-        <Link to="/about" style={getLinkStyle('/about')}>About</Link>
-        <Link to="/services" style={getLinkStyle('/services')}>Services</Link>
-        <Link to="/find-us" style={getLinkStyle('/find-us')}>Find Us</Link>
-        
-        <Link to="/admin" className="login-btn-nav" style={{ 
-          backgroundColor: '#00a2ff', 
-          padding: '8px 22px', 
-          borderRadius: '8px', 
-          color: '#fff', 
-          textDecoration: 'none', 
-          fontSize: '14px', 
-          fontWeight: '600',
-          fontFamily: "'serif', Georgia, Times",
-          borderBottom: location.pathname === '/admin' ? '2px solid #ffffff' : 'none'
-        }}>
-          Login
-        </Link>
-      </div>
-    </nav>
-  );
-}
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    let animationFrameId;
+    let width = (canvas.width = canvas.parentElement.offsetWidth);
+    let height = (canvas.height = canvas.parentElement.offsetHeight);
+    let mouse = { x: null, y: null, radius: 140 };
 
-// 2. HOME COMPONENT WITH INTERACTIVE PARTICLES
-function Home() {
-  const canvasRef = useRef(null);
+    const handleMouseMove = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    };
+    const handleMouseLeave = () => { mouse.x = null; mouse.y = null; };
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
 
-    let animationFrameId;
-    let particlesArray = [];
-    const mouse = { x: null, y: null, radius: 180 };
+    const handleResize = () => {
+      if (!canvas || !canvas.parentElement) return;
+      width = canvas.width = canvas.parentElement.offsetWidth;
+      height = canvas.height = canvas.parentElement.offsetHeight;
+    };
+    window.addEventListener('resize', handleResize);
 
-    const handleResize = () => {
-      if (canvas && canvas.parentElement) {
-        canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = canvas.parentElement.clientHeight;
-        init();
-      }
-    };
+    const particles = [];
+    const particleCount = 75; 
 
-    const handleMouseMove = (event) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = event.clientX - rect.left;
-      mouse.y = event.clientY - rect.top;
-    };
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.35, 
+        vy: (Math.random() - 0.5) * 0.35,
+        radius: Math.random() * 1.5 + 0.5
+      });
+    }
 
-    const handleMouseLeave = () => {
-      mouse.x = null;
-      mouse.y = null;
-    };
+    const renderLoop = () => {
+      ctx.clearRect(0, 0, width, height);
 
-    canvas.parentElement.addEventListener('mousemove', handleMouseMove);
-    canvas.parentElement.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('resize', handleResize);
+      for (let i = 0; i < particleCount; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
 
-    class Particle {
-      constructor(x, y, directionX, directionY, size, color) {
-        this.x = x;
-        this.y = y;
-        this.directionX = directionX;
-        this.directionY = directionY;
-        this.size = size;
-        this.color = color;
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-        ctx.fillStyle = this.color;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = '#ffffff';
-        ctx.fill();
-        ctx.shadowBlur = 0; 
-      }
-      update() {
-        this.x += this.directionX;
-        this.y += this.directionY;
-        if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-        if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
 
-        if (mouse.x !== null && mouse.y !== null) {
-          let dx = mouse.x - this.x;
-          let dy = mouse.y - this.y;
-          let distance = Math.sqrt(dx * dx + dy * dy);
-          if (distance < mouse.radius) {
-            let forceDirectionX = dx / distance;
-            let forceDirectionY = dy / distance;
-            let force = (mouse.radius - distance) / mouse.radius;
-            let speed = force * 3.5; 
-            this.x += forceDirectionX * speed;
-            this.y += forceDirectionY * speed;
-          }
-        }
-        this.draw();
-      }
-    }
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            const angle = Math.atan2(dy, dx);
+            p.x += Math.cos(angle) * force * 1.0;
+            p.y += Math.sin(angle) * force * 1.0;
+          }
+        }
 
-    const init = () => {
-      particlesArray = [];
-      let numberOfParticles = Math.floor((canvas.width * canvas.height) / 9000);
-      if (numberOfParticles > 120) numberOfParticles = 120;
-      if (numberOfParticles < 40) numberOfParticles = 40;
-      for (let i = 0; i < numberOfParticles; i++) {
-        let size = Math.random() * 2 + 1;
-        let x = Math.random() * canvas.width;
-        let y = Math.random() * canvas.height;
-        let directionX = (Math.random() * 0.4) - 0.2;
-        let directionY = (Math.random() * 0.4) - 0.2;
-        particlesArray.push(new Particle(x, y, directionX, directionY, size, '#ffffff'));
-      }
-    };
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.18)'; 
+        ctx.fill();
 
-    canvas.width = canvas.parentElement.clientWidth || window.innerWidth;
-    canvas.height = canvas.parentElement.clientHeight || window.innerHeight;
-    init();
-    
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-      }
-      animationFrameId = requestAnimationFrame(animate);
-    };
-    animate();
+        for (let j = i + 1; j < particleCount; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
 
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', handleResize);
-      if (canvas && canvas.parentElement) {
-        canvas.parentElement.removeEventListener('mousemove', handleMouseMove);
-        canvas.parentElement.removeEventListener('mouseleave', handleMouseLeave);
-      }
-    };
-  }, []);
+          if (dist < 120) {
+            const alpha = ((120 - dist) / 120) * 0.12; 
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`; 
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      animationFrameId = requestAnimationFrame(renderLoop);
+    };
+    renderLoop();
 
-  return (
-    <div style={{ padding: '0 24px', height: '100%', backgroundColor: '#09111e', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', boxSizing: 'border-box', width: '100%', position: 'relative', overflow: 'hidden' }}>
-      <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1, pointerEvents: 'none' }} />
-      <div style={{ zIndex: 2, maxWidth: '880px', padding: '0 10px' }}>
-        <h1 style={{ fontSize: 'calc(32px + 2.4vw)', fontWeight: '900', marginBottom: '24px', letterSpacing: '-1px', lineHeight: '1.15', color: '#f8fafc', textShadow: '0 10px 30px rgba(0,0,0,0.5)', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
-          Welcome to <span style={{ background: 'linear-gradient(135deg, #00a2ff 0%, #00ffcc 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', filter: 'drop-shadow(0px 4px 20px rgba(0,162,255,0.3))' }}>DigiGrow</span>
-        </h1>
-        <p style={{ color: '#94a3b8', fontSize: 'calc(14px + 0.15vw)', maxWidth: '650px', lineHeight: '1.8', margin: '0 auto', fontWeight: '400', letterSpacing: '0.2px', textShadow: '0 4px 10px rgba(0,0,0,0.4)', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
-          Expert Digital Marketing Solutions For Your Business. Scale your digital footprint and dominate your market niche with our expert strategies.
-        </p>
-      </div>
-    </div>
-  );
-}
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
 
-// 3. ABOUTPAGE MODULE
-function AboutPage() {
-  const [aboutText, setAboutText] = useState("Hum businesses ko online grow karne mein help karte hain through smart aur result-oriented digital marketing solutions. Hamara goal brands, startups aur local businesses ko strong online presence dena hai, taaki woh zyada customers tak pahunch sakein aur apne business ko faster grow kar sakein. Hum har client ke business goals ke according customized marketing strategies provide karte hain.");
+  return <div style={styles.canvasContainer}><canvas ref={canvasRef} /></div>;
+};
 
-  useEffect(() => {
-    const savedAbout = localStorage.getItem('admin_about_text');
-    if (savedAbout && savedAbout.trim() !== "") {
-      setAboutText(savedAbout);
-    }
-  }, []);
-
-  return (
-    <div style={{ padding: '40px 15px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
-      <div style={{ backgroundColor: '#111b2d', padding: '35px 25px', borderRadius: '24px', maxWidth: '850px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.04)', textAlign: 'left', boxSizing: 'border-box' }}>
-        <h2 style={{ fontSize: '28px', fontWeight: '700', marginBottom: '20px', color: '#ffffff', fontFamily: "'serif', Georgia, Times" }}>
-          Who We Are & <span style={{ color: '#00a2ff' }}>What We Do</span>
-        </h2>
-        <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px', fontFamily: "'serif', Georgia, Times" }}>{aboutText}</p>
-        <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.7', marginBottom: '30px', fontFamily: "'serif', Georgia, Times" }}>Hamari core mission startups, local brands aur established businesses ko ek strong digital foot-print dena hai, taaki aap sahi target audience tak pahunch sakein aur apne business ROI ko faster mode par grow sakein.</p>
-        <h4 style={{ color: '#00a2ff', fontSize: '15px', fontWeight: '700', marginBottom: '15px', fontFamily: "'serif', Georgia, Times" }}>Hamari Core Expertise:</h4>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '12px 20px', color: '#ffffff', fontSize: '14px', lineHeight: '1.5', fontFamily: "'serif', Georgia, Times", fontWeight: '500' }}>
-          <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Social Media Management</div>
-          <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Search Engine Optimization (SEO)</div>
-          <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> High-End Website Development</div>
-          <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Targeted Google & Meta Ads</div>
-          <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Content Strategy & Creation</div>
-          <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Corporate Brand Building</div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// 4. SERVICESPAGE MODULE
-function ServicesPage() {
-  const [services, setServices] = useState({
-    card1Title: 'Social Media Marketing', 
-    card1Desc: 'Instagram Marketing\nFacebook Marketing',
-    card2Title: 'Paid Advertising', 
-    card2Desc: 'Google Ads\nFacebook Ads',
-    card3Title: 'Website Development', 
-    card3Desc: 'Website Design\nWebsite Development'
-  });
-
-  useEffect(() => {
-    const saved = localStorage.getItem('admin_services_json');
-    if (saved) { 
-      try { 
-        const parsed = JSON.parse(saved);
-        if (parsed && parsed.card1Title) setServices(parsed); 
-      } catch(e) {} 
-    }
-  }, []);
-
-  return (
-    <div style={{ padding: '50px 15px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxSizing: 'border-box' }}>
-      <h2 style={{ fontSize: '30px', fontWeight: '700', marginBottom: '40px', color: '#ffffff', textAlign: 'center', fontFamily: "'serif', Georgia, Times" }}>
-        Our <span style={{ color: '#00a2ff' }}>Services</span>
-      </h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '25px', maxWidth: '1140px', width: '100%', boxSizing: 'border-box' }}>
-        {[1, 2, 3].map(num => (
-          <div key={num} style={{ backgroundColor: '#111b2d', padding: '35px 25px', borderRadius: '20px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)', boxSizing: 'border-box', textAlign: 'left' }}>
-            <h3 style={{ fontSize: '19px', color: '#00a2ff', marginBottom: '15px', fontWeight: '700', letterSpacing: '-0.3px', fontFamily: "'serif', Georgia, Times" }}>
-              {services[`card${num}Title`]}
-            </h3>
-            <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.7', whiteSpace: 'pre-line', fontWeight: '400', fontFamily: "'serif', Georgia, Times" }}>
-              {services[`card${num}Desc`]}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// 5. FINDUSPAGE MODULE
-function FindUsPage() {
-  const [findUs, setFindUs] = useState({ 
-    location: 'Roshan Bagh Prayagraj', 
-    email: 'anasknanprince1234@gmail.com', 
-    call: '+91 7007684279' 
-  });
-
-  useEffect(() => {
-    const saved = localStorage.getItem('admin_findus_json');
-    if (saved) { 
-      try { 
-        const parsed = JSON.parse(saved);
-        if (parsed && parsed.location) setFindUs(parsed); 
-      } catch(e) {} 
-    }
-  }, []);
-
-  return (
-    <div style={{ padding: '60px 15px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
-      <div style={{ backgroundColor: '#111b2d', padding: '40px 25px', borderRadius: '24px', maxWidth: '600px', width: '100%', textAlign: 'center', boxSizing: 'border-box', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)' }}>
-        <h2 style={{ fontSize: '30px', marginBottom: '30px', fontWeight: '700', color: '#ffffff', fontFamily: "'serif', Georgia, Times" }}>
-          Find <span style={{ color: '#00a2ff' }}>Us</span>
-        </h2>
-        <div style={{ textAlign: 'left', display: 'inline-block', fontSize: '14px', lineHeight: '2.0', fontFamily: "'serif', Georgia, Times" }}>
-          <p style={{ color: '#94a3b8', margin: '10px 0' }}>📍 <strong style={{ color: '#fff' }}>Location:</strong> {findUs.location}</p>
-          <p style={{ color: '#94a3b8', margin: '10px 0' }}>✉️ <strong style={{ color: '#fff' }}>Email:</strong> {findUs.email}</p>
-          <p style={{ color: '#94a3b8', margin: '10px 0' }}>📞 <strong style={{ color: '#fff' }}>Call:</strong> {findUs.call}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// 6. ADMIN PANEL
-function Admin() {
-  const [passwordInput, setPasswordInput] = useState('');
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [loginError, setLoginError] = useState('');
-  const [attempts, setAttempts] = useState(0);
-  const [lockoutTimeLeft, setLockoutTimeLeft] = useState(0);
-
-  const [formAbout, setFormAbout] = useState('');
-  const [formServices, setFormServices] = useState({
-    card1Title: '', card1Desc: '',
-    card2Title: '', card2Desc: '',
-    card3Title: '', card3Desc: ''
-  });
-  const [formFindUs, setFormFindUs] = useState({ location: '', email: '', call: '' });
-
-  useEffect(() => {
-    if (sessionStorage.getItem('admin_session_auth') === 'true') setIsAuthorized(true);
-    
-    const savedLockout = localStorage.getItem('admin_lockout_expiry');
-    const savedAttempts = localStorage.getItem('admin_failed_attempts');
-    if (savedAttempts) setAttempts(parseInt(savedAttempts, 10));
-    
-    if (savedLockout) {
-      const timeLeft = Math.ceil((parseInt(savedLockout, 10) - Date.now()) / 1000);
-      if (timeLeft > 0) setLockoutTimeLeft(timeLeft);
-    }
-
-    setFormAbout(localStorage.getItem('admin_about_text') || "Hum businesses ko online grow karne mein help karte hain...");
-    try { 
-      setFormServices(JSON.parse(localStorage.getItem('admin_services_json')) || {
-        card1Title: 'Social Media Marketing', card1Desc: 'Instagram Marketing\nFacebook Marketing',
-        card2Title: 'Paid Advertising', card2Desc: 'Google Ads\nFacebook Ads',
-        card3Title: 'Website Development', card3Desc: 'Website Design\nWebsite Development'
-      }); 
-    } catch(e){}
-    try { 
-      setFormFindUs(JSON.parse(localStorage.getItem('admin_findus_json')) || { 
-        location: 'Roshan Bagh Prayagraj', email: 'anasknanprince1234@gmail.com', call: '+91 7007684279' 
-      }); 
-    } catch(e){}
-  }, []);
-
-  useEffect(() => {
-    if (lockoutTimeLeft <= 0) return;
-    const timer = setInterval(() => {
-      setLockoutTimeLeft(prev => {
-        if (prev <= 1) {
-          localStorage.removeItem('admin_lockout_expiry');
-          localStorage.removeItem('admin_failed_attempts');
-          setAttempts(0);
-          setLoginError('');
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [lockoutTimeLeft]);
-
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    if (passwordInput === 'bhai163') {
-      setIsAuthorized(true);
-      setAttempts(0);
-      setLoginError('');
-      localStorage.removeItem('admin_failed_attempts');
-      sessionStorage.setItem('admin_session_auth', 'true');
-    } else {
-      const nextAttempts = attempts + 1;
-      setAttempts(nextAttempts);
-      setPasswordInput('');
-      
-      if (nextAttempts >= 3) {
-        const expiryTime = Date.now() + 7200000;
-        localStorage.setItem('admin_lockout_expiry', expiryTime.toString());
-        localStorage.setItem('admin_failed_attempts', '3');
-        setLockoutTimeLeft(7200);
-        setLoginError('Brute-force detected! Panel Locked for 2 hours.');
-      } else {
-        localStorage.setItem('admin_failed_attempts', nextAttempts.toString());
-        setLoginError(`Incorrect Password! (${3 - nextAttempts} attempts remaining)`);
-      }
-    }
-  };
-
-  const handleSaveAllSettings = (e) => {
-    e.preventDefault();
-    localStorage.setItem('admin_about_text', formAbout);
-    localStorage.setItem('admin_services_json', JSON.stringify(formServices));
-    localStorage.setItem('admin_findus_json', JSON.stringify(formFindUs));
-    alert('Bhai, saara data kamyabi se save ho gaya hai!');
-    window.location.reload();
-  };
-
-  const inputStyle = {
-    width: '100%',
-    backgroundColor: '#09111e',
-    border: '1px solid #1e2d4a',
-    borderRadius: '10px',
-    color: '#fff',
-    padding: '12px',
-    fontSize: '14px',
-    marginBottom: '15px',
-    outline: 'none',
-    boxSizing: 'border-box'
-  };
-
-  const labelStyle = {
-    display: 'block',
-    textAlign: 'left',
-    fontSize: '14px',
-    color: '#00a2ff',
-    fontWeight: '600',
-    marginBottom: '6px',
-    fontFamily: "'serif', Georgia, Times"
-  };
-
-  if (lockoutTimeLeft > 0) {
-    return (
-      <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div style={{ backgroundColor: '#111b2d', padding: '40px 20px', borderRadius: '24px', textAlign: 'center', maxWidth: '420px', width: '100%', border: '1px solid #ef4444', boxSizing: 'border-box' }}>
-          <h3 style={{ color: '#ef4444', marginBottom: '15px', fontSize: '20px', fontFamily: "'serif', Georgia, Times" }}>Security Lockout Active</h3>
-          <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '20px', lineHeight: '1.5' }}>3 baar galat password daala gaya hai. Panel temporary locked hai.</p>
-          <div style={{ backgroundColor: '#09111e', padding: '15px', borderRadius: '12px', fontSize: '24px', color: '#00ffcc', fontWeight: '800', border: '1px solid rgba(0,255,204,0.1)' }}>
-            {Math.floor(lockoutTimeLeft / 3600)}:{(Math.floor((lockoutTimeLeft % 3600) / 60)).toString().padStart(2,'0')}:{(lockoutTimeLeft % 60).toString().padStart(2,'0')}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isAuthorized) {
-    return (
-      <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <form onSubmit={handleLoginSubmit} style={{ backgroundColor: '#111b2d', padding: '35px 25px', borderRadius: '24px', textAlign: 'center', width: '100%', maxWidth: '380px', border: '1px solid rgba(255,255,255,0.04)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', boxSizing: 'border-box' }}>
-          <h3 style={{ marginBottom: '20px', fontFamily: "'serif', Georgia, Times", fontSize: '22px' }}>Admin Dashboard</h3>
-          <input type="password" placeholder="Enter Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} style={inputStyle} />
-          {loginError && <p style={{ color: '#ef4444', fontSize: '13px', marginBottom: '15px', fontWeight: '500' }}>{loginError}</p>}
-          <button type="submit" style={{ width: '100%', backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '13px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', fontFamily: "'serif', Georgia, Times" }}>Unlock Panel</button>
-        </form>
-      </div>
-    );
-  }
-
-  return (
-    <div style={{ padding: '40px 15px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
-      <style>{`
-        .responsive-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
-        .responsive-find-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
-        @media (max-width: 680px) {
-          .responsive-card-grid { grid-template-columns: 1fr !important; gap: 5px !important; }
-          .responsive-find-grid { grid-template-columns: 1fr !important; gap: 5px !important; }
-          .admin-box-card { padding: 30px 20px !important; }
-        }
-      `}</style>
-
-      <div className="admin-box-card" style={{ backgroundColor: '#111b2d', padding: '45px 40px', borderRadius: '24px', maxWidth: '750px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.04)', textAlign: 'center', boxSizing: 'border-box' }}>
-        <h2 style={{ fontSize: '26px', fontWeight: '700', marginBottom: '30px', color: '#ffffff', fontFamily: "'serif', Georgia, Times" }}>
-          Dashboard <span style={{ color: '#00a2ff' }}>Control Panel</span>
-        </h2>
-        <form onSubmit={handleSaveAllSettings}>
-          <div style={{ marginBottom: '25px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '15px' }}>
-            <label style={labelStyle}>Edit About Text Description:</label>
-            <textarea rows="4" value={formAbout} onChange={(e) => setFormAbout(e.target.value)} style={{ ...inputStyle, resize: 'vertical', fontFamily: 'sans-serif' }} />
-          </div>
-          <div style={{ marginBottom: '25px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '15px' }}>
-            <h4 style={{ ...labelStyle, color: '#fff', fontSize: '15px', marginBottom: '15px' }}>Edit Services Content:</h4>
-            {[1, 2, 3].map(i => (
-              <div key={i} className="responsive-card-grid">
-                <div>
-                  <label style={{ ...labelStyle, fontSize: '12px' }}>Card {i} Title</label>
-                  <input type="text" value={formServices[`card${i}Title`]} onChange={(e) => setFormServices({...formServices, [`card${i}Title`]: e.target.value})} style={inputStyle} />
-                </div>
-                <div>
-                  <label style={{ ...labelStyle, fontSize: '12px' }}>Card {i} Description</label>
-                  <textarea rows="2" value={formServices[`card${i}Desc`]} onChange={(e) => setFormServices({...formServices, [`card${i}Desc`]: e.target.value})} style={{ ...inputStyle, fontFamily: 'sans-serif' }} />
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={{ marginBottom: '30px' }}>
-            <h4 style={{ ...labelStyle, color: '#fff', fontSize: '15px', marginBottom: '15px' }}>Edit Find Us Info:</h4>
-            <div className="responsive-find-grid">
-              <div>
-                <label style={{ ...labelStyle, fontSize: '12px' }}>Location</label>
-                <input type="text" value={formFindUs.location} onChange={(e) => setFormFindUs({...formFindUs, location: e.target.value})} style={inputStyle} />
-              </div>
-              <div>
-                <label style={{ ...labelStyle, fontSize: '12px' }}>Email Address</label>
-                <input type="text" value={formFindUs.email} onChange={(e) => setFormFindUs({...formFindUs, email: e.target.value})} style={inputStyle} />
-              </div>
-              <div>
-                <label style={{ ...labelStyle, fontSize: '12px' }}>Call Number</label>
-                <input type="text" value={formFindUs.call} onChange={(e) => setFormFindUs({...formFindUs, call: e.target.value})} style={inputStyle} />
-              </div>
-            </div>
-          </div>
-          <button type="submit" style={{ backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '14px 35px', borderRadius: '12px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', fontFamily: "'serif', Georgia, Times", boxShadow: '0 4px 15px rgba(0,162,255,0.3)', width: '100%', maxWidth: '300px' }}>
-            Save All Settings Live
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-// 7. GLOBAL MASTER ROUTER CONTROL
+// ===================================================
+// 3. MAIN APP MODULE
+// ===================================================
 function App() {
-  return (
-    <div style={{ backgroundColor: '#09111e', height: '100vh', width: '100vw', margin: 0, padding: 0, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, overflow: 'hidden' }}>
-      <style>{`
-        body, html, #root {
-          background-color: #09111e !important;
-          margin: 0 !important;
-          padding: 0 !important;
-        }
-      `}</style>
-      
-      <Navbar />
-      <div style={{ flex: '1', width: '100%', height: 'calc(100vh - 75px)', overflowY: 'auto', overflowX: 'hidden' }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/find-us" element={<FindUsPage />} />
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
-      </div>
-    </div>
-  );
+  const [activeSection, setActiveSection] = useState('home');
+  const [toast, setToast] = useState({ visible: false, message: '' });
+  
+  const [liveData, setLiveData] = useState({
+    homeTitle: "Welcome to",
+    homeSubtitle: "Expert Digital Marketing Solutions For Your Business. Hum aapke business ko online grow karne aur zyaada se zyaada customers tak pahunchane mein madad karte hain.",
+    aboutHeader: "Who We Are & What We Do",
+    aboutSubtitle: "Bina kisi jhanjhat ke marketing aur simple data analytics jisse aapka business grow kare.",
+    aboutDesc: "Hamari core mission startups, local brands aur established businesses ko ek strong digital footprint dena hai. Hum aapke sahi customers ko target karte hain, website ko optimize karte hain aur aise marketing systems banate hain jisse aapka business har taraf popular ho sake.",
+    service1Title: "Social Media Marketing",
+    service1Desc: "Aapke brand ki popularity badhane ke liye sahi timing par post scheduling aur audience engagement.",
+    service2Title: "Paid Advertising",
+    service2Desc: "Google aur Meta Ads ke zyaada se zyaada conversion laane wale targeted ads jo kam budget mein accha result edin.",
+    service3Title: "Website Development",
+    service3Desc: "Fast aur responsive websites jo users ko bhatkaye bina seedhe leads generate karne mein help karein.",
+    contactLocation: "Roshan Bagh, Prayagraj",
+    contactEmail: "anasknanprince1234@gmail.com",
+    contactPhone: "+91 7007684279",
+    happyCustomersText: "1000+ Happy Customers"
+  });
+
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [passcode, setPasscode] = useState('');
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  
+  const [failedAttempts, setFailedAttempts] = useState(() => {
+    return parseInt(localStorage.getItem('admin_failed_attempts') || '0', 10);
+  });
+  const [lockUntil, setLockUntil] = useState(() => {
+    return parseInt(localStorage.getItem('admin_lock_timestamp') || '0', 10);
+  });
+  const [timeLeft, setTimeLeft] = useState(0);
+
+  const homeRef = useRef(null);
+  const aboutRef = useRef(null);
+  const servicesRef = useRef(null);
+  const findUsRef = useRef(null);
+
+  useEffect(() => {
+    const fontNode = document.createElement('style');
+    fontNode.innerHTML = `@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
+    ${responsiveStyles}`; 
+    document.head.appendChild(fontNode);
+    return () => document.head.removeChild(fontNode);
+  }, []);
+
+  useEffect(() => {
+    if (lockUntil <= 0) return;
+
+    const calculateTime = () => {
+      const remainingTime = Math.ceil((lockUntil - Date.now()) / 1000);
+      if (remainingTime <= 0) {
+        setLockUntil(0);
+        setFailedAttempts(0);
+        localStorage.removeItem('admin_lock_timestamp');
+        localStorage.setItem('admin_failed_attempts', '0');
+        setTimeLeft(0);
+        triggerToast("Lockout expired. Security panel open.");
+      } else {
+        setTimeLeft(remainingTime);
+      }
+    };
+
+    calculateTime();
+    const timerId = setInterval(calculateTime, 1000);
+    return () => clearInterval(timerId);
+  }, [lockUntil]);
+
+  useEffect(() => {
+    const sectionRefs = [
+      { id: 'home', ref: homeRef },
+      { id: 'about', ref: aboutRef },
+      { id: 'services', ref: servicesRef },
+      { id: 'find-us', ref: findUsRef },
+    ];
+    const observerOptions = { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 };
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) setActiveSection(entry.target.id);
+      });
+    };
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    sectionRefs.forEach((item) => { if (item.ref.current) observer.observe(item.ref.current); });
+    return () => observer.disconnect();
+  }, []);
+
+  const triggerToast = (msg) => {
+    setToast({ visible: true, message: msg });
+    setTimeout(() => setToast({ visible: false, message: '' }), 4000);
+  };
+
+  const scrollToNode = (elementRef) => {
+    window.scrollTo({ top: elementRef.current.offsetTop - 85, behavior: 'smooth' });
+  };
+
+  const handleAuthVerify = (e) => {
+    e.preventDefault();
+    if (Date.now() < lockUntil) {
+      triggerToast(`Console locked.`);
+      return;
+    }
+
+    if (passcode === 'bhai163') { 
+      setIsAuthorized(true);
+      setFailedAttempts(0);
+      localStorage.setItem('admin_failed_attempts', '0');
+      triggerToast("Access granted successfully!");
+    } else {
+      const updatedAttempts = failedAttempts + 1;
+      setFailedAttempts(updatedAttempts);
+      localStorage.setItem('admin_failed_attempts', updatedAttempts.toString());
+
+      if (updatedAttempts >= 3) {
+        const lockDurationTimestamp = Date.now() + 2 * 60 * 60 * 1000; 
+        setLockUntil(lockDurationTimestamp);
+        localStorage.setItem('admin_lock_timestamp', lockDurationTimestamp.toString());
+        triggerToast("System locked for 2 Hours.");
+      } else {
+        triggerToast(`Incorrect password. ${3 - updatedAttempts} attempts left.`);
+      }
+    }
+  };
+
+  const formatTimeRemaining = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${hours}h ${mins}m ${secs}s`;
+  };
+
+  return (
+    <div style={styles.main}>
+      <div style={styles.ambientLighting}></div>
+      
+      {toast.visible && (
+        <div style={styles.toast}>
+          <span>ℹ️</span>
+          <span>{toast.message}</span>
+        </div>
+      )}
+
+      {isAdminOpen && (
+        <div style={styles.adminOverlay}>
+          <div style={styles.adminModal}>
+            <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '20px', alignItems: 'center'}}>
+              <h2 style={{fontSize: '20px', fontWeight: '700', color: '#fff'}}>🔧 Website Live Editor Core</h2>
+              <button 
+                onClick={() => { setIsAdminOpen(false); setIsAuthorized(false); setPasscode(''); }}
+                style={{background: 'none', border: 'none', color: '#64748b', fontSize: '18px', cursor: 'pointer'}}
+              >✕</button>
+            </div>
+
+            {Date.now() < lockUntil ? (
+              <div style={{textAlign: 'center', padding: '20px 0'}}>
+                <div style={{fontSize: '44px', marginBottom: '15px'}}>🔒</div>
+                <h4 style={{color: '#ef4444', fontWeight: 'bold', fontSize: '16px'}}>SECURITY CONSOLE LOCKED</h4>
+                <p style={{color: '#94a3b8', fontSize: '14px', marginTop: '6px', lineHeight: '1.5'}}>
+                  Too many incorrect authentication parameters. Cooldown active.
+                </p>
+                <div style={{marginTop: '20px', padding: '12px', backgroundColor: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.15)', borderRadius: '8px', color: '#f87171', fontWeight: 'bold', fontSize: '15px', fontFamily: 'sans-serif'}}>
+                  Cooldown: {formatTimeRemaining(timeLeft)}
+                </div>
+              </div>
+            ) : !isAuthorized ? (
+              <form onSubmit={handleAuthVerify} autoComplete="off">
+                <label style={styles.adminLabel}>Enter Admin Password</label>
+                <input 
+                  type="password" 
+                  value={passcode} 
+                  onChange={(e) => setPasscode(e.target.value)}
+                  style={styles.adminInput} 
+                  placeholder="••••••••"
+                  autoComplete="new-password"
+                />
+                <div style={{fontSize: '11px', color: '#64748b', marginBottom: '12px'}}>Remaining Entry Node Tokens: {3 - failedAttempts}/3</div>
+                <button type="submit" style={{...styles.auditBtn, width: '100%'}}>Verify Dashboard</button>
+              </form>
+            ) : (
+              <div style={{display: 'flex', flexDirection: 'column'}}>
+                <p style={{fontSize: '13px', color: '#22c55e', marginBottom: '15px'}}>✓ Connected. Change any field below to see live changes on website.</p>
+                
+                <div style={styles.adminSectionDivider}>🏠 Home Section Content</div>
+                <label style={styles.adminLabel}>Home Subtitle / Paragraph</label>
+                <textarea rows="3" value={liveData.homeSubtitle} onChange={(e) => setLiveData({...liveData, homeSubtitle: e.target.value})} style={{...styles.adminInput, resize: 'none'}} />
+
+                <div style={styles.adminSectionDivider}>ℹ️ About Section Content</div>
+                <label style={styles.adminLabel}>About Heading Tagline</label>
+                <input type="text" value={liveData.aboutSubtitle} onChange={(e) => setLiveData({...liveData, aboutSubtitle: e.target.value})} style={styles.adminInput} />
+                <label style={styles.adminLabel}>About Main Long Description</label>
+                <textarea rows="4" value={liveData.aboutDesc} onChange={(e) => setLiveData({...liveData, aboutDesc: e.target.value})} style={{...styles.adminInput, resize: 'none'}} />
+
+                <div style={styles.adminSectionDivider}>💼 Services Block Content</div>
+                <label style={styles.adminLabel}>Service 1 Title</label>
+                <input type="text" value={liveData.service1Title} onChange={(e) => setLiveData({...liveData, service1Title: e.target.value})} style={styles.adminInput} />
+                <label style={styles.adminLabel}>Service 1 Short Description</label>
+                <input type="text" value={liveData.service1Desc} onChange={(e) => setLiveData({...liveData, service1Desc: e.target.value})} style={styles.adminInput} />
+                
+                <label style={styles.adminLabel}>Service 2 Title</label>
+                <input type="text" value={liveData.service2Title} onChange={(e) => setLiveData({...liveData, service2Title: e.target.value})} style={styles.adminInput} />
+                <label style={styles.adminLabel}>Service 2 Short Description</label>
+                <input type="text" value={liveData.service2Desc} onChange={(e) => setLiveData({...liveData, service2Desc: e.target.value})} style={styles.adminInput} />
+
+                <label style={styles.adminLabel}>Service 3 Title</label>
+                <input type="text" value={liveData.service3Title} onChange={(e) => setLiveData({...liveData, service3Title: e.target.value})} style={styles.adminInput} />
+                <label style={styles.adminLabel}>Service 3 Short Description</label>
+                <input type="text" value={liveData.service3Desc} onChange={(e) => setLiveData({...liveData, service3Desc: e.target.value})} style={styles.adminInput} />
+
+                <div style={styles.adminSectionDivider}>📍 Find Us / Contact Data</div>
+                <label style={styles.adminLabel}>Our Location</label>
+                <input type="text" value={liveData.contactLocation} onChange={(e) => setLiveData({...liveData, contactLocation: e.target.value})} style={styles.adminInput} />
+                <label style={styles.adminLabel}>Email Us</label>
+                <input type="text" value={liveData.contactEmail} onChange={(e) => setLiveData({...liveData, contactEmail: e.target.value})} style={styles.adminInput} />
+                <label style={styles.adminLabel}>Call Us</label>
+                <input type="text" value={liveData.contactPhone} onChange={(e) => setLiveData({...liveData, contactPhone: e.target.value})} style={styles.adminInput} />
+                
+                <label style={styles.adminLabel}>Happy Customers Metric Text</label>
+                <input type="text" value={liveData.happyCustomersText} onChange={(e) => setLiveData({...liveData, happyCustomersText: e.target.value})} style={styles.adminInput} />
+
+                <button 
+                  onClick={() => { setIsAdminOpen(false); setIsAuthorized(false); setPasscode(''); triggerToast("Changes deployed successfully!"); }}
+                  style={{...styles.auditBtn, background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', marginTop: '15px', marginBottom: '10px'}}
+                >
+                  Save & Live Deploy
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* FIXED NAVBAR STRIP INTERFACE */}
+      <header style={styles.header}>
+        <nav className="navbar-container-box" style={styles.navbar}>
+          <div style={styles.logoWrapper} onClick={() => scrollToNode(homeRef)}>
+            <span style={styles.logoText}>DigiGrow</span>
+          </div>
+          
+          <ul className="right-nav-wrapper" style={styles.navRightContainer}>
+            <li><button onClick={() => scrollToNode(homeRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'home' ? styles.activeLink : {})}}>Home</button></li>
+            <li><button onClick={() => scrollToNode(aboutRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'about' ? styles.activeLink : {})}}>About</button></li>
+            <li><button onClick={() => scrollToNode(servicesRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'services' ? styles.activeLink : {})}}>Services</button></li>
+            <li><button onClick={() => scrollToNode(findUsRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'find-us' ? styles.activeLink : {})}}>Find Us</button></li>
+            <li>
+              <button className="login-btn-glow" style={styles.auditBtn} onClick={() => setIsAdminOpen(true)}>
+                Login
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      {/* 1. HOME SECTION WITH HIGHLIGHTS */}
+      <section id="home" style={styles.scrollSection} ref={homeRef}>
+        <HomeWhiteAnimationEngine />
+        <div style={styles.viewWrapper}>
+          <div style={styles.heroSection}>
+            <div style={styles.topBadge}>🚀 Next-Gen Marketing Engine</div>
+            <h1 style={styles.hugeTitle}>
+              {liveData.homeTitle} <span style={styles.gradientBlueText}>DigiGrow</span>
+            </h1>
+            <p style={styles.subtitleText}>{liveData.homeSubtitle}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. ABOUT SECTION */}
+      <section id="about" style={styles.scrollSection} ref={aboutRef}>
+        <div style={styles.viewWrapper}>
+          <div style={styles.sectionHeader}>
+            <h1 style={styles.hugeTitle}>{liveData.aboutHeader}</h1>
+            <p style={styles.subtitleText}>{liveData.aboutSubtitle}</p>
+          </div>
+          <div style={styles.glassCard}>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '26px'}}>
+              <p style={{color: '#cbd5e1', lineHeight: '1.8', fontSize: '17px'}}>{liveData.aboutDesc}</p>
+              <h3 style={{color: '#38bdf8', fontSize: '18px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '15px'}}>Our Core Features Grid:</h3>
+              <div style={styles.gridContainer}>
+                <div style={styles.metricCard}>
+                  <div style={{fontSize: '20px', marginBottom: '10px'}}>📱</div>
+                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#fff', marginBottom: '6px'}}>Social Media Management</h4>
+                  <p style={{color: '#64748b', fontSize: '14px', lineHeight: '1.5'}}>Sahi strategy aur rules ke saath pages ko manage aur daily brand reputation grow karna.</p>
+                </div>
+                <div style={styles.metricCard}>
+                  <div style={{fontSize: '20px', marginBottom: '10px'}}>📈</div>
+                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#fff', marginBottom: '6px'}}>Search Engine Optimization (SEO)</h4>
+                  <p style={{color: '#64748b', fontSize: '14px', lineHeight: '1.5'}}>Google search result ranking ko improve karke free customer traffic laana.</p>
+                </div>
+                <div style={styles.metricCard}>
+                  <div style={{fontSize: '20px', marginBottom: '10px'}}>💻</div>
+                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#fff', marginBottom: '6px'}}>High-End Website Development</h4>
+                  <p style={{color: '#64748b', fontSize: '14px', lineHeight: '1.5'}}>Tez chalne wali modern custom single page websites jo business ka trust build karein.</p>
+                </div>
+                <div style={styles.metricCard}>
+                  <div style={{fontSize: '20px', marginBottom: '10px'}}>🎯</div>
+                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#fff', marginBottom: '6px'}}>Targeted Google & Meta Ads</h4>
+                  <p style={{color: '#64748b', fontSize: '14px', lineHeight: '1.5'}}>Sahi logon ko low investment cost par real-time products aur business ads show karna.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. SERVICES SECTION */}
+      <section id="services" style={styles.scrollSection} ref={servicesRef}>
+        <div style={styles.viewWrapper}>
+          <div style={styles.sectionHeader}>
+            <h1 style={styles.hugeTitle}>Our Premium <span style={styles.gradientBlueText}>Services</span></h1>
+            <p style={styles.subtitleText}>Aapke business scale ko badhane ke liye custom targeted services plans.</p>
+          </div>
+          <div style={styles.gridContainer}>
+            <div style={styles.glassCard}>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
+                <div style={{fontSize: '28px'}}>📱</div>
+                <span style={{fontSize: '11px', color: '#6366f1', fontWeight: '600', border: '1px solid rgba(99,102,241,0.2)', padding: '2px 10px', borderRadius: '12px'}}>ORGANIC MANAGEMENT</span>
+              </div>
+              <h3 style={{fontSize: '24px', fontWeight: '700', color: '#fff', marginBottom: '12px'}}>{liveData.service1Title}</h3>
+              <p style={{color: '#94a3b8', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px'}}>{liveData.service1Desc}</p>
+              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: '#cbd5e1'}}>
+                <li>✓ Daily Instagram Profile Strategy</li>
+                <li>✓ Professional Facebook Page Tuning</li>
+                <li>✓ High Engagement Creative Analytics</li>
+              </ul>
+            </div>
+            <div style={styles.glassCard}>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
+                <div style={{fontSize: '28px'}}>🎯</div>
+                <span style={{fontSize: '11px', color: '#38bdf8', fontWeight: '600', border: '1px solid rgba(14,165,233,0.2)', padding: '2px 10px', borderRadius: '12px'}}>PAID CHANNELS</span>
+              </div>
+              <h3 style={{fontSize: '24px', fontWeight: '700', color: '#fff', marginBottom: '12px'}}>{liveData.service2Title}</h3>
+              <p style={{color: '#94a3b8', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px'}}>{liveData.service2Desc}</p>
+              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: '#cbd5e1'}}>
+                <li>✓ Targeted Google Search Campaigns</li>
+                <li>✓ High Converting Meta Video Lead Ads</li>
+                <li>✓ Daily Cost Management & Scaling Optimization</li>
+              </ul>
+            </div>
+            <div style={styles.glassCard}>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
+                <div style={{fontSize: '28px'}}>💻</div>
+                <span style={{fontSize: '11px', color: '#10b981', fontWeight: '600', border: '1px solid rgba(16,185,129,0.2)', padding: '2px 10px', borderRadius: '12px'}}>WEB ARCHITECTURE</span>
+              </div>
+              <h3 style={{fontSize: '24px', fontWeight: '700', color: '#fff', marginBottom: '12px'}}>{liveData.service3Title}</h3>
+              <p style={{color: '#94a3b8', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px'}}>{liveData.service3Desc}</p>
+              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: '#cbd5e1'}}>
+                <li>✓ Smooth Interactive User Interfaces</li>
+                <li>✓ Lightning Fast Page Speed & Loading Time</li>
+                <li>✓ All Mobile Responsive Clean Design Layouts</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. FIND US SECTION */}
+      <section id="find-us" style={styles.scrollSection} ref={findUsRef}>
+        <div style={styles.viewWrapper}>
+          <div style={styles.sectionHeader}>
+            <h1 style={styles.hugeTitle}>Find <span style={styles.gradientBlueText}>Us</span></h1>
+            <p style={styles.subtitleText}>Hamari team se connect karke apne business growth plan ko discuss karein.</p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '550px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
+            
+            <div style={styles.metricCard}>
+              <span style={{fontSize: '11px', color: '#38bdf8', fontWeight: '600', letterSpacing: '0.5px'}}>📍 OUR LOCATION</span>
+              <p style={{fontSize: '18px', fontWeight: '600', marginTop: '6px', color: '#ffffff'}}>{liveData.contactLocation}</p>
+            </div>
+            <div style={styles.metricCard}>
+              <span style={{fontSize: '11px', color: '#818cf8', fontWeight: '600', letterSpacing: '0.5px'}}>📧 EMAIL US</span>
+              <p style={{fontSize: '17px', fontWeight: '600', marginTop: '6px', color: '#ffffff'}}>{liveData.contactEmail}</p>
+            </div>
+            <div style={styles.metricCard}>
+              <span style={{fontSize: '11px', color: '#34d399', fontWeight: '600', letterSpacing: '0.5px'}}>📞 CALL US</span>
+              <p style={{fontSize: '18px', fontWeight: '600', marginTop: '6px', color: '#ffffff'}}>{liveData.contactPhone}</p>
+            </div>
+            
+            <div style={{...styles.metricCard, background: 'linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(99,102,241,0.05) 100%)', border: '1px solid rgba(56,189,248,0.2)'}}>
+              <span style={{fontSize: '11px', color: '#38bdf8', fontWeight: '800', letterSpacing: '1px'}}>🎉 OUR PROUD TRUST METRIC</span>
+              <p style={{fontSize: '22px', fontWeight: '800', marginTop: '6px', color: '#38bdf8', letterSpacing: '-0.5px'}}>{liveData.happyCustomersText}</p>
+              <p style={{color: '#94a3b8', fontSize: '13px', marginTop: '2px'}}>Trusted by growing brands and startups all over India.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }
 
-export default App; 
+export default App;
