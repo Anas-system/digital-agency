@@ -22,19 +22,19 @@ function Navbar() {
           DigiGrow
         </span>
       </Link>
-      <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
-        <Link to="/about" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>About</Link>
-        <Link to="/services" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Services</Link>
-        <Link to="/find-us" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Find Us</Link>
+      <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+        <Link to="/about" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '14px', fontWeight: '500', fontFamily: "'serif', Georgia, Times" }}>About</Link>
+        <Link to="/services" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '14px', fontWeight: '500', fontFamily: "'serif', Georgia, Times" }}>Services</Link>
+        <Link to="/find-us" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '14px', fontWeight: '500', fontFamily: "'serif', Georgia, Times" }}>Find Us</Link>
         <Link to="/admin" style={{ 
           backgroundColor: '#00a2ff', 
-          padding: '9px 24px', 
+          padding: '7px 18px', 
           borderRadius: '8px', 
           color: '#fff', 
           textDecoration: 'none', 
-          fontSize: '14px', 
+          fontSize: '13px', 
           fontWeight: '600',
-          fontFamily: "'serif', Georgia, Times, 'Times New Roman'"
+          fontFamily: "'serif', Georgia, Times"
         }}>
           Login
         </Link>
@@ -162,10 +162,10 @@ function Home() {
     <div style={{ padding: '0 24px', height: '100%', backgroundColor: '#09111e', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', boxSizing: 'border-box', width: '100%', position: 'relative', overflow: 'hidden' }}>
       <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1, pointerEvents: 'none' }} />
       <div style={{ zIndex: 2, maxWidth: '880px', padding: '0 10px' }}>
-        <h1 style={{ fontSize: 'calc(36px + 2.4vw)', fontWeight: '900', marginBottom: '24px', letterSpacing: '-1px', lineHeight: '1.15', color: '#f8fafc', textShadow: '0 10px 30px rgba(0,0,0,0.5)', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+        <h1 style={{ fontSize: 'calc(32px + 2.4vw)', fontWeight: '900', marginBottom: '24px', letterSpacing: '-1px', lineHeight: '1.15', color: '#f8fafc', textShadow: '0 10px 30px rgba(0,0,0,0.5)', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
           Welcome to <span style={{ background: 'linear-gradient(135deg, #00a2ff 0%, #00ffcc 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', filter: 'drop-shadow(0px 4px 20px rgba(0,162,255,0.3))' }}>DigiGrow</span>
         </h1>
-        <p style={{ color: '#94a3b8', fontSize: 'calc(15px + 0.15vw)', maxWidth: '650px', lineHeight: '1.8', margin: '0 auto', fontWeight: '400', letterSpacing: '0.2px', textShadow: '0 4px 10px rgba(0,0,0,0.4)', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+        <p style={{ color: '#94a3b8', fontSize: 'calc(14px + 0.15vw)', maxWidth: '650px', lineHeight: '1.8', margin: '0 auto', fontWeight: '400', letterSpacing: '0.2px', textShadow: '0 4px 10px rgba(0,0,0,0.4)', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
           Expert Digital Marketing Solutions For Your Business. Scale your digital footprint and dominate your market niche with our expert strategies.
         </p>
       </div>
@@ -185,15 +185,15 @@ function AboutPage() {
   }, []);
 
   return (
-    <div style={{ padding: '60px 20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
-      <div style={{ backgroundColor: '#111b2d', padding: '50px 40px', borderRadius: '24px', maxWidth: '850px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.04)', textAlign: 'left' }}>
-        <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '25px', color: '#ffffff', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+    <div style={{ padding: '40px 15px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
+      <div style={{ backgroundColor: '#111b2d', padding: '35px 25px', borderRadius: '24px', maxWidth: '850px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.04)', textAlign: 'left', boxSizing: 'border-box' }}>
+        <h2 style={{ fontSize: '28px', fontWeight: '700', marginBottom: '20px', color: '#ffffff', fontFamily: "'serif', Georgia, Times" }}>
           Who We Are & <span style={{ color: '#00a2ff' }}>What We Do</span>
         </h2>
-        <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.8', marginBottom: '25px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>{aboutText}</p>
-        <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.8', marginBottom: '35px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Hamari core mission startups, local brands aur established businesses ko ek strong digital foot-print dena hai, taaki aap sahi target audience tak pahunch sakein aur apne business ROI ko faster mode par grow sakein.</p>
-        <h4 style={{ color: '#00a2ff', fontSize: '16px', fontWeight: '700', marginBottom: '20px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Hamari Core Expertise:</h4>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '15px 30px', color: '#ffffff', fontSize: '14px', lineHeight: '1.6', fontFamily: "'serif', Georgia, Times, 'Times New Roman'", fontWeight: '500' }}>
+        <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.7', marginBottom: '20px', fontFamily: "'serif', Georgia, Times" }}>{aboutText}</p>
+        <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.7', marginBottom: '30px', fontFamily: "'serif', Georgia, Times" }}>Hamari core mission startups, local brands aur established businesses ko ek strong digital foot-print dena hai, taaki aap sahi target audience tak pahunch sakein aur apne business ROI ko faster mode par grow sakein.</p>
+        <h4 style={{ color: '#00a2ff', fontSize: '15px', fontWeight: '700', marginBottom: '15px', fontFamily: "'serif', Georgia, Times" }}>Hamari Core Expertise:</h4>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '12px 20px', color: '#ffffff', fontSize: '14px', lineHeight: '1.5', fontFamily: "'serif', Georgia, Times", fontWeight: '500' }}>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Social Media Management</div>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Search Engine Optimization (SEO)</div>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> High-End Website Development</div>
@@ -228,17 +228,17 @@ function ServicesPage() {
   }, []);
 
   return (
-    <div style={{ padding: '80px 20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxSizing: 'border-box' }}>
-      <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '50px', color: '#ffffff', textAlign: 'center', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+    <div style={{ padding: '50px 15px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxSizing: 'border-box' }}>
+      <h2 style={{ fontSize: '30px', fontWeight: '700', marginBottom: '40px', color: '#ffffff', textAlign: 'center', fontFamily: "'serif', Georgia, Times" }}>
         Our <span style={{ color: '#00a2ff' }}>Services</span>
       </h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', maxWidth: '1140px', width: '100%', boxSizing: 'border-box' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '25px', maxWidth: '1140px', width: '100%', boxSizing: 'border-box' }}>
         {[1, 2, 3].map(num => (
-          <div key={num} style={{ backgroundColor: '#111b2d', padding: '45px 35px', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)', boxSizing: 'border-box', textAlign: 'left' }}>
-            <h3 style={{ fontSize: '20px', color: '#00a2ff', marginBottom: '20px', fontWeight: '700', letterSpacing: '-0.3px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+          <div key={num} style={{ backgroundColor: '#111b2d', padding: '35px 25px', borderRadius: '20px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)', boxSizing: 'border-box', textAlign: 'left' }}>
+            <h3 style={{ fontSize: '19px', color: '#00a2ff', marginBottom: '15px', fontWeight: '700', letterSpacing: '-0.3px', fontFamily: "'serif', Georgia, Times" }}>
               {services[`card${num}Title`]}
             </h3>
-            <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.8', whiteSpace: 'pre-line', fontWeight: '400', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+            <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.7', whiteSpace: 'pre-line', fontWeight: '400', fontFamily: "'serif', Georgia, Times" }}>
               {services[`card${num}Desc`]}
             </p>
           </div>
@@ -267,22 +267,22 @@ function FindUsPage() {
   }, []);
 
   return (
-    <div style={{ padding: '80px 20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
-      <div style={{ backgroundColor: '#111b2d', padding: '50px 45px', borderRadius: '24px', maxWidth: '600px', width: '100%', textAlign: 'center', boxSizing: 'border-box', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)' }}>
-        <h2 style={{ fontSize: '32px', marginBottom: '40px', fontWeight: '700', color: '#ffffff', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+    <div style={{ padding: '60px 15px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
+      <div style={{ backgroundColor: '#111b2d', padding: '40px 25px', borderRadius: '24px', maxWidth: '600px', width: '100%', textAlign: 'center', boxSizing: 'border-box', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)' }}>
+        <h2 style={{ fontSize: '30px', marginBottom: '30px', fontWeight: '700', color: '#ffffff', fontFamily: "'serif', Georgia, Times" }}>
           Find <span style={{ color: '#00a2ff' }}>Us</span>
         </h2>
-        <div style={{ textAlign: 'left', display: 'inline-block', fontSize: '15px', lineHeight: '2.2', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
-          <p style={{ color: '#94a3b8', margin: '12px 0' }}>📍 <strong style={{ color: '#fff' }}>Location:</strong> {findUs.location}</p>
-          <p style={{ color: '#94a3b8', margin: '12px 0' }}>✉️ <strong style={{ color: '#fff' }}>Email:</strong> {findUs.email}</p>
-          <p style={{ color: '#94a3b8', margin: '12px 0' }}>📞 <strong style={{ color: '#fff' }}>Call:</strong> {findUs.call}</p>
+        <div style={{ textAlign: 'left', display: 'inline-block', fontSize: '14px', lineHeight: '2.0', fontFamily: "'serif', Georgia, Times" }}>
+          <p style={{ color: '#94a3b8', margin: '10px 0' }}>📍 <strong style={{ color: '#fff' }}>Location:</strong> {findUs.location}</p>
+          <p style={{ color: '#94a3b8', margin: '10px 0' }}>✉️ <strong style={{ color: '#fff' }}>Email:</strong> {findUs.email}</p>
+          <p style={{ color: '#94a3b8', margin: '10px 0' }}>📞 <strong style={{ color: '#fff' }}>Call:</strong> {findUs.call}</p>
         </div>
       </div>
     </div>
   );
 }
 
-// 6. ADMIN SECURITY MODULE (🚀 Full Lock Protection Restored + Centered Controls Form)
+// 6. ADMIN PANEL (🚀 Mobile UI & Responsive Input Alignments Fully Upgraded)
 function Admin() {
   const [passwordInput, setPasswordInput] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -290,7 +290,6 @@ function Admin() {
   const [attempts, setAttempts] = useState(0);
   const [lockoutTimeLeft, setLockoutTimeLeft] = useState(0);
 
-  // Form states for content management
   const [formAbout, setFormAbout] = useState('');
   const [formServices, setFormServices] = useState({
     card1Title: '', card1Desc: '',
@@ -300,10 +299,8 @@ function Admin() {
   const [formFindUs, setFormFindUs] = useState({ location: '', email: '', call: '' });
 
   useEffect(() => {
-    // Session Auth Check
     if (sessionStorage.getItem('admin_session_auth') === 'true') setIsAuthorized(true);
     
-    // Lockout States Verification
     const savedLockout = localStorage.getItem('admin_lockout_expiry');
     const savedAttempts = localStorage.getItem('admin_failed_attempts');
     if (savedAttempts) setAttempts(parseInt(savedAttempts, 10));
@@ -313,7 +310,6 @@ function Admin() {
       if (timeLeft > 0) setLockoutTimeLeft(timeLeft);
     }
 
-    // Load initial values to form fields
     setFormAbout(localStorage.getItem('admin_about_text') || "Hum businesses ko online grow karne mein help karte hain...");
     try { 
       setFormServices(JSON.parse(localStorage.getItem('admin_services_json')) || {
@@ -329,7 +325,6 @@ function Admin() {
     } catch(e){}
   }, []);
 
-  // Lockout countdown timer logic
   useEffect(() => {
     if (lockoutTimeLeft <= 0) return;
     const timer = setInterval(() => {
@@ -361,7 +356,6 @@ function Admin() {
       setPasswordInput('');
       
       if (nextAttempts >= 3) {
-        // Lock system for 2 hours (7200 seconds)
         const expiryTime = Date.now() + 7200000;
         localStorage.setItem('admin_lockout_expiry', expiryTime.toString());
         localStorage.setItem('admin_failed_attempts', '3');
@@ -406,14 +400,13 @@ function Admin() {
     fontFamily: "'serif', Georgia, Times"
   };
 
-  // 🚀 Lock Screen UI View (When system is active)
   if (lockoutTimeLeft > 0) {
     return (
       <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div style={{ backgroundColor: '#111b2d', padding: '50px 40px', borderRadius: '24px', textAlign: 'center', maxWidth: '420px', width: '100%', border: '1px solid #ef4444', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
-          <h3 style={{ color: '#ef4444', marginBottom: '15px', fontSize: '22px', fontFamily: "'serif', Georgia, Times" }}>Security Lockout Active</h3>
-          <p style={{ color: '#94a3b8', fontSize: '14px', marginBottom: '25px', lineHeight: '1.6' }}>3 baar lagat galat password daala gaya hai. Brute force protection ke chalte ye panel block ho gaya hai.</p>
-          <div style={{ backgroundColor: '#09111e', padding: '20px', borderRadius: '14px', fontSize: '26px', color: '#00ffcc', fontWeight: '800', letterSpacing: '1px', border: '1px solid rgba(0,255,204,0.1)' }}>
+        <div style={{ backgroundColor: '#111b2d', padding: '40px 20px', borderRadius: '24px', textAlign: 'center', maxWidth: '420px', width: '100%', border: '1px solid #ef4444', boxSizing: 'border-box' }}>
+          <h3 style={{ color: '#ef4444', marginBottom: '15px', fontSize: '20px', fontFamily: "'serif', Georgia, Times" }}>Security Lockout Active</h3>
+          <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '20px', lineHeight: '1.5' }}>3 baar galat password daala gaya hai. Brute force protection ke chalte panel temporary locked hai.</p>
+          <div style={{ backgroundColor: '#09111e', padding: '15px', borderRadius: '12px', fontSize: '24px', color: '#00ffcc', fontWeight: '800', border: '1px solid rgba(0,255,204,0.1)' }}>
             {Math.floor(lockoutTimeLeft / 3600)}:{(Math.floor((lockoutTimeLeft % 3600) / 60)).toString().padStart(2,'0')}:{(lockoutTimeLeft % 60).toString().padStart(2,'0')}
           </div>
         </div>
@@ -421,57 +414,84 @@ function Admin() {
     );
   }
 
-  // Login Authorization View
   if (!isAuthorized) {
     return (
       <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <form onSubmit={handleLoginSubmit} style={{ backgroundColor: '#111b2d', padding: '40px', borderRadius: '24px', textAlign: 'center', width: '100%', maxWidth: '380px', border: '1px solid rgba(255,255,255,0.04)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
-          <h3 style={{ marginBottom: '25px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'", fontSize: '24px' }}>Admin Dashboard</h3>
+        <form onSubmit={handleLoginSubmit} style={{ backgroundColor: '#111b2d', padding: '35px 25px', borderRadius: '24px', textAlign: 'center', width: '100%', maxWidth: '380px', border: '1px solid rgba(255,255,255,0.04)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', boxSizing: 'border-box' }}>
+          <h3 style={{ marginBottom: '20px', fontFamily: "'serif', Georgia, Times", fontSize: '22px' }}>Admin Dashboard</h3>
           <input type="password" placeholder="Enter Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} style={inputStyle} />
           {loginError && <p style={{ color: '#ef4444', fontSize: '13px', marginBottom: '15px', fontWeight: '500' }}>{loginError}</p>}
-          <button type="submit" style={{ width: '100%', backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', fontFamily: "'serif', Georgia, Times" }}>Unlock Panel</button>
+          <button type="submit" style={{ width: '100%', backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '13px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', fontFamily: "'serif', Georgia, Times" }}>Unlock Panel</button>
         </form>
       </div>
     );
   }
 
-  // 🚀 Full Authorized Management View Center Form
   return (
-    <div style={{ padding: '50px 20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
-      <div style={{ backgroundColor: '#111b2d', padding: '45px 40px', borderRadius: '24px', maxWidth: '750px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.04)', textAlign: 'center' }}>
+    <div style={{ padding: '40px 15px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
+      
+      {/* Dynamic CSS Grid Injector directly for handling perfect clean mobile responsive breakdown */}
+      <style>{`
+        .responsive-card-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 15px;
+          margin-bottom: 15px;
+        }
+        .responsive-find-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 15px;
+        }
+        @media (max-width: 680px) {
+          .responsive-card-grid {
+            grid-template-columns: 1fr !important;
+            gap: 5px !important;
+          }
+          .responsive-find-grid {
+            grid-template-columns: 1fr !important;
+            gap: 5px !important;
+          }
+          .admin-box-card {
+            padding: 30px 20px !important;
+          }
+        }
+      `}</style>
+
+      <div className="admin-box-card" style={{ backgroundColor: '#111b2d', padding: '45px 40px', borderRadius: '24px', maxWidth: '750px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.04)', textAlign: 'center', boxSizing: 'border-box' }}>
         
-        <h2 style={{ fontSize: '28px', fontWeight: '700', marginBottom: '35px', color: '#ffffff', fontFamily: "'serif', Georgia, Times" }}>
+        <h2 style={{ fontSize: '26px', fontWeight: '700', marginBottom: '30px', color: '#ffffff', fontFamily: "'serif', Georgia, Times" }}>
           Dashboard <span style={{ color: '#00a2ff' }}>Control Panel</span>
         </h2>
 
         <form onSubmit={handleSaveAllSettings}>
-          {/* ABOUT CONTENT */}
-          <div style={{ marginBottom: '30px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '20px' }}>
+          {/* ABOUT DESCRIPTION TEXTAREA */}
+          <div style={{ marginBottom: '25px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '15px' }}>
             <label style={labelStyle}>Edit About Text Description:</label>
-            <textarea rows="3" value={formAbout} onChange={(e) => setFormAbout(e.target.value)} style={{ ...inputStyle, resize: 'vertical', fontFamily: 'sans-serif' }} />
+            <textarea rows="4" value={formAbout} onChange={(e) => setFormAbout(e.target.value)} style={{ ...inputStyle, resize: 'vertical', fontFamily: 'sans-serif' }} />
           </div>
 
-          {/* SERVICES CARDS */}
-          <div style={{ marginBottom: '30px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '20px' }}>
-            <h4 style={{ ...labelStyle, color: '#fff', fontSize: '16px', marginBottom: '15px' }}>Edit Services Content:</h4>
+          {/* 🚀 FIXED FOR MOBILE: SERVICES DYNAMIC CARDS SECTION */}
+          <div style={{ marginBottom: '25px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '15px' }}>
+            <h4 style={{ ...labelStyle, color: '#fff', fontSize: '15px', marginBottom: '15px' }}>Edit Services Content:</h4>
             {[1, 2, 3].map(i => (
-              <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '10px' }}>
+              <div key={i} className="responsive-card-grid">
                 <div>
                   <label style={{ ...labelStyle, fontSize: '12px' }}>Card {i} Title</label>
                   <input type="text" value={formServices[`card${i}Title`]} onChange={(e) => setFormServices({...formServices, [`card${i}Title`]: e.target.value})} style={inputStyle} />
                 </div>
                 <div>
                   <label style={{ ...labelStyle, fontSize: '12px' }}>Card {i} Description</label>
-                  <textarea rows="1" value={formServices[`card${i}Desc`]} onChange={(e) => setFormServices({...formServices, [`card${i}Desc`]: e.target.value})} style={{ ...inputStyle, fontFamily: 'sans-serif' }} />
+                  <textarea rows="2" value={formServices[`card${i}Desc`]} onChange={(e) => setFormServices({...formServices, [`card${i}Desc`]: e.target.value})} style={{ ...inputStyle, fontFamily: 'sans-serif' }} />
                 </div>
               </div>
             ))}
           </div>
 
-          {/* FIND US DATA */}
-          <div style={{ marginBottom: '35px' }}>
-            <h4 style={{ ...labelStyle, color: '#fff', fontSize: '16px', marginBottom: '15px' }}>Edit Find Us Info:</h4>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
+          {/* 🚀 FIXED FOR MOBILE: FIND US SECTION */}
+          <div style={{ marginBottom: '30px' }}>
+            <h4 style={{ ...labelStyle, color: '#fff', fontSize: '15px', marginBottom: '15px' }}>Edit Find Us Info:</h4>
+            <div className="responsive-find-grid">
               <div>
                 <label style={{ ...labelStyle, fontSize: '12px' }}>Location</label>
                 <input type="text" value={formFindUs.location} onChange={(e) => setFormFindUs({...formFindUs, location: e.target.value})} style={inputStyle} />
@@ -487,8 +507,8 @@ function Admin() {
             </div>
           </div>
 
-          {/* SAVE ALL BUTTON */}
-          <button type="submit" style={{ backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '15px 40px', borderRadius: '12px', fontSize: '15px', fontWeight: '700', cursor: 'pointer', fontFamily: "'serif', Georgia, Times", boxShadow: '0 4px 15px rgba(0,162,255,0.3)' }}>
+          {/* MASTER LIVE SAVE BUTTON */}
+          <button type="submit" style={{ backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '14px 35px', borderRadius: '12px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', fontFamily: "'serif', Georgia, Times", boxShadow: '0 4px 15px rgba(0,162,255,0.3)', width: '100%', maxWidth: '300px' }}>
             Save All Settings Live
           </button>
         </form>
