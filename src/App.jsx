@@ -175,10 +175,16 @@ function Home() {
 
 // 3. ABOUTPAGE MODULE
 function AboutPage() {
-  const [aboutText, setAboutText] = useState("Hum businesses ko online grow karne mein help karte hain through smart aur result-oriented digital marketing solutions.");
+  const defaultAbout = "Hum businesses ko online grow karne mein help karte hain through smart aur result-oriented digital marketing solutions.";
+  const [aboutText, setAboutText] = useState(defaultAbout);
+
   useEffect(() => {
     const savedAbout = localStorage.getItem('admin_about_text');
-    if (savedAbout) setAboutText(savedAbout);
+    if (savedAbout) {
+      setAboutText(savedAbout);
+    } else {
+      setAboutText(defaultAbout);
+    }
   }, []);
 
   return (
@@ -201,20 +207,35 @@ function AboutPage() {
   );
 }
 
-// 4. SERVICESPAGE MODULE (Exact Copy of image_7736cb.png)
+// 4. SERVICESPAGE MODULE (Anti-Blank Safe Mode Enabled)
 function ServicesPage() {
-  const [services, setServices] = useState({
+  const defaultServices = {
     card1Title: 'Social Media Marketing', 
     card1Desc: 'Instagram Marketing\nFacebook Marketing',
     card2Title: 'Paid Advertising', 
     card2Desc: 'Google Ads\nFacebook Ads',
     card3Title: 'Website Development', 
     card3Desc: 'Website Design\nWebsite Development'
-  });
+  };
+  
+  const [services, setServices] = useState(defaultServices);
 
   useEffect(() => {
     const saved = localStorage.getItem('admin_services_json');
-    if (saved) { try { setServices(JSON.parse(saved)); } catch(e) {} }
+    if (saved) { 
+      try { 
+        const parsed = JSON.parse(saved);
+        if(parsed && parsed.card1Title) {
+          setServices(parsed); 
+        } else {
+          setServices(defaultServices);
+        }
+      } catch(e) {
+        setServices(defaultServices);
+      } 
+    } else {
+      setServices(defaultServices);
+    }
   }, []);
 
   return (
@@ -232,17 +253,32 @@ function ServicesPage() {
   );
 }
 
-// 5. FINDUSPAGE MODULE (Exact Copy of image_773409.png)
+// 5. FINDUSPAGE MODULE (Anti-Blank Safe Mode Enabled)
 function FindUsPage() {
-  const [findUs, setFindUs] = useState({ 
+  const defaultFindUs = { 
     location: 'Roshan Bagh Prayagraj', 
     email: 'anasknanprince1234@gmail.com', 
     call: '+91 7007684279' 
-  });
+  };
+  
+  const [findUs, setFindUs] = useState(defaultFindUs);
 
   useEffect(() => {
     const saved = localStorage.getItem('admin_findus_json');
-    if (saved) { try { setFindUs(JSON.parse(saved)); } catch(e) {} }
+    if (saved) { 
+      try { 
+        const parsed = JSON.parse(saved);
+        if(parsed && parsed.location) {
+          setFindUs(parsed); 
+        } else {
+          setFindUs(defaultFindUs);
+        }
+      } catch(e) {
+        setFindUs(defaultFindUs);
+      } 
+    } else {
+      setFindUs(defaultFindUs);
+    }
   }, []);
 
   return (
