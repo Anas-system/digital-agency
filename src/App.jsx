@@ -173,7 +173,7 @@ function Home() {
   );
 }
 
-// 3. ABOUTPAGE MODULE
+// 3. ABOUTPAGE MODULE (Restored comfortable font, support blocks removed)
 function AboutPage() {
   const [aboutText, setAboutText] = useState("Hum aapke business ko online scale karne aur brand value build karne mein madad karte hain through custom, data-driven aur result-oriented digital marketing strategies.");
   useEffect(() => {
@@ -248,7 +248,7 @@ function FindUsPage() {
   );
 }
 
-// 6. ADMIN SECURITY MODULE
+// 6. ADMIN PANEL MODULE (With 3 attempts lockout protection)
 function Admin() {
   const [passwordInput, setPasswordInput] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -361,13 +361,12 @@ function Admin() {
   );
 }
 
-// 7. GLOBAL MASTER ROUTER
+// 7. GLOBAL ROUTER CONTROLLER (No broken external imports)
 function App() {
   return (
     <div style={{ backgroundColor: '#090f1c', height: '100vh', width: '100vw', margin: 0, padding: 0, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, overflow: 'hidden' }}>
       <Navbar />
       <div style={{ flex: '1', width: '100%', height: 'calc(100vh - 75px)', overflowY: 'auto', overflowX: 'hidden' }}>
-        {/* 🚀 PERFECT REDIRECT SYNTAX */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />
