@@ -1,8 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 
-// 1. DYNAMIC NAVBAR MODULE (🚀 Fixed Mobile Layering & Overlapping Alignment)
+// 1. DYNAMIC NAVBAR MODULE (🚀 Fixed Alignment & Active Page Highlighting)
 function Navbar() {
+  const location = useLocation(); // Current active page url track karne ke liye
+
+  // Function to return active color dynamically
+  const getLinkStyle = (path) => {
+    const isActive = location.pathname === path;
+    return {
+      color: isActive ? '#ffffff' : '#94a3b8',
+      fontWeight: isActive ? '700' : '500',
+      textDecoration: 'none',
+      fontSize: '15px',
+      fontFamily: "'serif', Georgia, Times",
+      transition: 'color 0.2s ease',
+      position: 'relative',
+      paddingBottom: '4px',
+      borderBottom: isActive ? '2px solid #00a2ff' : '2px solid transparent' // Active link ke niche premium blue line
+    };
+  };
+
   return (
     <nav className="main-navbar" style={{ 
       display: 'flex', 
@@ -17,23 +35,23 @@ function Navbar() {
       position: 'relative',
       zIndex: 10
     }}>
-      {/* Dynamic CSS Injector for Layout Wrapping */}
+      {/* Responsive Alignment Ke Liye Custom CSS Injector */}
       <style>{`
         @media (max-width: 650px) {
           .main-navbar {
             flex-direction: column !important;
             height: auto !important;
-            padding: 15px 20px !important;
-            gap: 12px !important;
+            padding: 15px 10px !important;
+            gap: 15px !important;
           }
           .nav-links-box {
-            gap: 15px !important;
+            gap: 18px !important;
             flex-wrap: wrap !important;
-            justifyContent: center !important;
+            justify-content: center !important;
             width: 100% !important;
           }
           .login-btn-nav {
-            padding: 6px 16px !important;
+            padding: 6px 14px !important;
             font-size: 13px !important;
           }
         }
@@ -45,10 +63,13 @@ function Navbar() {
         </span>
       </Link>
       
+      {/* Links box jo active path ke according highlight hoga aur space out rahega */}
       <div className="nav-links-box" style={{ display: 'flex', gap: '25px', alignItems: 'center' }}>
-        <Link to="/about" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', fontFamily: "'serif', Georgia, Times" }}>About</Link>
-        <Link to="/services" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '15px', fontWeight: '500', fontFamily: "'serif', Georgia, Times" }}>Services</Link>
-        <Link to="/find-us" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', fontFamily: "'serif', Georgia, Times" }}>Find Us</Link>
+        <Link to="/" style={getLinkStyle('/')}>Home</Link>
+        <Link to="/about" style={getLinkStyle('/about')}>About</Link>
+        <Link to="/services" style={getLinkStyle('/services')}>Services</Link>
+        <Link to="/find-us" style={getLinkStyle('/find-us')}>Find Us</Link>
+        
         <Link to="/admin" className="login-btn-nav" style={{ 
           backgroundColor: '#00a2ff', 
           padding: '8px 22px', 
@@ -57,7 +78,8 @@ function Navbar() {
           textDecoration: 'none', 
           fontSize: '14px', 
           fontWeight: '600',
-          fontFamily: "'serif', Georgia, Times"
+          fontFamily: "'serif', Georgia, Times",
+          borderBottom: location.pathname === '/admin' ? '2px solid #ffffff' : 'none'
         }}>
           Login
         </Link>
