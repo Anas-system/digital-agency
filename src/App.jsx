@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
 // 1. DYNAMIC NAVBAR MODULE
@@ -10,22 +10,22 @@ function Navbar() {
       alignItems: 'center', 
       padding: '0 5%', 
       height: '75px', 
-      backgroundColor: '#090f1c', 
-      borderBottom: '1px solid rgba(255, 255, 255, 0.05)', 
+      backgroundColor: '#09111e', 
+      borderBottom: '1px solid rgba(255, 255, 255, 0.04)', 
       color: '#fff',
       boxSizing: 'border-box',
       position: 'relative',
       zIndex: 10
     }}>
       <Link to="/" style={{ textDecoration: 'none' }}>
-        <span style={{ fontSize: '22px', fontWeight: '800', color: '#ffffff', letterSpacing: '-0.5px' }}>
+        <span style={{ fontSize: '22px', fontWeight: '800', color: '#ffffff', letterSpacing: '-0.5px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
           DigiGrow
         </span>
       </Link>
       <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
-        <Link to="/about" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>About</Link>
-        <Link to="/services" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>Services</Link>
-        <Link to="/find-us" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500' }}>Find Us</Link>
+        <Link to="/about" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>About</Link>
+        <Link to="/services" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Services</Link>
+        <Link to="/find-us" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Find Us</Link>
         <Link to="/admin" style={{ 
           backgroundColor: '#00a2ff', 
           padding: '9px 24px', 
@@ -33,7 +33,8 @@ function Navbar() {
           color: '#fff', 
           textDecoration: 'none', 
           fontSize: '14px', 
-          fontWeight: '600'
+          fontWeight: '600',
+          fontFamily: "'serif', Georgia, Times, 'Times New Roman'"
         }}>
           Login
         </Link>
@@ -53,7 +54,6 @@ function Home() {
 
     let animationFrameId;
     let particlesArray = [];
-    
     const mouse = { x: null, y: null, radius: 180 };
 
     const handleResize = () => {
@@ -159,13 +159,13 @@ function Home() {
   }, []);
 
   return (
-    <div style={{ padding: '0 24px', height: '100%', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', boxSizing: 'border-box', width: '100%', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ padding: '0 24px', height: '100%', backgroundColor: '#09111e', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', boxSizing: 'border-box', width: '100%', position: 'relative', overflow: 'hidden' }}>
       <canvas ref={canvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1, pointerEvents: 'none' }} />
       <div style={{ zIndex: 2, maxWidth: '880px', padding: '0 10px' }}>
-        <h1 style={{ fontSize: 'calc(36px + 2.4vw)', fontWeight: '900', marginBottom: '24px', letterSpacing: '-1px', lineHeight: '1.15', color: '#f8fafc', textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+        <h1 style={{ fontSize: 'calc(36px + 2.4vw)', fontWeight: '900', marginBottom: '24px', letterSpacing: '-1px', lineHeight: '1.15', color: '#f8fafc', textShadow: '0 10px 30px rgba(0,0,0,0.5)', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
           Welcome to <span style={{ background: 'linear-gradient(135deg, #00a2ff 0%, #00ffcc 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', filter: 'drop-shadow(0px 4px 20px rgba(0,162,255,0.3))' }}>DigiGrow</span>
         </h1>
-        <p style={{ color: '#94a3b8', fontSize: 'calc(15px + 0.15vw)', maxWidth: '650px', lineHeight: '1.8', margin: '0 auto', fontWeight: '400', letterSpacing: '0.2px', textShadow: '0 4px 10px rgba(0,0,0,0.4)' }}>
+        <p style={{ color: '#94a3b8', fontSize: 'calc(15px + 0.15vw)', maxWidth: '650px', lineHeight: '1.8', margin: '0 auto', fontWeight: '400', letterSpacing: '0.2px', textShadow: '0 4px 10px rgba(0,0,0,0.4)', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
           Expert Digital Marketing Solutions For Your Business. Scale your digital footprint and dominate your market niche with our expert strategies.
         </p>
       </div>
@@ -175,14 +175,25 @@ function Home() {
 
 // 3. ABOUTPAGE MODULE
 function AboutPage() {
+  const [aboutText, setAboutText] = useState("Hum businesses ko online grow karne mein help karte hain through smart aur result-oriented digital marketing solutions. Hamara goal brands, startups aur local businesses ko strong online presence dena hai, taaki woh zyada customers tak pahunch sakein aur apne business ko faster grow kar sakein. Hum har client ke business goals ke according customized marketing strategies provide karte hain.");
+
+  useEffect(() => {
+    const savedAbout = localStorage.getItem('admin_about_text');
+    if (savedAbout && savedAbout.trim() !== "") {
+      setAboutText(savedAbout);
+    }
+  }, []);
+
   return (
-    <div style={{ padding: '40px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
-      <div style={{ backgroundColor: '#121a2e', padding: '40px 30px', borderRadius: '24px', maxWidth: '850px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.05)', textAlign: 'left' }}>
-        <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '20px', color: '#ffffff' }}>Who We Are & <span style={{ color: '#00a2ff' }}>What We Do</span></h2>
-        <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.7', marginBottom: '20px' }}>Hum businesses ko online grow karne mein help karte hain through smart aur result-oriented digital marketing solutions.</p>
-        <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.7', marginBottom: '30px' }}>Hamara core mission startups, local brands aur established businesses ko ek strong digital foot-print dena hai, taaki aap sahi target audience tak pahunch sakein aur apne business ROI ko faster mode par grow sakein. Hum har ek client ki specific requirements ke mutabik tailored solutions design karte hain.</p>
-        <h4 style={{ color: '#00a2ff', fontSize: '16px', fontWeight: '600', marginBottom: '15px' }}>Hamari Core Expertise:</h4>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px 25px', color: '#e2e8f0', fontSize: '14px', lineHeight: '1.5' }}>
+    <div style={{ padding: '60px 20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
+      <div style={{ backgroundColor: '#111b2d', padding: '50px 40px', borderRadius: '24px', maxWidth: '850px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.04)', textAlign: 'left' }}>
+        <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '25px', color: '#ffffff', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+          Who We Are & <span style={{ color: '#00a2ff' }}>What We Do</span>
+        </h2>
+        <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.8', marginBottom: '25px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>{aboutText}</p>
+        <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.8', marginBottom: '35px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Hamari core mission startups, local brands aur established businesses ko ek strong digital foot-print dena hai, taaki aap sahi target audience tak pahunch sakein aur apne business ROI ko faster mode par grow sakein.</p>
+        <h4 style={{ color: '#00a2ff', fontSize: '16px', fontWeight: '700', marginBottom: '20px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Hamari Core Expertise:</h4>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '15px 30px', color: '#ffffff', fontSize: '14px', lineHeight: '1.6', fontFamily: "'serif', Georgia, Times, 'Times New Roman'", fontWeight: '500' }}>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Social Media Management</div>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Search Engine Optimization (SEO)</div>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> High-End Website Development</div>
@@ -195,56 +206,293 @@ function AboutPage() {
   );
 }
 
-// 4. SERVICESPAGE MODULE (Pure Hardcoded - image_772bcd.png Standard)
+// 4. SERVICESPAGE MODULE
 function ServicesPage() {
+  const [services, setServices] = useState({
+    card1Title: 'Social Media Marketing', 
+    card1Desc: 'Instagram Marketing\nFacebook Marketing',
+    card2Title: 'Paid Advertising', 
+    card2Desc: 'Google Ads\nFacebook Ads',
+    card3Title: 'Website Development', 
+    card3Desc: 'Website Design\nWebsite Development'
+  });
+
+  useEffect(() => {
+    const saved = localStorage.getItem('admin_services_json');
+    if (saved) { 
+      try { 
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.card1Title) setServices(parsed); 
+      } catch(e) {} 
+    }
+  }, []);
+
   return (
-    <div style={{ padding: '60px 4%', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxSizing: 'border-box' }}>
-      <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '50px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Our Services</h2>
-      <div style={{ display: 'flex', gap: '25px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1200px', width: '100%' }}>
-        
-        <div style={{ backgroundColor: '#111726', padding: '35px 30px', borderRadius: '18px', flex: '1', minWidth: '280px', boxSizing: 'border-box', textAlign: 'left' }}>
-          <h3 style={{ fontSize: '18px', color: '#00a2ff', marginBottom: '20px', fontWeight: '700' }}>Social Media Marketing</h3>
-          <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.8', whiteSpace: 'pre-line' }}>Instagram Marketing{"\n"}Facebook Marketing</p>
-        </div>
-
-        <div style={{ backgroundColor: '#111726', padding: '35px 30px', borderRadius: '18px', flex: '1', minWidth: '280px', boxSizing: 'border-box', textAlign: 'left' }}>
-          <h3 style={{ fontSize: '18px', color: '#00a2ff', marginBottom: '20px', fontWeight: '700' }}>Paid Advertising</h3>
-          <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.8', whiteSpace: 'pre-line' }}>Google Ads{"\n"}Facebook Ads</p>
-        </div>
-
-        <div style={{ backgroundColor: '#111726', padding: '35px 30px', borderRadius: '18px', flex: '1', minWidth: '280px', boxSizing: 'border-box', textAlign: 'left' }}>
-          <h3 style={{ fontSize: '18px', color: '#00a2ff', marginBottom: '20px', fontWeight: '700' }}>Website Development</h3>
-          <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.8', whiteSpace: 'pre-line' }}>Website Design{"\n"}Website Development</p>
-        </div>
-
+    <div style={{ padding: '80px 20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxSizing: 'border-box' }}>
+      <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '50px', color: '#ffffff', textAlign: 'center', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+        Our <span style={{ color: '#00a2ff' }}>Services</span>
+      </h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', maxWidth: '1140px', width: '100%', boxSizing: 'border-box' }}>
+        {[1, 2, 3].map(num => (
+          <div key={num} style={{ backgroundColor: '#111b2d', padding: '45px 35px', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)', boxSizing: 'border-box', textAlign: 'left' }}>
+            <h3 style={{ fontSize: '20px', color: '#00a2ff', marginBottom: '20px', fontWeight: '700', letterSpacing: '-0.3px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+              {services[`card${num}Title`]}
+            </h3>
+            <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.8', whiteSpace: 'pre-line', fontWeight: '400', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+              {services[`card${num}Desc`]}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-// 5. FINDUSPAGE MODULE (Pure Hardcoded - image_772bad.png Standard)
+// 5. FINDUSPAGE MODULE
 function FindUsPage() {
+  const [findUs, setFindUs] = useState({ 
+    location: 'Roshan Bagh Prayagraj', 
+    email: 'anasknanprince1234@gmail.com', 
+    call: '+91 7007684279' 
+  });
+
+  useEffect(() => {
+    const saved = localStorage.getItem('admin_findus_json');
+    if (saved) { 
+      try { 
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.location) setFindUs(parsed); 
+      } catch(e) {} 
+    }
+  }, []);
+
   return (
-    <div style={{ padding: '60px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
-      <div style={{ backgroundColor: '#111726', padding: '50px 40px', borderRadius: '20px', maxWidth: '550px', width: '100%', textAlign: 'center', boxSizing: 'border-box' }}>
-        <h2 style={{ fontSize: '28px', marginBottom: '35px', fontWeight: '700', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Find Us</h2>
-        <div style={{ textAlign: 'left', display: 'inline-block', fontSize: '14px', lineHeight: '2' }}>
-          <p style={{ color: '#94a3b8', margin: '10px 0' }}>📍 <strong style={{ color: '#fff' }}>Location:</strong> Roshan Bagh Prayagraj</p>
-          <p style={{ color: '#94a3b8', margin: '10px 0' }}>✉️ <strong style={{ color: '#fff' }}>Email:</strong> anasknanprince1234@gmail.com</p>
-          <p style={{ color: '#94a3b8', margin: '10px 0' }}>📞 <strong style={{ color: '#fff' }}>Call:</strong> +91 7007684279</p>
+    <div style={{ padding: '80px 20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
+      <div style={{ backgroundColor: '#111b2d', padding: '50px 45px', borderRadius: '24px', maxWidth: '600px', width: '100%', textAlign: 'center', boxSizing: 'border-box', boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.04)' }}>
+        <h2 style={{ fontSize: '32px', marginBottom: '40px', fontWeight: '700', color: '#ffffff', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+          Find <span style={{ color: '#00a2ff' }}>Us</span>
+        </h2>
+        <div style={{ textAlign: 'left', display: 'inline-block', fontSize: '15px', lineHeight: '2.2', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
+          <p style={{ color: '#94a3b8', margin: '12px 0' }}>📍 <strong style={{ color: '#fff' }}>Location:</strong> {findUs.location}</p>
+          <p style={{ color: '#94a3b8', margin: '12px 0' }}>✉️ <strong style={{ color: '#fff' }}>Email:</strong> {findUs.email}</p>
+          <p style={{ color: '#94a3b8', margin: '12px 0' }}>📞 <strong style={{ color: '#fff' }}>Call:</strong> {findUs.call}</p>
         </div>
       </div>
     </div>
   );
 }
 
-// 6. ADMIN SYSTEM FRAMEWORK (Standard Interface Keep Safe)
+// 6. ADMIN SECURITY MODULE (🚀 Full Lock Protection Restored + Centered Controls Form)
 function Admin() {
+  const [passwordInput, setPasswordInput] = useState('');
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [loginError, setLoginError] = useState('');
+  const [attempts, setAttempts] = useState(0);
+  const [lockoutTimeLeft, setLockoutTimeLeft] = useState(0);
+
+  // Form states for content management
+  const [formAbout, setFormAbout] = useState('');
+  const [formServices, setFormServices] = useState({
+    card1Title: '', card1Desc: '',
+    card2Title: '', card2Desc: '',
+    card3Title: '', card3Desc: ''
+  });
+  const [formFindUs, setFormFindUs] = useState({ location: '', email: '', call: '' });
+
+  useEffect(() => {
+    // Session Auth Check
+    if (sessionStorage.getItem('admin_session_auth') === 'true') setIsAuthorized(true);
+    
+    // Lockout States Verification
+    const savedLockout = localStorage.getItem('admin_lockout_expiry');
+    const savedAttempts = localStorage.getItem('admin_failed_attempts');
+    if (savedAttempts) setAttempts(parseInt(savedAttempts, 10));
+    
+    if (savedLockout) {
+      const timeLeft = Math.ceil((parseInt(savedLockout, 10) - Date.now()) / 1000);
+      if (timeLeft > 0) setLockoutTimeLeft(timeLeft);
+    }
+
+    // Load initial values to form fields
+    setFormAbout(localStorage.getItem('admin_about_text') || "Hum businesses ko online grow karne mein help karte hain...");
+    try { 
+      setFormServices(JSON.parse(localStorage.getItem('admin_services_json')) || {
+        card1Title: 'Social Media Marketing', card1Desc: 'Instagram Marketing\nFacebook Marketing',
+        card2Title: 'Paid Advertising', card2Desc: 'Google Ads\nFacebook Ads',
+        card3Title: 'Website Development', card3Desc: 'Website Design\nWebsite Development'
+      }); 
+    } catch(e){}
+    try { 
+      setFormFindUs(JSON.parse(localStorage.getItem('admin_findus_json')) || { 
+        location: 'Roshan Bagh Prayagraj', email: 'anasknanprince1234@gmail.com', call: '+91 7007684279' 
+      }); 
+    } catch(e){}
+  }, []);
+
+  // Lockout countdown timer logic
+  useEffect(() => {
+    if (lockoutTimeLeft <= 0) return;
+    const timer = setInterval(() => {
+      setLockoutTimeLeft(prev => {
+        if (prev <= 1) {
+          localStorage.removeItem('admin_lockout_expiry');
+          localStorage.removeItem('admin_failed_attempts');
+          setAttempts(0);
+          setLoginError('');
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [lockoutTimeLeft]);
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    if (passwordInput === 'bhai163') {
+      setIsAuthorized(true);
+      setAttempts(0);
+      setLoginError('');
+      localStorage.removeItem('admin_failed_attempts');
+      sessionStorage.setItem('admin_session_auth', 'true');
+    } else {
+      const nextAttempts = attempts + 1;
+      setAttempts(nextAttempts);
+      setPasswordInput('');
+      
+      if (nextAttempts >= 3) {
+        // Lock system for 2 hours (7200 seconds)
+        const expiryTime = Date.now() + 7200000;
+        localStorage.setItem('admin_lockout_expiry', expiryTime.toString());
+        localStorage.setItem('admin_failed_attempts', '3');
+        setLockoutTimeLeft(7200);
+        setLoginError('Brute-force detected! Panel Locked for 2 hours.');
+      } else {
+        localStorage.setItem('admin_failed_attempts', nextAttempts.toString());
+        setLoginError(`Incorrect Password! (${3 - nextAttempts} attempts remaining)`);
+      }
+    }
+  };
+
+  const handleSaveAllSettings = (e) => {
+    e.preventDefault();
+    localStorage.setItem('admin_about_text', formAbout);
+    localStorage.setItem('admin_services_json', JSON.stringify(formServices));
+    localStorage.setItem('admin_findus_json', JSON.stringify(formFindUs));
+    alert('Bhai, saara data kamyabi se save ho gaya hai!');
+    window.location.reload();
+  };
+
+  const inputStyle = {
+    width: '100%',
+    backgroundColor: '#09111e',
+    border: '1px solid #1e2d4a',
+    borderRadius: '10px',
+    color: '#fff',
+    padding: '12px',
+    fontSize: '14px',
+    marginBottom: '15px',
+    outline: 'none',
+    boxSizing: 'border-box'
+  };
+
+  const labelStyle = {
+    display: 'block',
+    textAlign: 'left',
+    fontSize: '14px',
+    color: '#00a2ff',
+    fontWeight: '600',
+    marginBottom: '6px',
+    fontFamily: "'serif', Georgia, Times"
+  };
+
+  // 🚀 Lock Screen UI View (When system is active)
+  if (lockoutTimeLeft > 0) {
+    return (
+      <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ backgroundColor: '#111b2d', padding: '50px 40px', borderRadius: '24px', textAlign: 'center', maxWidth: '420px', width: '100%', border: '1px solid #ef4444', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
+          <h3 style={{ color: '#ef4444', marginBottom: '15px', fontSize: '22px', fontFamily: "'serif', Georgia, Times" }}>Security Lockout Active</h3>
+          <p style={{ color: '#94a3b8', fontSize: '14px', marginBottom: '25px', lineHeight: '1.6' }}>3 baar lagat galat password daala gaya hai. Brute force protection ke chalte ye panel block ho gaya hai.</p>
+          <div style={{ backgroundColor: '#09111e', padding: '20px', borderRadius: '14px', fontSize: '26px', color: '#00ffcc', fontWeight: '800', letterSpacing: '1px', border: '1px solid rgba(0,255,204,0.1)' }}>
+            {Math.floor(lockoutTimeLeft / 3600)}:{(Math.floor((lockoutTimeLeft % 3600) / 60)).toString().padStart(2,'0')}:{(lockoutTimeLeft % 60).toString().padStart(2,'0')}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Login Authorization View
+  if (!isAuthorized) {
+    return (
+      <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <form onSubmit={handleLoginSubmit} style={{ backgroundColor: '#111b2d', padding: '40px', borderRadius: '24px', textAlign: 'center', width: '100%', maxWidth: '380px', border: '1px solid rgba(255,255,255,0.04)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+          <h3 style={{ marginBottom: '25px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'", fontSize: '24px' }}>Admin Dashboard</h3>
+          <input type="password" placeholder="Enter Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} style={inputStyle} />
+          {loginError && <p style={{ color: '#ef4444', fontSize: '13px', marginBottom: '15px', fontWeight: '500' }}>{loginError}</p>}
+          <button type="submit" style={{ width: '100%', backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', fontFamily: "'serif', Georgia, Times" }}>Unlock Panel</button>
+        </form>
+      </div>
+    );
+  }
+
+  // 🚀 Full Authorized Management View Center Form
   return (
-    <div style={{ padding: '40px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', textAlign: 'center' }}>
-        <h3>Admin System Settings</h3>
-        <p style={{ color: '#94a3b8', fontSize: '14px' }}>Framework is running in native deployment override mode.</p>
+    <div style={{ padding: '50px 20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
+      <div style={{ backgroundColor: '#111b2d', padding: '45px 40px', borderRadius: '24px', maxWidth: '750px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.04)', textAlign: 'center' }}>
+        
+        <h2 style={{ fontSize: '28px', fontWeight: '700', marginBottom: '35px', color: '#ffffff', fontFamily: "'serif', Georgia, Times" }}>
+          Dashboard <span style={{ color: '#00a2ff' }}>Control Panel</span>
+        </h2>
+
+        <form onSubmit={handleSaveAllSettings}>
+          {/* ABOUT CONTENT */}
+          <div style={{ marginBottom: '30px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '20px' }}>
+            <label style={labelStyle}>Edit About Text Description:</label>
+            <textarea rows="3" value={formAbout} onChange={(e) => setFormAbout(e.target.value)} style={{ ...inputStyle, resize: 'vertical', fontFamily: 'sans-serif' }} />
+          </div>
+
+          {/* SERVICES CARDS */}
+          <div style={{ marginBottom: '30px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '20px' }}>
+            <h4 style={{ ...labelStyle, color: '#fff', fontSize: '16px', marginBottom: '15px' }}>Edit Services Content:</h4>
+            {[1, 2, 3].map(i => (
+              <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '10px' }}>
+                <div>
+                  <label style={{ ...labelStyle, fontSize: '12px' }}>Card {i} Title</label>
+                  <input type="text" value={formServices[`card${i}Title`]} onChange={(e) => setFormServices({...formServices, [`card${i}Title`]: e.target.value})} style={inputStyle} />
+                </div>
+                <div>
+                  <label style={{ ...labelStyle, fontSize: '12px' }}>Card {i} Description</label>
+                  <textarea rows="1" value={formServices[`card${i}Desc`]} onChange={(e) => setFormServices({...formServices, [`card${i}Desc`]: e.target.value})} style={{ ...inputStyle, fontFamily: 'sans-serif' }} />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* FIND US DATA */}
+          <div style={{ marginBottom: '35px' }}>
+            <h4 style={{ ...labelStyle, color: '#fff', fontSize: '16px', marginBottom: '15px' }}>Edit Find Us Info:</h4>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
+              <div>
+                <label style={{ ...labelStyle, fontSize: '12px' }}>Location</label>
+                <input type="text" value={formFindUs.location} onChange={(e) => setFormFindUs({...formFindUs, location: e.target.value})} style={inputStyle} />
+              </div>
+              <div>
+                <label style={{ ...labelStyle, fontSize: '12px' }}>Email Address</label>
+                <input type="text" value={formFindUs.email} onChange={(e) => setFormFindUs({...formFindUs, email: e.target.value})} style={inputStyle} />
+              </div>
+              <div>
+                <label style={{ ...labelStyle, fontSize: '12px' }}>Call Number</label>
+                <input type="text" value={formFindUs.call} onChange={(e) => setFormFindUs({...formFindUs, call: e.target.value})} style={inputStyle} />
+              </div>
+            </div>
+          </div>
+
+          {/* SAVE ALL BUTTON */}
+          <button type="submit" style={{ backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '15px 40px', borderRadius: '12px', fontSize: '15px', fontWeight: '700', cursor: 'pointer', fontFamily: "'serif', Georgia, Times", boxShadow: '0 4px 15px rgba(0,162,255,0.3)' }}>
+            Save All Settings Live
+          </button>
+        </form>
+
       </div>
     </div>
   );
@@ -253,7 +501,15 @@ function Admin() {
 // 7. GLOBAL MASTER ROUTER CONTROL
 function App() {
   return (
-    <div style={{ backgroundColor: '#090f1c', height: '100vh', width: '100vw', margin: 0, padding: 0, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, overflow: 'hidden' }}>
+    <div style={{ backgroundColor: '#09111e', height: '100vh', width: '100vw', margin: 0, padding: 0, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, overflow: 'hidden' }}>
+      <style>{`
+        body, html, #root {
+          background-color: #09111e !important;
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+      `}</style>
+      
       <Navbar />
       <div style={{ flex: '1', width: '100%', height: 'calc(100vh - 75px)', overflowY: 'auto', overflowX: 'hidden' }}>
         <Routes>
