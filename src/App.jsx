@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
 // 1. DYNAMIC NAVBAR MODULE
@@ -175,23 +175,11 @@ function Home() {
 
 // 3. ABOUTPAGE MODULE
 function AboutPage() {
-  const defaultAbout = "Hum businesses ko online grow karne mein help karte hain through smart aur result-oriented digital marketing solutions.";
-  const [aboutText, setAboutText] = useState(defaultAbout);
-
-  useEffect(() => {
-    const savedAbout = localStorage.getItem('admin_about_text');
-    if (savedAbout) {
-      setAboutText(savedAbout);
-    } else {
-      setAboutText(defaultAbout);
-    }
-  }, []);
-
   return (
     <div style={{ padding: '40px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
       <div style={{ backgroundColor: '#121a2e', padding: '40px 30px', borderRadius: '24px', maxWidth: '850px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.05)', textAlign: 'left' }}>
         <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '20px', color: '#ffffff' }}>Who We Are & <span style={{ color: '#00a2ff' }}>What We Do</span></h2>
-        <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.7', marginBottom: '20px' }}>{aboutText}</p>
+        <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.7', marginBottom: '20px' }}>Hum businesses ko online grow karne mein help karte hain through smart aur result-oriented digital marketing solutions.</p>
         <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.7', marginBottom: '30px' }}>Hamara core mission startups, local brands aur established businesses ko ek strong digital foot-print dena hai, taaki aap sahi target audience tak pahunch sakein aur apne business ROI ko faster mode par grow sakein. Hum har ek client ki specific requirements ke mutabik tailored solutions design karte hain.</p>
         <h4 style={{ color: '#00a2ff', fontSize: '16px', fontWeight: '600', marginBottom: '15px' }}>Hamari Core Expertise:</h4>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px 25px', color: '#e2e8f0', fontSize: '14px', lineHeight: '1.5' }}>
@@ -207,230 +195,57 @@ function AboutPage() {
   );
 }
 
-// 4. SERVICESPAGE MODULE (Anti-Blank Safe Mode Enabled)
+// 4. SERVICESPAGE MODULE (Pure Hardcoded - image_772bcd.png Standard)
 function ServicesPage() {
-  const defaultServices = {
-    card1Title: 'Social Media Marketing', 
-    card1Desc: 'Instagram Marketing\nFacebook Marketing',
-    card2Title: 'Paid Advertising', 
-    card2Desc: 'Google Ads\nFacebook Ads',
-    card3Title: 'Website Development', 
-    card3Desc: 'Website Design\nWebsite Development'
-  };
-  
-  const [services, setServices] = useState(defaultServices);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('admin_services_json');
-    if (saved) { 
-      try { 
-        const parsed = JSON.parse(saved);
-        if(parsed && parsed.card1Title) {
-          setServices(parsed); 
-        } else {
-          setServices(defaultServices);
-        }
-      } catch(e) {
-        setServices(defaultServices);
-      } 
-    } else {
-      setServices(defaultServices);
-    }
-  }, []);
-
   return (
     <div style={{ padding: '60px 4%', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxSizing: 'border-box' }}>
       <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '50px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Our Services</h2>
       <div style={{ display: 'flex', gap: '25px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1200px', width: '100%' }}>
-        {[1, 2, 3].map(num => (
-          <div key={num} style={{ backgroundColor: '#111726', padding: '35px 30px', borderRadius: '18px', flex: '1', minWidth: '280px', boxSizing: 'border-box', textAlign: 'left' }}>
-            <h3 style={{ fontSize: '18px', color: '#00a2ff', marginBottom: '20px', fontWeight: '700' }}>{services[`card${num}Title`]}</h3>
-            <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.8', whiteSpace: 'pre-line' }}>{services[`card${num}Desc`]}</p>
-          </div>
-        ))}
+        
+        <div style={{ backgroundColor: '#111726', padding: '35px 30px', borderRadius: '18px', flex: '1', minWidth: '280px', boxSizing: 'border-box', textAlign: 'left' }}>
+          <h3 style={{ fontSize: '18px', color: '#00a2ff', marginBottom: '20px', fontWeight: '700' }}>Social Media Marketing</h3>
+          <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.8', whiteSpace: 'pre-line' }}>Instagram Marketing{"\n"}Facebook Marketing</p>
+        </div>
+
+        <div style={{ backgroundColor: '#111726', padding: '35px 30px', borderRadius: '18px', flex: '1', minWidth: '280px', boxSizing: 'border-box', textAlign: 'left' }}>
+          <h3 style={{ fontSize: '18px', color: '#00a2ff', marginBottom: '20px', fontWeight: '700' }}>Paid Advertising</h3>
+          <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.8', whiteSpace: 'pre-line' }}>Google Ads{"\n"}Facebook Ads</p>
+        </div>
+
+        <div style={{ backgroundColor: '#111726', padding: '35px 30px', borderRadius: '18px', flex: '1', minWidth: '280px', boxSizing: 'border-box', textAlign: 'left' }}>
+          <h3 style={{ fontSize: '18px', color: '#00a2ff', marginBottom: '20px', fontWeight: '700' }}>Website Development</h3>
+          <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.8', whiteSpace: 'pre-line' }}>Website Design{"\n"}Website Development</p>
+        </div>
+
       </div>
     </div>
   );
 }
 
-// 5. FINDUSPAGE MODULE (Anti-Blank Safe Mode Enabled)
+// 5. FINDUSPAGE MODULE (Pure Hardcoded - image_772bad.png Standard)
 function FindUsPage() {
-  const defaultFindUs = { 
-    location: 'Roshan Bagh Prayagraj', 
-    email: 'anasknanprince1234@gmail.com', 
-    call: '+91 7007684279' 
-  };
-  
-  const [findUs, setFindUs] = useState(defaultFindUs);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('admin_findus_json');
-    if (saved) { 
-      try { 
-        const parsed = JSON.parse(saved);
-        if(parsed && parsed.location) {
-          setFindUs(parsed); 
-        } else {
-          setFindUs(defaultFindUs);
-        }
-      } catch(e) {
-        setFindUs(defaultFindUs);
-      } 
-    } else {
-      setFindUs(defaultFindUs);
-    }
-  }, []);
-
   return (
     <div style={{ padding: '60px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
       <div style={{ backgroundColor: '#111726', padding: '50px 40px', borderRadius: '20px', maxWidth: '550px', width: '100%', textAlign: 'center', boxSizing: 'border-box' }}>
         <h2 style={{ fontSize: '28px', marginBottom: '35px', fontWeight: '700', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Find Us</h2>
         <div style={{ textAlign: 'left', display: 'inline-block', fontSize: '14px', lineHeight: '2' }}>
-          <p style={{ color: '#94a3b8', margin: '10px 0' }}>📍 <strong style={{ color: '#fff' }}>Location:</strong> {findUs.location}</p>
-          <p style={{ color: '#94a3b8', margin: '10px 0' }}>✉️ <strong style={{ color: '#fff' }}>Email:</strong> {findUs.email}</p>
-          <p style={{ color: '#94a3b8', margin: '10px 0' }}>📞 <strong style={{ color: '#fff' }}>Call:</strong> {findUs.call}</p>
+          <p style={{ color: '#94a3b8', margin: '10px 0' }}>📍 <strong style={{ color: '#fff' }}>Location:</strong> Roshan Bagh Prayagraj</p>
+          <p style={{ color: '#94a3b8', margin: '10px 0' }}>✉️ <strong style={{ color: '#fff' }}>Email:</strong> anasknanprince1234@gmail.com</p>
+          <p style={{ color: '#94a3b8', margin: '10px 0' }}>📞 <strong style={{ color: '#fff' }}>Call:</strong> +91 7007684279</p>
         </div>
       </div>
     </div>
   );
 }
 
-// 6. ADMIN PANEL MODULE
+// 6. ADMIN SYSTEM FRAMEWORK (Standard Interface Keep Safe)
 function Admin() {
-  const [passwordInput, setPasswordInput] = useState('');
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [loginError, setLoginError] = useState('');
-  const [attempts, setAttempts] = useState(0);
-  const [lockoutTimeLeft, setLockoutTimeLeft] = useState(0);
-
-  const [aboutText, setAboutText] = useState("");
-  const [services, setServices] = useState({ card1Title: '', card1Desc: '', card2Title: '', card2Desc: '', card3Title: '', card3Desc: '' });
-  const [findUs, setFindUs] = useState({ location: '', email: '', call: '' });
-
-  useEffect(() => {
-    if (sessionStorage.getItem('admin_session_auth') === 'true') setIsAuthorized(true);
-    const savedLockout = localStorage.getItem('admin_lockout_expiry');
-    const savedAttempts = localStorage.getItem('admin_failed_attempts');
-    if (savedAttempts) setAttempts(parseInt(savedAttempts, 10));
-    
-    if (savedLockout) {
-      const timeLeft = Math.ceil((parseInt(savedLockout, 10) - Date.now()) / 1000);
-      if (timeLeft > 0) setLockoutTimeLeft(timeLeft);
-    }
-
-    setAboutText(localStorage.getItem('admin_about_text') || "Hum businesses ko online grow karne mein help karte hain...");
-    try { setServices(JSON.parse(localStorage.getItem('admin_services_json')) || { card1Title: 'Social Media Marketing', card1Desc: 'Instagram Marketing\nFacebook Marketing', card2Title: 'Paid Advertising', card2Desc: 'Google Ads\nFacebook Ads', card3Title: 'Website Development', card3Desc: 'Website Design\nWebsite Development' }); } catch(e){}
-    try { setFindUs(JSON.parse(localStorage.getItem('admin_findus_json')) || { location: 'Roshan Bagh Prayagraj', email: 'anasknanprince1234@gmail.com', call: '+91 7007684279' }); } catch(e){}
-  }, []);
-
-  useEffect(() => {
-    if (lockoutTimeLeft <= 0) return;
-    const timer = setInterval(() => {
-      setLockoutTimeLeft(prev => {
-        if (prev <= 1) {
-          localStorage.removeItem('admin_lockout_expiry');
-          localStorage.removeItem('admin_failed_attempts');
-          setAttempts(0);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [lockoutTimeLeft]);
-
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    if (passwordInput === 'bhai163') {
-      setIsAuthorized(true);
-      setAttempts(0);
-      localStorage.removeItem('admin_failed_attempts');
-      sessionStorage.setItem('admin_session_auth', 'true');
-    } else {
-      const nextAttempts = attempts + 1;
-      setAttempts(nextAttempts);
-      setPasswordInput('');
-      if (nextAttempts >= 3) {
-        localStorage.setItem('admin_lockout_expiry', (Date.now() + 7200000).toString());
-        localStorage.setItem('admin_failed_attempts', '3');
-        setLockoutTimeLeft(7200);
-        setLoginError('Brute-force detected! Locked for 2 hours.');
-      } else {
-        localStorage.setItem('admin_failed_attempts', nextAttempts.toString());
-        setLoginError(`Incorrect Password! (${3 - nextAttempts} attempts remaining)`);
-      }
-    }
-  };
-
-  const handleServiceChange = (field, value) => {
-    setServices(prev => ({ ...prev, [field]: value }));
-  };
-
-  const handleFindUsChange = (field, value) => {
-    setFindUs(prev => ({ ...prev, [field]: value }));
-  };
-
-  const handleSaveAll = () => {
-    localStorage.setItem('admin_about_text', aboutText);
-    localStorage.setItem('admin_services_json', JSON.stringify(services));
-    localStorage.setItem('admin_findus_json', JSON.stringify(findUs));
-    alert('Bhai, saara data successfully local storage me save ho gaya!');
-  };
-
-  if (lockoutTimeLeft > 0) {
-    return (
-      <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', textAlign: 'center', border: '1px solid #ef4444' }}>
-          <h3 style={{ color: '#ef4444', marginBottom: '10px' }}>Security Lockout Active</h3>
-          <p style={{ color: '#94a3b8', fontSize: '14px', marginBottom: '20px' }}>3 baar galat password enter kiya gaya hai.</p>
-          <div style={{ backgroundColor: '#090f1c', padding: '15px', borderRadius: '12px', fontSize: '24px', color: '#00ffcc', fontWeight: '800' }}>
-            {Math.floor(lockoutTimeLeft / 3600)}:{(Math.floor((lockoutTimeLeft % 3600) / 60)).toString().padStart(2,'0')}:{(lockoutTimeLeft % 60).toString().padStart(2,'0')}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isAuthorized) {
-    return (
-      <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <form onSubmit={handleLoginSubmit} autoComplete="off" style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', textAlign: 'center', width: '100%', maxWidth: '380px' }}>
-          <h3 style={{ marginBottom: '20px' }}>Admin Panel Lock</h3>
-          <input type="password" placeholder="Enter Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} autoComplete="new-password" style={{ width: '100%', backgroundColor: '#090f1c', border: '1px solid #1e2d4a', borderRadius: '12px', color: '#fff', padding: '14px', textAlign: 'center', marginBottom: '15px', outline: 'none' }} />
-          {loginError && <p style={{ color: '#ef4444', fontSize: '13px', marginBottom: '15px' }}>{loginError}</p>}
-          <button type="submit" style={{ width: '100%', backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer' }}>Unlock Dashboard</button>
-        </form>
-      </div>
-    );
-  }
-
   return (
-    <div style={{ padding: '40px 20px', minHeight: '100vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '25px', overflowY: 'auto' }}>
-      <h2 style={{ width: '100%', maxWidth: '700px', textAlign: 'left' }}>Admin Dashboard</h2>
-      
-      <div style={{ width: '100%', maxWidth: '700px', backgroundColor: '#121a2e', padding: '20px', borderRadius: '16px' }}>
-        <label style={{ display: 'block', marginBottom: '10px', fontWeight: '600' }}>About Page Text:</label>
-        <textarea value={aboutText} onChange={(e) => setAboutText(e.target.value)} style={{ width: '100%', height: '80px', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', borderRadius: '8px', padding: '10px', outline: 'none' }} />
+    <div style={{ padding: '40px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', textAlign: 'center' }}>
+        <h3>Admin System Settings</h3>
+        <p style={{ color: '#94a3b8', fontSize: '14px' }}>Framework is running in native deployment override mode.</p>
       </div>
-
-      <div style={{ width: '100%', maxWidth: '700px', backgroundColor: '#121a2e', padding: '20px', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
-        <label style={{ fontWeight: '600' }}>Services Settings:</label>
-        {[1, 2, 3].map(num => (
-          <div key={num} style={{ borderBottom: '1px solid #1e2d4a', paddingBottom: '10px' }}>
-            <input type="text" value={services[`card${num}Title`] || ''} onChange={(e) => handleServiceChange(`card${num}Title`, e.target.value)} style={{ width: '100%', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', padding: '8px', borderRadius: '6px', marginBottom: '5px' }} />
-            <textarea value={services[`card${num}Desc`] || ''} onChange={(e) => handleServiceChange(`card` + num + `Desc`, e.target.value)} style={{ width: '100%', height: '60px', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', padding: '8px', borderRadius: '6px' }} />
-          </div>
-        ))}
-      </div>
-
-      <div style={{ width: '100%', maxWidth: '700px', backgroundColor: '#121a2e', padding: '20px', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        <label style={{ fontWeight: '600' }}>Find Us Settings:</label>
-        <input type="text" value={findUs.location} onChange={(e) => handleFindUsChange('location', e.target.value)} style={{ width: '100%', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', padding: '8px', borderRadius: '6px' }} />
-        <input type="text" value={findUs.email} onChange={(e) => handleFindUsChange('email', e.target.value)} style={{ width: '100%', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', padding: '8px', borderRadius: '6px' }} />
-        <input type="text" value={findUs.call} onChange={(e) => handleFindUsChange('call', e.target.value)} style={{ width: '100%', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', padding: '8px', borderRadius: '6px' }} />
-      </div>
-
-      <button onClick={handleSaveAll} style={{ width: '100%', maxWidth: '700px', backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '15px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', marginBottom: '30px' }}>Save All Changes</button>
     </div>
   );
 }
