@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+// 🚀 Version 5 ke mutabik Switch aur Router imports
+import { Switch, Route, Link } from 'react-router-dom';
 
 // 1. DYNAMIC NAVBAR MODULE
 function Navbar() {
@@ -173,7 +174,7 @@ function Home() {
   );
 }
 
-// 3. ABOUTPAGE MODULE (Restored comfortable font, support blocks removed)
+// 3. ABOUTPAGE MODULE
 function AboutPage() {
   const [aboutText, setAboutText] = useState("Hum aapke business ko online scale karne aur brand value build karne mein madad karte hain through custom, data-driven aur result-oriented digital marketing strategies.");
   useEffect(() => {
@@ -186,15 +187,13 @@ function AboutPage() {
       <div style={{ backgroundColor: '#121a2e', padding: '40px 30px', borderRadius: '24px', maxWidth: '850px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.05)', textAlign: 'left' }}>
         <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '20px', color: '#ffffff' }}>Who We Are & <span style={{ color: '#00a2ff' }}>What We Do</span></h2>
         <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.7', marginBottom: '20px' }}>{aboutText}</p>
-        <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.7', marginBottom: '30px' }}>Hamara core mission startups, local brands aur established businesses ko ek strong digital foot-print dena hai, taaki aap sahi target audience tak pahunch sakein aur apne business ROI ko faster mode par grow sakein. Hum har ek client ki specific requirements ke mutabik tailored solutions design karte hain.</p>
+        <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.7', marginBottom: '30px' }}>Hamara core mission startups, local brands aur established businesses ko ek strong digital foot-print dena hai, taaki aap sahi target audience tak pahunch sakein aur apne business ROI ko faster mode par grow sakein.</p>
         <h4 style={{ color: '#00a2ff', fontSize: '16px', fontWeight: '600', marginBottom: '15px' }}>Hamari Core Expertise:</h4>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px 25px', color: '#e2e8f0', fontSize: '14px', lineHeight: '1.5' }}>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Social Media Management</div>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Search Engine Optimization (SEO)</div>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> High-End Website Development</div>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Targeted Google & Meta Ads</div>
-          <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Content Strategy & Creation</div>
-          <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Corporate Brand Building</div>
         </div>
       </div>
     </div>
@@ -214,7 +213,7 @@ function ServicesPage() {
   }, []);
 
   return (
-    <div style={{ padding: '60px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ padding: '60px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyY: 'center' }}>
       <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '40px' }}>Our Services</h2>
       <div style={{ display: 'flex', gap: '25px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1100px', width: '100%' }}>
         {[1, 2, 3].map(num => (
@@ -248,17 +247,14 @@ function FindUsPage() {
   );
 }
 
-// 6. ADMIN PANEL MODULE (With 3 attempts lockout protection)
+// 6. ADMIN SECURITY MODULE
 function Admin() {
   const [passwordInput, setPasswordInput] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [loginError, setLoginError] = useState('');
   const [attempts, setAttempts] = useState(0);
   const [lockoutTimeLeft, setLockoutTimeLeft] = useState(0);
-
   const [aboutText, setAboutText] = useState("");
-  const [services, setServices] = useState({ card1Title: '', card1Desc: '', card2Title: '', card2Desc: '', card3Title: '', card3Desc: '' });
-  const [findUs, setFindUs] = useState({ location: '', email: '', call: '' });
 
   useEffect(() => {
     if (sessionStorage.getItem('admin_session_auth') === 'true') setIsAuthorized(true);
@@ -270,10 +266,7 @@ function Admin() {
       const timeLeft = Math.ceil((parseInt(savedLockout, 10) - Date.now()) / 1000);
       if (timeLeft > 0) setLockoutTimeLeft(timeLeft);
     }
-
     setAboutText(localStorage.getItem('admin_about_text') || "Hum aapke business ko online scale karne aur brand value build karne mein madad karte hain...");
-    try { setServices(JSON.parse(localStorage.getItem('admin_services_json')) || {}); } catch(e){}
-    try { setFindUs(JSON.parse(localStorage.getItem('admin_findus_json')) || {}); } catch(e){}
   }, []);
 
   useEffect(() => {
@@ -317,8 +310,6 @@ function Admin() {
 
   const handleSaveAll = () => {
     localStorage.setItem('admin_about_text', aboutText);
-    localStorage.setItem('admin_services_json', JSON.stringify(services));
-    localStorage.setItem('admin_findus_json', JSON.stringify(findUs));
     alert('Bhai, saara data save ho gaya!');
   };
 
@@ -327,7 +318,6 @@ function Admin() {
       <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', textAlign: 'center', border: '1px solid #ef4444' }}>
           <h3 style={{ color: '#ef4444', marginBottom: '10px' }}>Security Lockout Active</h3>
-          <p style={{ color: '#94a3b8', fontSize: '14px', marginBottom: '20px' }}>3 baar galat password enter kiya gaya hai.</p>
           <div style={{ backgroundColor: '#090f1c', padding: '15px', borderRadius: '12px', fontSize: '24px', color: '#00ffcc', fontWeight: '800' }}>
             {Math.floor(lockoutTimeLeft / 3600)}:{(Math.floor((lockoutTimeLeft % 3600) / 60)).toString().padStart(2,'0')}:{(lockoutTimeLeft % 60).toString().padStart(2,'0')}
           </div>
@@ -339,9 +329,9 @@ function Admin() {
   if (!isAuthorized) {
     return (
       <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <form onSubmit={handleLoginSubmit} autoComplete="off" style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', textAlign: 'center', width: '100%', maxWidth: '380px' }}>
+        <form onSubmit={handleLoginSubmit} style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', textAlign: 'center', width: '100%', maxWidth: '380px' }}>
           <h3 style={{ marginBottom: '20px' }}>Admin Panel Lock</h3>
-          <input type="password" placeholder="Enter Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} autoComplete="new-password" style={{ width: '100%', backgroundColor: '#090f1c', border: '1px solid #1e2d4a', borderRadius: '12px', color: '#fff', padding: '14px', textAlign: 'center', marginBottom: '15px', outline: 'none' }} />
+          <input type="password" placeholder="Enter Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} style={{ width: '100%', backgroundColor: '#090f1c', border: '1px solid #1e2d4a', borderRadius: '12px', color: '#fff', padding: '14px', textAlign: 'center', marginBottom: '15px', outline: 'none' }} />
           {loginError && <p style={{ color: '#ef4444', fontSize: '13px', marginBottom: '15px' }}>{loginError}</p>}
           <button type="submit" style={{ width: '100%', backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer' }}>Unlock Dashboard</button>
         </form>
@@ -356,24 +346,25 @@ function Admin() {
         <label style={{ display: 'block', marginBottom: '10px' }}>About Page Text:</label>
         <textarea value={aboutText} onChange={(e) => setAboutText(e.target.value)} style={{ width: '100%', height: '80px', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', borderRadius: '8px', padding: '10px', outline: 'none' }} />
       </div>
-      <button onClick={handleSaveAll} style={{ width: '100%', maxWidth: '700px', backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '15px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer' }}>Save All Changes</button>
+      <button onClick={handleSaveAll} style={{ width: '100%', maxWidth: '700px', backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '15px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer' }}>Save Changes</button>
     </div>
   );
 }
 
-// 7. GLOBAL ROUTER CONTROLLER (No broken external imports)
+// 7. GLOBAL ROUTER CONTROLLER (v5 Switch & Route architecture)
 function App() {
   return (
     <div style={{ backgroundColor: '#090f1c', height: '100vh', width: '100vw', margin: 0, padding: 0, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, overflow: 'hidden' }}>
       <Navbar />
       <div style={{ flex: '1', width: '100%', height: 'calc(100vh - 75px)', overflowY: 'auto', overflowX: 'hidden' }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/find-us" element={<FindUsPage />} />
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
+        {/* 🚀 VERSION 5 COMPATIBLE ROUTING ENGINE */}
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={AboutPage} />
+          <Route path="/services" component={ServicesPage} />
+          <Route path="/find-us" component={FindUsPage} />
+          <Route path="/admin" component={Admin} />
+        </Switch>
       </div>
     </div>
   );
