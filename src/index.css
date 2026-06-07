@@ -1,20 +1,11 @@
-/* 1. Browser ki sabhi default khali jagah ko zero karne ke liye */
-html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100vw !important; /* Poori screen ki width lega */
-    max-width: 100% !important;
-    min-height: 100vh !important;
-    overflow-x: hidden !important; /* Side scroll bilkul band */
-    background-color: #0c1524 !important; /* Jo aapki website ka dark navy blue/black color hai wo */
-}
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css' // Agar aapke project mein index.css hai to ise rehne dena
 
-/* 2. Kisi bhi main wrapper div ke padding/margin ko reset karne ke liye */
-#root, .App, main, header, nav, section {
-    margin: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-}
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    {/* 🚀 YAHA SE BROWSER_ROUTER HATA DIYA HAI TAKI DOBARA COINCIDE NA HO */}
+    <App />
+  </React.StrictMode>,
+)

@@ -1,102 +1,63 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-export default function FindUsPage() {
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-
-  useEffect(() => {
-    // LocalStorage se saved content uthana
-    const savedAddress = localStorage.getItem('website_address') || "123 Digital Street, Tech Hub, India";
-    const savedEmail = localStorage.getItem('website_email') || "contact@digigrow.com";
-    const savedPhone = localStorage.getItem('website_phone') || "+91 98765 43210";
-
-    setAddress(savedAddress);
-    setEmail(savedEmail);
-    setPhone(savedPhone);
-  }, []);
-
+function FindUsPage() {
   return (
-    <div style={{ 
-      minHeight: 'calc(100vh - 68px)', 
-      background: 'linear-gradient(-45deg, #0f172a, #1e1b4b, #11274c, #0f172a)',
-      backgroundSize: '400% 400%',
-      animation: 'gradientMove 15s ease infinite',
-      padding: '80px 24px', 
-      display: 'flex', 
-      justifyContent: 'center', 
-      alignItems: 'center', 
-      fontFamily: '"Segoe UI", Roboto, sans-serif',
-      boxSizing: 'border-box',
-      position: 'relative',
-      overflow: 'hidden'
-    }}>
-      <style>{`
-        @keyframes gradientMove {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-      `}</style>
+    <div style={{ position: 'relative', padding: '100px 20px', minHeight: '88vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'hidden', boxSizing: 'border-box' }}>
+      
+      {/* Background Static Layer */}
+      <div style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0, backgroundColor: '#090f1c', zIndex: 0 }} />
 
-      {/* Background Neon Glowing Blur Rings */}
-      <div style={{ position: 'absolute', width: '300px', height: '300px', background: 'rgba(56, 189, 248, 0.12)', filter: 'blur(90px)', bottom: '5%', left: '5%', borderRadius: '50%' }}></div>
-      <div style={{ position: 'absolute', width: '300px', height: '300px', background: 'rgba(139, 92, 246, 0.1)', filter: 'blur(90px)', top: '10%', right: '5%', borderRadius: '50%' }}></div>
-
-      {/* Main Glassmorphism Contact Card */}
+      {/* iOS Style Widget Card */}
       <div style={{ 
-        maxWidth: '750px', 
-        width: '100%',
-        background: 'rgba(15, 23, 42, 0.65)', 
-        backdropFilter: 'blur(20px)', 
-        WebkitBackdropFilter: 'blur(20px)',
-        borderRadius: '24px', 
-        padding: '50px', 
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.6)', 
-        border: '1px solid rgba(255, 255, 255, 0.08)',
+        position: 'relative', 
+        zIndex: 1, 
+        backgroundColor: '#121a2e', 
+        padding: '60px 50px', 
+        borderRadius: '32px', 
+        maxWidth: '650px', 
+        width: '100%', 
         boxSizing: 'border-box',
-        zIndex: 1
+        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)' 
       }}>
         
-        {/* Page Header */}
-        <div style={{ marginBottom: '40px' }}>
-          <span style={{ background: 'linear-gradient(90deg, #38bdf8, #818cf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontSize: '14px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '2px', display: 'block', marginBottom: '8px' }}>Get In Touch</span>
-          <h1 style={{ fontSize: '42px', fontWeight: '800', color: '#ffffff', margin: 0, letterSpacing: '-1px' }}>3. How to Find Us</h1>
-        </div>
-
-        {/* Clean Professional Contact List Blocks */}
+        {/* ❌ NEELI ACCENT LINE KO YAHA SE BHI POORA HATA DIYA HAI */}
+        
+        {/* Left Aligned Clean Title */}
+        <h2 style={{ 
+          fontSize: 'calc(24px + 1vw)', 
+          margin: '0 0 35px 0', 
+          fontWeight: '700', 
+          letterSpacing: '-0.5px',
+          textAlign: 'left'
+        }}>
+          How to <span style={{ color: '#00a2ff' }}>Find Us</span>
+        </h2>
+        
+        {/* Rows Stack Layout */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           
-          {/* Address Card */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '20px', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
-            <span style={{ fontSize: '28px', backgroundColor: 'rgba(56, 189, 248, 0.1)', padding: '12px', borderRadius: '10px', color: '#38bdf8' }}>📍</span>
-            <div>
-              <strong style={{ color: '#94a3b8', fontSize: '13px', display: 'block', textTransform: 'uppercase', letterSpacing: '1px' }}>Our Location</strong>
-              <span style={{ color: '#ffffff', fontSize: '16px', fontWeight: '500' }}>{address}</span>
-            </div>
+          {/* Location Row */}
+          <div style={{ backgroundColor: '#090f1c', padding: '20px 24px', borderRadius: '16px', textAlign: 'left' }}>
+            <span style={{ fontSize: '11px', color: '#64748b', display: 'block', fontWeight: '600', marginBottom: '6px', letterSpacing: '0.5px' }}>OUR LOCATION</span>
+            <strong style={{ fontSize: '16px', color: '#fff', fontWeight: '600' }}>Roshan Bagh Prayagraj</strong>
           </div>
 
-          {/* Email Card */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '20px', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
-            <span style={{ fontSize: '28px', backgroundColor: 'rgba(129, 140, 248, 0.1)', padding: '12px', borderRadius: '10px', color: '#818cf8' }}>✉️</span>
-            <div>
-              <strong style={{ color: '#94a3b8', fontSize: '13px', display: 'block', textTransform: 'uppercase', letterSpacing: '1px' }}>Email Support</strong>
-              <span style={{ color: '#ffffff', fontSize: '16px', fontWeight: '500' }}>{email}</span>
-            </div>
+          {/* Email Row */}
+          <div style={{ backgroundColor: '#090f1c', padding: '20px 24px', borderRadius: '16px', textAlign: 'left' }}>
+            <span style={{ fontSize: '11px', color: '#64748b', display: 'block', fontWeight: '600', marginBottom: '6px', letterSpacing: '0.5px' }}>EMAIL SUPPORT</span>
+            <strong style={{ fontSize: '16px', color: '#fff', fontWeight: '600' }}>anasknanprince1234@gmail.com</strong>
           </div>
 
-          {/* Phone Card */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '20px', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
-            <span style={{ fontSize: '28px', backgroundColor: 'rgba(16, 185, 129, 0.1)', padding: '12px', borderRadius: '10px', color: '#10b981' }}>📞</span>
-            <div>
-              <strong style={{ color: '#94a3b8', fontSize: '13px', display: 'block', textTransform: 'uppercase', letterSpacing: '1px' }}>Call Anytime</strong>
-              <span style={{ color: '#ffffff', fontSize: '16px', fontWeight: '500' }}>{phone}</span>
-            </div>
+          {/* Call Row */}
+          <div style={{ backgroundColor: '#090f1c', padding: '20px 24px', borderRadius: '16px', textAlign: 'left' }}>
+            <span style={{ fontSize: '11px', color: '#64748b', display: 'block', fontWeight: '600', marginBottom: '6px', letterSpacing: '0.5px' }}>CALL ANYTIME</span>
+            <strong style={{ fontSize: '16px', color: '#fff', fontWeight: '600' }}>+91 7007684279</strong>
           </div>
 
         </div>
-
       </div>
     </div>
   );
 }
+
+export default FindUsPage;

@@ -1,17 +1,13 @@
-/* Browser ke sabhi default gaps aur borders ko jad se khatam karne ke liye */
-html, body, #root {
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    outline: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 100vh !important;
-    background-color: #0b1528 !important; /* Jo aapki website ka main dark color hai */
-    overflow-x: hidden !important;
-}
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
+import { BrowserRouter } from 'react-router-dom'
 
-/* Kisi bhi browser layout wrapper ko stretch karne ke liye */
-div, section, main, header {
-    box-sizing: border-box;
-}
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+)

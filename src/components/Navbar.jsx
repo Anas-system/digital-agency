@@ -1,58 +1,82 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+function Navbar() {
+  const location = useLocation();
 
   return (
-    <nav style={{ backgroundColor: '#0b1329', padding: '1rem 1.5rem', position: 'relative', zIndex: 100 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1200px', margin: '0 auto' }}>
-        
-        {/* Logo (Rocket Completely Removed) */}
-        <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#fff' }}>
-          Digi <span style={{ color: '#0ea5e9' }}>Grow</span>
-        </div>
+    <nav style={{ 
+      display: 'flex', 
+      justifyContent: 'space-between', 
+      alignItems: 'center', 
+      padding: '0 5%', 
+      height: '75px', 
+      backgroundColor: '#090f1c', 
+      borderBottom: '1px solid rgba(28, 39, 66, 0.6)', 
+      color: '#fff',
+      boxSizing: 'border-box'
+    }}>
+      {/* 🚀 FIXED LOGO: Dot completely removed */}
+      <Link to="/" style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        textDecoration: 'none',
+        fontFamily: "'Inter', system-ui, sans-serif"
+      }}>
+        <span style={{ 
+          fontSize: '24px', 
+          fontWeight: '800', 
+          color: '#ffffff', 
+          letterSpacing: '-0.8px' 
+        }}>
+          Digi<span style={{ 
+            background: 'linear-gradient(135deg, #00a2ff 0%, #00ffcc 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            fontWeight: '900'
+          }}>Grow</span>
+        </span>
+      </Link>
 
-        {/* Laptop/Desktop Menu */}
-        <div className="desktop-menu" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <a href="#about" style={{ color: '#94a3b8', textDecoration: 'none' }}>About</a>
-          <a href="#services" style={{ color: '#94a3b8', textDecoration: 'none' }}>Services</a>
-          <a href="#find-us" style={{ color: '#94a3b8', textDecoration: 'none' }}>Find Us</a>
-          <a href="/admin" style={{ backgroundColor: '#0ea5e9', color: '#fff', padding: '0.5rem 1.25rem', borderRadius: '0.375rem', textDecoration: 'none', fontWeight: '600' }}>Login</a>
-        </div>
-
-        {/* Mobile Menu Button (☰) */}
-        <button 
-          onClick={() => setIsOpen(!isOpen)} 
-          className="mobile-burger-btn"
-          style={{ backgroundColor: 'transparent', border: 'none', color: '#fff', fontSize: '1.75rem', cursor: 'pointer', display: 'none' }}
-        >
-          {isOpen ? '✕' : '☰'}
-        </button>
+      {/* Navigation Links */}
+      <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
+        {[
+          { path: '/about', label: 'About' },
+          { path: '/services', label: 'Services' },
+          { path: '/find-us', label: 'Find Us' }
+        ].map((link) => {
+          const isActive = location.pathname === link.path;
+          return (
+            <Link 
+              key={link.path} 
+              to={link.path} 
+              style={{ 
+                color: isActive ? '#00a2ff' : '#94a3b8', 
+                textDecoration: 'none', 
+                fontSize: '15px',
+                fontWeight: isActive ? '600' : '500',
+                transition: 'color 0.2s ease'
+              }}
+            >
+              {link.label}
+            </Link>
+          );
+        })}
+        <Link to="/admin" style={{ 
+          backgroundColor: '#00a2ff', 
+          padding: '9px 20px', 
+          borderRadius: '10px', 
+          color: '#fff', 
+          textDecoration: 'none', 
+          fontSize: '14px', 
+          fontWeight: '600',
+          boxShadow: '0 4px 15px rgba(0,162,255,0.25)'
+        }}>
+          Admin
+        </Link>
       </div>
-
-      {/* Mobile Dropdown */}
-      {isOpen && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', backgroundColor: '#111b35', padding: '1.5rem', position: 'absolute', top: '100%', left: 0, right: 0, boxShadow: '0 10px 15px -3px rgba(0,0,0,0.3)', zIndex: 101 }}>
-          <a href="#about" onClick={() => setIsOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.1rem' }}>About</a>
-          <a href="#services" onClick={() => setIsOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.1rem' }}>Services</a>
-          <a href="#find-us" onClick={() => setIsOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.1rem' }}>Find Us</a>
-          <a href="/admin" onClick={() => setIsOpen(false)} style={{ backgroundColor: '#0ea5e9', color: '#fff', padding: '0.6rem', borderRadius: '0.375rem', textDecoration: 'none', fontWeight: '600', textAlign: 'center' }}>Login</a>
-        </div>
-      )}
-
-      {/* Strict CSS for Responsive Mobile View */}
-      <style>{`
-        @media (max-width: 768px) {
-          .desktop-menu {
-            display: none !important;
-          }
-          .mobile-burger-btn {
-            display: block !important;
-          }
-        }
-      `}</style>
     </nav>
   );
-};
+}
 
 export default Navbar;
