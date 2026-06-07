@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-// 🚀 Version 6 ke sahi imports (Routes aur Route)
 import { Routes, Route, Link } from 'react-router-dom';
 
-// 1. DYNAMIC NAVBAR MODULE
+// 1. DYNAMIC NAVBAR MODULE (Login with exact blue button)
 function Navbar() {
   return (
     <nav style={{ 
@@ -43,7 +42,7 @@ function Navbar() {
   );
 }
 
-// 2. HOME COMPONENT WITH INTERACTIVE PARTICLES
+// 2. HOME COMPONENT WITH INTERACTIVE PARTICLES (Video Match Layout)
 function Home() {
   const canvasRef = useRef(null);
 
@@ -174,9 +173,9 @@ function Home() {
   );
 }
 
-// 3. ABOUTPAGE MODULE
+// 3. ABOUTPAGE MODULE (Comfortable font & Clean design)
 function AboutPage() {
-  const [aboutText, setAboutText] = useState("Hum aapke business ko online scale karne aur brand value build karne mein madad karte hain through custom, data-driven aur result-oriented digital marketing strategies.");
+  const [aboutText, setAboutText] = useState("Hum businesses ko online grow karne mein help karte hain through smart aur result-oriented digital marketing solutions.");
   useEffect(() => {
     const savedAbout = localStorage.getItem('admin_about_text');
     if (savedAbout) setAboutText(savedAbout);
@@ -187,26 +186,32 @@ function AboutPage() {
       <div style={{ backgroundColor: '#121a2e', padding: '40px 30px', borderRadius: '24px', maxWidth: '850px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.05)', textAlign: 'left' }}>
         <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '20px', color: '#ffffff' }}>Who We Are & <span style={{ color: '#00a2ff' }}>What We Do</span></h2>
         <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.7', marginBottom: '20px' }}>{aboutText}</p>
-        <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.7', marginBottom: '30px' }}>Hamara core mission startups, local brands aur established businesses ko ek strong digital foot-print dena hai, taaki aap sahi target audience tak pahunch sakein aur apne business ROI ko faster mode par grow sakein.</p>
+        <p style={{ color: '#94a3b8', fontSize: '15px', lineHeight: '1.7', marginBottom: '30px' }}>Hamara core mission startups, local brands aur established businesses ko ek strong digital foot-print dena hai, taaki aap sahi target audience tak pahunch sakein aur apne business ROI ko faster mode par grow sakein. Hum har ek client ki specific requirements ke mutabik tailored solutions design karte hain.</p>
         <h4 style={{ color: '#00a2ff', fontSize: '16px', fontWeight: '600', marginBottom: '15px' }}>Hamari Core Expertise:</h4>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '12px 25px', color: '#e2e8f0', fontSize: '14px', lineHeight: '1.5' }}>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Social Media Management</div>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Search Engine Optimization (SEO)</div>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> High-End Website Development</div>
           <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Targeted Google & Meta Ads</div>
+          <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Content Strategy & Creation</div>
+          <div><span style={{ color: '#00a2ff', marginRight: '8px' }}>✓</span> Corporate Brand Building</div>
         </div>
       </div>
     </div>
   );
 }
 
-// 4. SERVICESPAGE MODULE
+// 4. SERVICESPAGE MODULE (Complete data restored)
 function ServicesPage() {
   const [services, setServices] = useState({
-    card1Title: 'Social Media Marketing', card1Desc: 'Instagram Marketing\nFacebook Marketing\nLinkedIn Marketing',
-    card2Title: 'Paid Advertising', card2Desc: 'Google Ads\nFacebook Ads\nInstagram Ads',
-    card3Title: 'Website Development', card3Desc: 'Website Design\nWebsite Development\nWebsite Maintenance'
+    card1Title: 'Social Media Marketing', 
+    card1Desc: 'Instagram Marketing\nFacebook Marketing\nLinkedIn Marketing\nYoutube Marketing',
+    card2Title: 'Paid Advertising', 
+    card2Desc: 'Google Ads\nFacebook Ads\nInstagram Ads\nYouTube Ads',
+    card3Title: 'Website Development', 
+    card3Desc: 'Website Design\nWebsite Development\nWebsite Maintenance'
   });
+
   useEffect(() => {
     const saved = localStorage.getItem('admin_services_json');
     if (saved) { try { setServices(JSON.parse(saved)); } catch(e) {} }
@@ -217,9 +222,9 @@ function ServicesPage() {
       <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '40px' }}>Our Services</h2>
       <div style={{ display: 'flex', gap: '25px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1100px', width: '100%' }}>
         {[1, 2, 3].map(num => (
-          <div key={num} style={{ backgroundColor: '#121a2e', padding: '30px', borderRadius: '20px', flex: '1', minWidth: '280px', border: '1px solid rgba(255,255,255,0.05)' }}>
-            <h3 style={{ fontSize: '20px', color: '#00a2ff', marginBottom: '15px' }}>{services[`card${num}Title`]}</h3>
-            <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.6', whiteSpace: 'pre-line' }}>{services[`card${num}Desc`]}</p>
+          <div key={num} style={{ backgroundColor: '#121a2e', padding: '30px', borderRadius: '20px', flex: '1', minWidth: '280px', border: '1px solid rgba(255,255,255,0.05)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>
+            <h3 style={{ fontSize: '20px', color: '#00a2ff', marginBottom: '15px', fontWeight: '600' }}>{services[`card${num}Title`]}</h3>
+            <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.7', whiteSpace: 'pre-line' }}>{services[`card${num}Desc`]}</p>
           </div>
         ))}
       </div>
@@ -227,9 +232,14 @@ function ServicesPage() {
   );
 }
 
-// 5. FINDUSPAGE MODULE
+// 5. FINDUSPAGE MODULE (Complete info restored)
 function FindUsPage() {
-  const [findUs, setFindUs] = useState({ location: 'Roshan Bagh Prayagraj', email: 'anasknanprince1234@gmail.com', call: '+91 7007684279' });
+  const [findUs, setFindUs] = useState({ 
+    location: 'Roshan Bagh Prayagraj', 
+    email: 'anasknanprince1234@gmail.com', 
+    call: '+91 7007684279' 
+  });
+
   useEffect(() => {
     const saved = localStorage.getItem('admin_findus_json');
     if (saved) { try { setFindUs(JSON.parse(saved)); } catch(e) {} }
@@ -237,24 +247,29 @@ function FindUsPage() {
 
   return (
     <div style={{ padding: '60px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', maxWidth: '500px', width: '100%', border: '1px solid rgba(255,255,255,0.05)', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '28px', marginBottom: '25px' }}>Find Us</h2>
-        <p style={{ color: '#94a3b8', marginBottom: '12px' }}>📍 <strong>Location:</strong> {findUs.location}</p>
-        <p style={{ color: '#94a3b8', marginBottom: '12px' }}>✉️ <strong>Email:</strong> {findUs.email}</p>
-        <p style={{ color: '#94a3b8' }}>📞 <strong>Call:</strong> {findUs.call}</p>
+      <div style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', maxWidth: '500px', width: '100%', border: '1px solid rgba(255,255,255,0.05)', textAlign: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+        <h2 style={{ fontSize: '28px', marginBottom: '25px', fontWeight: '700' }}>Find Us</h2>
+        <div style={{ textAlign: 'left', display: 'inline-block', gap: '15px' }}>
+          <p style={{ color: '#94a3b8', fontSize: '15px', marginBottom: '14px' }}>📍 <strong style={{ color: '#fff' }}>Location:</strong> {findUs.location}</p>
+          <p style={{ color: '#94a3b8', fontSize: '15px', marginBottom: '14px' }}>✉️ <strong style={{ color: '#fff' }}>Email:</strong> {findUs.email}</p>
+          <p style={{ color: '#94a3b8', fontSize: '15px' }}>📞 <strong style={{ color: '#fff' }}>Call:</strong> {findUs.call}</p>
+        </div>
       </div>
     </div>
   );
 }
 
-// 6. ADMIN SECURITY MODULE
+// 6. ADMIN SECURITY PANEL MODULE (Full inputs and configurations restored)
 function Admin() {
   const [passwordInput, setPasswordInput] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [loginError, setLoginError] = useState('');
   const [attempts, setAttempts] = useState(0);
   const [lockoutTimeLeft, setLockoutTimeLeft] = useState(0);
+
   const [aboutText, setAboutText] = useState("");
+  const [services, setServices] = useState({ card1Title: '', card1Desc: '', card2Title: '', card2Desc: '', card3Title: '', card3Desc: '' });
+  const [findUs, setFindUs] = useState({ location: '', email: '', call: '' });
 
   useEffect(() => {
     if (sessionStorage.getItem('admin_session_auth') === 'true') setIsAuthorized(true);
@@ -266,7 +281,10 @@ function Admin() {
       const timeLeft = Math.ceil((parseInt(savedLockout, 10) - Date.now()) / 1000);
       if (timeLeft > 0) setLockoutTimeLeft(timeLeft);
     }
-    setAboutText(localStorage.getItem('admin_about_text') || "Hum aapke business ko online scale karne aur brand value build karne mein madad karte hain...");
+
+    setAboutText(localStorage.getItem('admin_about_text') || "Hum businesses ko online grow karne mein help karte hain...");
+    try { setServices(JSON.parse(localStorage.getItem('admin_services_json')) || { card1Title: 'Social Media Marketing', card1Desc: 'Instagram Marketing\nFacebook Marketing', card2Title: 'Paid Advertising', card2Desc: 'Google Ads\nFacebook Ads', card3Title: 'Website Development', card3Desc: 'Website Design\nWebsite Development' }); } catch(e){}
+    try { setFindUs(JSON.parse(localStorage.getItem('admin_findus_json')) || { location: 'Roshan Bagh Prayagraj', email: 'anasknanprince1234@gmail.com', call: '+91 7007684279' }); } catch(e){}
   }, []);
 
   useEffect(() => {
@@ -308,9 +326,19 @@ function Admin() {
     }
   };
 
+  const handleServiceChange = (field, value) => {
+    setServices(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleFindUsChange = (field, value) => {
+    setFindUs(prev => ({ ...prev, [field]: value }));
+  };
+
   const handleSaveAll = () => {
     localStorage.setItem('admin_about_text', aboutText);
-    alert('Bhai, saara data save ho gaya!');
+    localStorage.setItem('admin_services_json', JSON.stringify(services));
+    localStorage.setItem('admin_findus_json', JSON.stringify(findUs));
+    alert('Bhai, saara data successfully local storage me save ho gaya!');
   };
 
   if (lockoutTimeLeft > 0) {
@@ -318,6 +346,7 @@ function Admin() {
       <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', textAlign: 'center', border: '1px solid #ef4444' }}>
           <h3 style={{ color: '#ef4444', marginBottom: '10px' }}>Security Lockout Active</h3>
+          <p style={{ color: '#94a3b8', fontSize: '14px', marginBottom: '20px' }}>3 baar galat password enter kiya gaya hai.</p>
           <div style={{ backgroundColor: '#090f1c', padding: '15px', borderRadius: '12px', fontSize: '24px', color: '#00ffcc', fontWeight: '800' }}>
             {Math.floor(lockoutTimeLeft / 3600)}:{(Math.floor((lockoutTimeLeft % 3600) / 60)).toString().padStart(2,'0')}:{(lockoutTimeLeft % 60).toString().padStart(2,'0')}
           </div>
@@ -329,9 +358,9 @@ function Admin() {
   if (!isAuthorized) {
     return (
       <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <form onSubmit={handleLoginSubmit} style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', textAlign: 'center', width: '100%', maxWidth: '380px' }}>
+        <form onSubmit={handleLoginSubmit} autoComplete="off" style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', textAlign: 'center', width: '100%', maxWidth: '380px' }}>
           <h3 style={{ marginBottom: '20px' }}>Admin Panel Lock</h3>
-          <input type="password" placeholder="Enter Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} style={{ width: '100%', backgroundColor: '#090f1c', border: '1px solid #1e2d4a', borderRadius: '12px', color: '#fff', padding: '14px', textAlign: 'center', marginBottom: '15px', outline: 'none' }} />
+          <input type="password" placeholder="Enter Password" value={passwordInput} onChange={(e) => setPasswordInput(e.target.value)} autoComplete="new-password" style={{ width: '100%', backgroundColor: '#090f1c', border: '1px solid #1e2d4a', borderRadius: '12px', color: '#fff', padding: '14px', textAlign: 'center', marginBottom: '15px', outline: 'none' }} />
           {loginError && <p style={{ color: '#ef4444', fontSize: '13px', marginBottom: '15px' }}>{loginError}</p>}
           <button type="submit" style={{ width: '100%', backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer' }}>Unlock Dashboard</button>
         </form>
@@ -340,18 +369,40 @@ function Admin() {
   }
 
   return (
-    <div style={{ padding: '40px 20px', minHeight: '100vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '25px' }}>
+    <div style={{ padding: '40px 20px', minHeight: '100vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '25px', overflowY: 'auto' }}>
       <h2 style={{ width: '100%', maxWidth: '700px', textAlign: 'left' }}>Admin Dashboard</h2>
+      
+      {/* ABOUT AREA */}
       <div style={{ width: '100%', maxWidth: '700px', backgroundColor: '#121a2e', padding: '20px', borderRadius: '16px' }}>
-        <label style={{ display: 'block', marginBottom: '10px' }}>About Page Text:</label>
+        <label style={{ display: 'block', marginBottom: '10px', fontWeight: '600' }}>About Page Text:</label>
         <textarea value={aboutText} onChange={(e) => setAboutText(e.target.value)} style={{ width: '100%', height: '80px', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', borderRadius: '8px', padding: '10px', outline: 'none' }} />
       </div>
-      <button onClick={handleSaveAll} style={{ width: '100%', maxWidth: '700px', backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '15px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer' }}>Save Changes</button>
+
+      {/* SERVICES AREA */}
+      <div style={{ width: '100%', maxWidth: '700px', backgroundColor: '#121a2e', padding: '20px', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+        <label style={{ fontWeight: '600' }}>Services Settings:</label>
+        {[1, 2, 3].map(num => (
+          <div key={num} style={{ borderBottom: '1px solid #1e2d4a', paddingBottom: '10px' }}>
+            <input type="text" value={services[`card${num}Title`] || ''} onChange={(e) => handleServiceChange(`card${num}Title`, e.target.value)} style={{ width: '100%', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', padding: '8px', borderRadius: '6px', marginBottom: '5px' }} />
+            <textarea value={services[`card${num}Desc`] || ''} onChange={(e) => handleServiceChange(`card` + num + `Desc`, e.target.value)} style={{ width: '100%', height: '60px', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', padding: '8px', borderRadius: '6px' }} />
+          </div>
+        ))}
+      </div>
+
+      {/* FIND US AREA */}
+      <div style={{ width: '100%', maxWidth: '700px', backgroundColor: '#121a2e', padding: '20px', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <label style={{ fontWeight: '600' }}>Find Us Settings:</label>
+        <input type="text" value={findUs.location} onChange={(e) => handleFindUsChange('location', e.target.value)} style={{ width: '100%', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', padding: '8px', borderRadius: '6px' }} />
+        <input type="text" value={findUs.email} onChange={(e) => handleFindUsChange('email', e.target.value)} style={{ width: '100%', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', padding: '8px', borderRadius: '6px' }} />
+        <input type="text" value={findUs.call} onChange={(e) => handleFindUsChange('call', e.target.value)} style={{ width: '100%', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', padding: '8px', borderRadius: '6px' }} />
+      </div>
+
+      <button onClick={handleSaveAll} style={{ width: '100%', maxWidth: '700px', backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '15px', borderRadius: '12px', fontWeight: '600', cursor: 'pointer', marginBottom: '30px' }}>Save All Changes</button>
     </div>
   );
 }
 
-// 7. GLOBAL ROUTER CONTROLLER (🚀 Version 6 Rules Restored)
+// 7. GLOBAL MASTER ROUTER
 function App() {
   return (
     <div style={{ backgroundColor: '#090f1c', height: '100vh', width: '100vw', margin: 0, padding: 0, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, overflow: 'hidden' }}>
