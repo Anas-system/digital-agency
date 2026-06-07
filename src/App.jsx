@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
-// 1. DYNAMIC NAVBAR MODULE (Login with exact blue button)
+// 1. DYNAMIC NAVBAR MODULE
 function Navbar() {
   return (
     <nav style={{ 
@@ -42,7 +42,7 @@ function Navbar() {
   );
 }
 
-// 2. HOME COMPONENT WITH INTERACTIVE PARTICLES (Video Match Layout)
+// 2. HOME COMPONENT WITH INTERACTIVE PARTICLES
 function Home() {
   const canvasRef = useRef(null);
 
@@ -173,7 +173,7 @@ function Home() {
   );
 }
 
-// 3. ABOUTPAGE MODULE (Comfortable font & Clean design)
+// 3. ABOUTPAGE MODULE
 function AboutPage() {
   const [aboutText, setAboutText] = useState("Hum businesses ko online grow karne mein help karte hain through smart aur result-oriented digital marketing solutions.");
   useEffect(() => {
@@ -201,15 +201,15 @@ function AboutPage() {
   );
 }
 
-// 4. SERVICESPAGE MODULE (Complete data restored)
+// 4. SERVICESPAGE MODULE (Exact Copy of image_7736cb.png)
 function ServicesPage() {
   const [services, setServices] = useState({
     card1Title: 'Social Media Marketing', 
-    card1Desc: 'Instagram Marketing\nFacebook Marketing\nLinkedIn Marketing\nYoutube Marketing',
+    card1Desc: 'Instagram Marketing\nFacebook Marketing',
     card2Title: 'Paid Advertising', 
-    card2Desc: 'Google Ads\nFacebook Ads\nInstagram Ads\nYouTube Ads',
+    card2Desc: 'Google Ads\nFacebook Ads',
     card3Title: 'Website Development', 
-    card3Desc: 'Website Design\nWebsite Development\nWebsite Maintenance'
+    card3Desc: 'Website Design\nWebsite Development'
   });
 
   useEffect(() => {
@@ -218,13 +218,13 @@ function ServicesPage() {
   }, []);
 
   return (
-    <div style={{ padding: '60px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-      <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '40px' }}>Our Services</h2>
-      <div style={{ display: 'flex', gap: '25px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1100px', width: '100%' }}>
+    <div style={{ padding: '60px 4%', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', boxSizing: 'border-box' }}>
+      <h2 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '50px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Our Services</h2>
+      <div style={{ display: 'flex', gap: '25px', flexWrap: 'wrap', justifyContent: 'center', maxWidth: '1200px', width: '100%' }}>
         {[1, 2, 3].map(num => (
-          <div key={num} style={{ backgroundColor: '#121a2e', padding: '30px', borderRadius: '20px', flex: '1', minWidth: '280px', border: '1px solid rgba(255,255,255,0.05)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>
-            <h3 style={{ fontSize: '20px', color: '#00a2ff', marginBottom: '15px', fontWeight: '600' }}>{services[`card${num}Title`]}</h3>
-            <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.7', whiteSpace: 'pre-line' }}>{services[`card${num}Desc`]}</p>
+          <div key={num} style={{ backgroundColor: '#111726', padding: '35px 30px', borderRadius: '18px', flex: '1', minWidth: '280px', boxSizing: 'border-box', textAlign: 'left' }}>
+            <h3 style={{ fontSize: '18px', color: '#00a2ff', marginBottom: '20px', fontWeight: '700' }}>{services[`card${num}Title`]}</h3>
+            <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.8', whiteSpace: 'pre-line' }}>{services[`card${num}Desc`]}</p>
           </div>
         ))}
       </div>
@@ -232,7 +232,7 @@ function ServicesPage() {
   );
 }
 
-// 5. FINDUSPAGE MODULE (Complete info restored)
+// 5. FINDUSPAGE MODULE (Exact Copy of image_773409.png)
 function FindUsPage() {
   const [findUs, setFindUs] = useState({ 
     location: 'Roshan Bagh Prayagraj', 
@@ -246,20 +246,20 @@ function FindUsPage() {
   }, []);
 
   return (
-    <div style={{ padding: '60px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div style={{ backgroundColor: '#121a2e', padding: '40px', borderRadius: '24px', maxWidth: '500px', width: '100%', border: '1px solid rgba(255,255,255,0.05)', textAlign: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
-        <h2 style={{ fontSize: '28px', marginBottom: '25px', fontWeight: '700' }}>Find Us</h2>
-        <div style={{ textAlign: 'left', display: 'inline-block', gap: '15px' }}>
-          <p style={{ color: '#94a3b8', fontSize: '15px', marginBottom: '14px' }}>📍 <strong style={{ color: '#fff' }}>Location:</strong> {findUs.location}</p>
-          <p style={{ color: '#94a3b8', fontSize: '15px', marginBottom: '14px' }}>✉️ <strong style={{ color: '#fff' }}>Email:</strong> {findUs.email}</p>
-          <p style={{ color: '#94a3b8', fontSize: '15px' }}>📞 <strong style={{ color: '#fff' }}>Call:</strong> {findUs.call}</p>
+    <div style={{ padding: '60px 20px', minHeight: '85vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
+      <div style={{ backgroundColor: '#111726', padding: '50px 40px', borderRadius: '20px', maxWidth: '550px', width: '100%', textAlign: 'center', boxSizing: 'border-box' }}>
+        <h2 style={{ fontSize: '28px', marginBottom: '35px', fontWeight: '700', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>Find Us</h2>
+        <div style={{ textAlign: 'left', display: 'inline-block', fontSize: '14px', lineHeight: '2' }}>
+          <p style={{ color: '#94a3b8', margin: '10px 0' }}>📍 <strong style={{ color: '#fff' }}>Location:</strong> {findUs.location}</p>
+          <p style={{ color: '#94a3b8', margin: '10px 0' }}>✉️ <strong style={{ color: '#fff' }}>Email:</strong> {findUs.email}</p>
+          <p style={{ color: '#94a3b8', margin: '10px 0' }}>📞 <strong style={{ color: '#fff' }}>Call:</strong> {findUs.call}</p>
         </div>
       </div>
     </div>
   );
 }
 
-// 6. ADMIN SECURITY PANEL MODULE (Full inputs and configurations restored)
+// 6. ADMIN PANEL MODULE
 function Admin() {
   const [passwordInput, setPasswordInput] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -372,13 +372,11 @@ function Admin() {
     <div style={{ padding: '40px 20px', minHeight: '100vh', backgroundColor: '#090f1c', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '25px', overflowY: 'auto' }}>
       <h2 style={{ width: '100%', maxWidth: '700px', textAlign: 'left' }}>Admin Dashboard</h2>
       
-      {/* ABOUT AREA */}
       <div style={{ width: '100%', maxWidth: '700px', backgroundColor: '#121a2e', padding: '20px', borderRadius: '16px' }}>
         <label style={{ display: 'block', marginBottom: '10px', fontWeight: '600' }}>About Page Text:</label>
         <textarea value={aboutText} onChange={(e) => setAboutText(e.target.value)} style={{ width: '100%', height: '80px', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', borderRadius: '8px', padding: '10px', outline: 'none' }} />
       </div>
 
-      {/* SERVICES AREA */}
       <div style={{ width: '100%', maxWidth: '700px', backgroundColor: '#121a2e', padding: '20px', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
         <label style={{ fontWeight: '600' }}>Services Settings:</label>
         {[1, 2, 3].map(num => (
@@ -389,7 +387,6 @@ function Admin() {
         ))}
       </div>
 
-      {/* FIND US AREA */}
       <div style={{ width: '100%', maxWidth: '700px', backgroundColor: '#121a2e', padding: '20px', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <label style={{ fontWeight: '600' }}>Find Us Settings:</label>
         <input type="text" value={findUs.location} onChange={(e) => handleFindUsChange('location', e.target.value)} style={{ width: '100%', backgroundColor: '#090f1c', color: '#fff', border: '1px solid #1e2d4a', padding: '8px', borderRadius: '6px' }} />
@@ -402,7 +399,7 @@ function Admin() {
   );
 }
 
-// 7. GLOBAL MASTER ROUTER
+// 7. GLOBAL MASTER ROUTER CONTROL
 function App() {
   return (
     <div style={{ backgroundColor: '#090f1c', height: '100vh', width: '100vw', margin: 0, padding: 0, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', position: 'fixed', top: 0, left: 0, overflow: 'hidden' }}>
