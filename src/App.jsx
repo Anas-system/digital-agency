@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
-// 1. DYNAMIC NAVBAR MODULE
+// 1. DYNAMIC NAVBAR MODULE (🚀 Fixed Mobile Layering & Overlapping Alignment)
 function Navbar() {
   return (
-    <nav style={{ 
+    <nav className="main-navbar" style={{ 
       display: 'flex', 
       justifyContent: 'space-between', 
       alignItems: 'center', 
@@ -17,22 +17,45 @@ function Navbar() {
       position: 'relative',
       zIndex: 10
     }}>
+      {/* Dynamic CSS Injector for Layout Wrapping */}
+      <style>{`
+        @media (max-width: 650px) {
+          .main-navbar {
+            flex-direction: column !important;
+            height: auto !important;
+            padding: 15px 20px !important;
+            gap: 12px !important;
+          }
+          .nav-links-box {
+            gap: 15px !important;
+            flex-wrap: wrap !important;
+            justifyContent: center !important;
+            width: 100% !important;
+          }
+          .login-btn-nav {
+            padding: 6px 16px !important;
+            font-size: 13px !important;
+          }
+        }
+      `}</style>
+
       <Link to="/" style={{ textDecoration: 'none' }}>
         <span style={{ fontSize: '22px', fontWeight: '800', color: '#ffffff', letterSpacing: '-0.5px', fontFamily: "'serif', Georgia, Times, 'Times New Roman'" }}>
           DigiGrow
         </span>
       </Link>
-      <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-        <Link to="/about" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '14px', fontWeight: '500', fontFamily: "'serif', Georgia, Times" }}>About</Link>
-        <Link to="/services" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '14px', fontWeight: '500', fontFamily: "'serif', Georgia, Times" }}>Services</Link>
-        <Link to="/find-us" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '14px', fontWeight: '500', fontFamily: "'serif', Georgia, Times" }}>Find Us</Link>
-        <Link to="/admin" style={{ 
+      
+      <div className="nav-links-box" style={{ display: 'flex', gap: '25px', alignItems: 'center' }}>
+        <Link to="/about" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', fontFamily: "'serif', Georgia, Times" }}>About</Link>
+        <Link to="/services" style={{ color: '#ffffff', textDecoration: 'none', fontSize: '15px', fontWeight: '500', fontFamily: "'serif', Georgia, Times" }}>Services</Link>
+        <Link to="/find-us" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '15px', fontWeight: '500', fontFamily: "'serif', Georgia, Times" }}>Find Us</Link>
+        <Link to="/admin" className="login-btn-nav" style={{ 
           backgroundColor: '#00a2ff', 
-          padding: '7px 18px', 
+          padding: '8px 22px', 
           borderRadius: '8px', 
           color: '#fff', 
           textDecoration: 'none', 
-          fontSize: '13px', 
+          fontSize: '14px', 
           fontWeight: '600',
           fontFamily: "'serif', Georgia, Times"
         }}>
@@ -282,7 +305,7 @@ function FindUsPage() {
   );
 }
 
-// 6. ADMIN PANEL (🚀 Mobile UI & Responsive Input Alignments Fully Upgraded)
+// 6. ADMIN PANEL
 function Admin() {
   const [passwordInput, setPasswordInput] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -405,7 +428,7 @@ function Admin() {
       <div style={{ padding: '20px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div style={{ backgroundColor: '#111b2d', padding: '40px 20px', borderRadius: '24px', textAlign: 'center', maxWidth: '420px', width: '100%', border: '1px solid #ef4444', boxSizing: 'border-box' }}>
           <h3 style={{ color: '#ef4444', marginBottom: '15px', fontSize: '20px', fontFamily: "'serif', Georgia, Times" }}>Security Lockout Active</h3>
-          <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '20px', lineHeight: '1.5' }}>3 baar galat password daala gaya hai. Brute force protection ke chalte panel temporary locked hai.</p>
+          <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '20px', lineHeight: '1.5' }}>3 baar galat password daala gaya hai. Panel temporary locked hai.</p>
           <div style={{ backgroundColor: '#09111e', padding: '15px', borderRadius: '12px', fontSize: '24px', color: '#00ffcc', fontWeight: '800', border: '1px solid rgba(0,255,204,0.1)' }}>
             {Math.floor(lockoutTimeLeft / 3600)}:{(Math.floor((lockoutTimeLeft % 3600) / 60)).toString().padStart(2,'0')}:{(lockoutTimeLeft % 60).toString().padStart(2,'0')}
           </div>
@@ -429,49 +452,25 @@ function Admin() {
 
   return (
     <div style={{ padding: '40px 15px', minHeight: '85vh', backgroundColor: '#09111e', color: '#fff', display: 'flex', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box' }}>
-      
-      {/* Dynamic CSS Grid Injector directly for handling perfect clean mobile responsive breakdown */}
       <style>{`
-        .responsive-card-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 15px;
-          margin-bottom: 15px;
-        }
-        .responsive-find-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          gap: 15px;
-        }
+        .responsive-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        .responsive-find-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
         @media (max-width: 680px) {
-          .responsive-card-grid {
-            grid-template-columns: 1fr !important;
-            gap: 5px !important;
-          }
-          .responsive-find-grid {
-            grid-template-columns: 1fr !important;
-            gap: 5px !important;
-          }
-          .admin-box-card {
-            padding: 30px 20px !important;
-          }
+          .responsive-card-grid { grid-template-columns: 1fr !important; gap: 5px !important; }
+          .responsive-find-grid { grid-template-columns: 1fr !important; gap: 5px !important; }
+          .admin-box-card { padding: 30px 20px !important; }
         }
       `}</style>
 
       <div className="admin-box-card" style={{ backgroundColor: '#111b2d', padding: '45px 40px', borderRadius: '24px', maxWidth: '750px', width: '100%', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.04)', textAlign: 'center', boxSizing: 'border-box' }}>
-        
         <h2 style={{ fontSize: '26px', fontWeight: '700', marginBottom: '30px', color: '#ffffff', fontFamily: "'serif', Georgia, Times" }}>
           Dashboard <span style={{ color: '#00a2ff' }}>Control Panel</span>
         </h2>
-
         <form onSubmit={handleSaveAllSettings}>
-          {/* ABOUT DESCRIPTION TEXTAREA */}
           <div style={{ marginBottom: '25px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '15px' }}>
             <label style={labelStyle}>Edit About Text Description:</label>
             <textarea rows="4" value={formAbout} onChange={(e) => setFormAbout(e.target.value)} style={{ ...inputStyle, resize: 'vertical', fontFamily: 'sans-serif' }} />
           </div>
-
-          {/* 🚀 FIXED FOR MOBILE: SERVICES DYNAMIC CARDS SECTION */}
           <div style={{ marginBottom: '25px', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '15px' }}>
             <h4 style={{ ...labelStyle, color: '#fff', fontSize: '15px', marginBottom: '15px' }}>Edit Services Content:</h4>
             {[1, 2, 3].map(i => (
@@ -487,8 +486,6 @@ function Admin() {
               </div>
             ))}
           </div>
-
-          {/* 🚀 FIXED FOR MOBILE: FIND US SECTION */}
           <div style={{ marginBottom: '30px' }}>
             <h4 style={{ ...labelStyle, color: '#fff', fontSize: '15px', marginBottom: '15px' }}>Edit Find Us Info:</h4>
             <div className="responsive-find-grid">
@@ -506,13 +503,10 @@ function Admin() {
               </div>
             </div>
           </div>
-
-          {/* MASTER LIVE SAVE BUTTON */}
           <button type="submit" style={{ backgroundColor: '#00a2ff', color: '#fff', border: 'none', padding: '14px 35px', borderRadius: '12px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', fontFamily: "'serif', Georgia, Times", boxShadow: '0 4px 15px rgba(0,162,255,0.3)', width: '100%', maxWidth: '300px' }}>
             Save All Settings Live
           </button>
         </form>
-
       </div>
     </div>
   );
