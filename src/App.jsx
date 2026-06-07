@@ -114,8 +114,7 @@ function Home() {
     canvas.height = canvas.parentElement.clientHeight || window.innerHeight;
 
     init();
-    animate();
-
+    
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (let i = 0; i < particlesArray.length; i++) {
@@ -123,6 +122,8 @@ function Home() {
       }
       animationFrameId = requestAnimationFrame(animate);
     }
+    
+    animate();
 
     return () => {
       cancelAnimationFrame(animationFrameId);
@@ -229,15 +230,16 @@ function App() {
         }
       `}</style>
 
-      <Navbar/>
+      <Navbar />
       
       <div style={{ flex: '1', width: '100%', height: 'calc(100vh - 75px)', overflowY: 'auto', overflowX: 'hidden' }}>
+        {/* 🚀 FIXED ROUTING SYNTAX */}
         <Routes>
-          <Route element="{<Home" path="/"/>} />
-          <Route element="{<AboutPage" path="/about"/>} />
-          <Route element="{<ServicesPage" path="/services"/>} />
-          <Route element="{<FindUsPage" path="/find-us"/>} />
-          <Route element="{<Admin" path="/admin"/>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/find-us" element={<FindUsPage />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </div>
     </div>
