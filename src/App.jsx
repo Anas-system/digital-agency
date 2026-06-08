@@ -173,33 +173,6 @@ const responsiveStyles = `
     .right-nav-wrapper button { padding: 6px 10px !important; font-size: 13px !important; }
   }
 
-  /* ── Mobile Section Pill ── */
-  @keyframes pillSlideUp   { from { opacity:0; transform: translateY(14px); } to { opacity:1; transform: translateY(0); } }
-  @keyframes pillSlideDown { from { opacity:1; transform: translateY(0); } to { opacity:0; transform: translateY(14px); } }
-  .section-pill {
-    display: none;
-  }
-  @media (max-width: 900px) {
-    .section-pill {
-      display: flex; align-items: center; gap: 8px;
-      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-      background: rgba(255,249,242,0.96);
-      border: 1.5px solid rgba(138,94,30,0.25);
-      border-radius: 99px;
-      padding: 9px 20px;
-      font-size: 12px; font-weight: 700; color: #8a5e1e;
-      font-family: 'Source Serif 4', serif; letter-spacing: 0.8px; text-transform: uppercase;
-      box-shadow: 0 4px 20px rgba(44,31,14,0.13);
-      z-index: 500; pointer-events: none;
-      white-space: nowrap;
-    }
-    .section-pill.show { animation: pillSlideUp   0.3s ease both; }
-    .section-pill.hide { animation: pillSlideDown 0.3s ease both; }
-    .section-pill-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: #8a5e1e; flex-shrink: 0;
-    }
-  }
   @keyframes heroFadeUp {
     from { opacity: 0; transform: translateY(28px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -260,9 +233,6 @@ function ScrollIndicator({ activeSection, onDotClick }) {
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
-  const [pill, setPill] = useState({ visible: false, hiding: false, label: '' });
-  const pillTimer = useRef(null);
-  const pillHideTimer = useRef(null);
   const [toast, setToast] = useState({ visible: false, message: '' });
   
   const [liveData, setLiveData] = useState({
@@ -317,8 +287,6 @@ function App() {
     return () => clearInterval(timerId);
   }, [lockUntil]);
 
-  const PILL_LABELS = { services: '⚡ Service', about: '👥 About', 'find-us': '📍 Find Us' };
-
   useEffect(() => {
     const sectionRefs = [
       { id: 'home',     ref: homeRef },
@@ -327,31 +295,11 @@ function App() {
       { id: 'find-us',  ref: findUsRef },
     ];
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => {
-        if (e.isIntersecting) {
-          setActiveSection(e.target.id);
-          // Show pill only for non-home sections on mobile
-          if (e.target.id !== 'home' && PILL_LABELS[e.target.id]) {
-            if (pillTimer.current) clearTimeout(pillTimer.current);
-            if (pillHideTimer.current) clearTimeout(pillHideTimer.current);
-            setPill({ visible: true, hiding: false, label: PILL_LABELS[e.target.id] });
-            pillTimer.current = setTimeout(() => {
-              setPill(p => ({ ...p, hiding: true }));
-              pillHideTimer.current = setTimeout(() => setPill({ visible: false, hiding: false, label: '' }), 320);
-            }, 2200);
-          } else if (e.target.id === 'home') {
-            setPill({ visible: false, hiding: false, label: '' });
-          }
-        }
-      }),
+      (entries) => entries.forEach(e => { if (e.isIntersecting) setActiveSection(e.target.id); }),
       { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 }
     );
     sectionRefs.forEach(item => { if (item.ref.current) observer.observe(item.ref.current); });
-    return () => {
-      observer.disconnect();
-      if (pillTimer.current) clearTimeout(pillTimer.current);
-      if (pillHideTimer.current) clearTimeout(pillHideTimer.current);
-    };
+    return () => observer.disconnect();
   }, []);
 
   const triggerToast = (msg) => {
@@ -407,14 +355,6 @@ function App() {
       {/* ── TOAST ── */}
       {toast.visible && (
         <div style={styles.toast}><span>{toast.message}</span></div>
-      )}
-
-      {/* ── MOBILE SECTION PILL ── */}
-      {pill.visible && (
-        <div className={`section-pill ${pill.hiding ? 'hide' : 'show'}`}>
-          <div className="section-pill-dot" />
-          {pill.label}
-        </div>
       )}
 
       {/* ── ADMIN MODAL ── */}
