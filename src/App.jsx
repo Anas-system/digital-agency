@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 // ===================================================
-// 1. PREMIUM SOFT-DARK SYSTEM DESIGN STYLES WITH GLOW
+// 1. CREAM MELT THEME — WARM IVORY SYSTEM
 // ===================================================
 const styles = {
   main: { 
-    backgroundColor: '#0b0f19', 
+    backgroundColor: '#fdf8f2', 
     minHeight: '100vh', 
-    color: '#f1f5f9', 
+    color: '#2c1f0e', 
     fontFamily: "'Source Serif 4', Georgia, 'Times New Roman', serif",
     overflowX: 'hidden', 
     position: 'relative',
@@ -23,20 +23,19 @@ const styles = {
   ambientLighting: {
     position: 'fixed', top: '10%', left: '50%', transform: 'translate(-50%, -50%)',
     width: '120vw', height: '60vh',
-    background: 'radial-gradient(circle at 50% 30%, rgba(56,189,248,0.12) 0%, rgba(99,102,241,0.04) 50%, transparent 100%)',
+    background: 'radial-gradient(circle at 50% 30%, rgba(210,170,110,0.13) 0%, rgba(245,230,200,0.06) 50%, transparent 100%)',
     pointerEvents: 'none', zIndex: 2
   },
   header: {
     backdropFilter: 'blur(24px)',
     WebkitBackdropFilter: 'blur(24px)',
-    borderBottom: '1px solid rgba(56, 189, 248, 0.15)',
+    borderBottom: '1px solid rgba(180,140,90,0.18)',
     position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-    backgroundColor: 'rgba(11, 15, 25, 0.8)', 
-    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.05)',
+    backgroundColor: 'rgba(253, 248, 242, 0.88)', 
+    boxShadow: '0 4px 30px rgba(180,140,90,0.08), inset 0 1px 1px rgba(255,255,255,0.7)',
     transition: 'all 0.3s ease',
     width: '100%'
   },
-  // FIXED ALIGNMENT: Proper spacing structure to avoid edge spilling
   navbar: { 
     display: 'flex', 
     justifyContent: 'space-between', 
@@ -61,11 +60,10 @@ const styles = {
     fontSize: '26px', 
     fontWeight: '800', 
     letterSpacing: '-1px',
-    color: '#38bdf8', 
+    color: '#b07d3a', 
     userSelect: 'none',
-    textShadow: '0 0 20px rgba(56,189,248,0.3)'
+    textShadow: '0 0 20px rgba(176,125,58,0.2)'
   },
-  // FIXED LAYER SHIFT: Combined flexible structure preventing overlapping
   navRightContainer: {
     display: 'flex',
     alignItems: 'center',
@@ -76,7 +74,7 @@ const styles = {
     flexWrap: 'nowrap'
   },
   linkButton: { 
-    color: '#94a3b8', 
+    color: '#7a6048', 
     background: 'transparent',
     backgroundColor: 'transparent',
     border: '1px solid transparent', 
@@ -95,24 +93,23 @@ const styles = {
     whiteSpace: 'nowrap'
   },
   activeLink: { 
-    color: '#38bdf8 !important', 
+    color: '#b07d3a', 
     fontWeight: '600',
-    background: 'rgba(56, 189, 248, 0.12) !important',
-    backgroundColor: 'rgba(56, 189, 248, 0.12) !important',
-    border: '1px solid rgba(56, 189, 248, 0.3) !important',
-    textShadow: '0 0 10px rgba(56,189,248,0.4)',
-    boxShadow: '0 4px 15px rgba(56, 189, 248, 0.08)'
+    backgroundColor: 'rgba(176,125,58,0.10)',
+    border: '1px solid rgba(176,125,58,0.28)',
+    textShadow: '0 0 10px rgba(176,125,58,0.2)',
+    boxShadow: '0 4px 15px rgba(176,125,58,0.06)'
   },
   auditBtn: { 
     padding: '8px 18px', 
-    background: 'linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%)', 
-    border: '1px solid rgba(255,255,255,0.1)', 
+    background: 'linear-gradient(135deg, #c9913a 0%, #a0692a 100%)', 
+    border: '1px solid rgba(255,255,255,0.25)', 
     borderRadius: '20px', 
-    color: 'white', 
+    color: '#fff8ee', 
     fontWeight: '600', 
     cursor: 'pointer', 
     fontSize: '13px',
-    boxShadow: '0 4px 14px rgba(14,165,233,0.2)', 
+    boxShadow: '0 4px 14px rgba(176,125,58,0.22)', 
     transition: 'all 0.3s ease',
     fontFamily: "'Source Serif 4', serif",
     whiteSpace: 'nowrap',
@@ -133,7 +130,7 @@ const styles = {
     position: 'relative',
     zIndex: 10,
     boxSizing: 'border-box',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.02)',
+    borderBottom: '1px solid rgba(180,140,90,0.08)',
     width: '100%'
   },
   viewWrapper: { 
@@ -144,69 +141,67 @@ const styles = {
   },
   heroSection: { display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', width: '100%', position: 'relative', zIndex: 20 },
   sectionHeader: { textAlign: 'center', marginBottom: '50px', width: '100%' },
-  hugeTitle: { fontSize: 'clamp(32px, 7vw, 64px)', fontWeight: '700', lineHeight: '1.25', letterSpacing: '-1px', marginBottom: '24px', width: '100%', color: '#ffffff' },
-  gradientBlueText: { color: '#38bdf8' },
-  subtitleText: { color: '#94a3b8', fontSize: 'clamp(15px, 3.8vw, 20px)', maxWidth: '760px', lineHeight: '1.7', margin: '0 auto', fontWeight: '300', width: '100%' },
+  hugeTitle: { fontSize: 'clamp(32px, 7vw, 64px)', fontWeight: '700', lineHeight: '1.25', letterSpacing: '-1px', marginBottom: '24px', width: '100%', color: '#1e1208' },
+  gradientBlueText: { color: '#b07d3a' },
+  subtitleText: { color: '#7a6048', fontSize: 'clamp(15px, 3.8vw, 20px)', maxWidth: '760px', lineHeight: '1.7', margin: '0 auto', fontWeight: '300', width: '100%' },
   topBadge: {
-    background: 'linear-gradient(135deg, rgba(56,189,248,0.1) 0%, rgba(99,102,241,0.1) 100%)',
-    border: '1px solid rgba(56,189,248,0.3)',
+    background: 'linear-gradient(135deg, rgba(176,125,58,0.12) 0%, rgba(200,160,90,0.10) 100%)',
+    border: '1px solid rgba(176,125,58,0.32)',
     borderRadius: '30px',
     padding: '6px 16px',
     fontSize: '13px',
     fontWeight: '600',
-    color: '#38bdf8',
+    color: '#b07d3a',
     letterSpacing: '0.5px',
     marginBottom: '24px',
     display: 'inline-block',
-    boxShadow: '0 4px 20px rgba(56,189,248,0.15)',
+    boxShadow: '0 4px 20px rgba(176,125,58,0.10)',
     textTransform: 'uppercase'
   },
-  
   glassCard: {
-    backgroundColor: 'rgba(17, 24, 39, 0.45)', 
+    backgroundColor: 'rgba(255, 252, 245, 0.72)', 
     backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-    border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '20px', padding: 'clamp(20px, 5vw, 40px)',
-    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.25)', transition: 'all 0.3s ease', width: '100%',
+    border: '1px solid rgba(180,140,90,0.13)', borderRadius: '20px', padding: 'clamp(20px, 5vw, 40px)',
+    boxShadow: '0 20px 40px rgba(180,140,90,0.08)', transition: 'all 0.3s ease', width: '100%',
     boxSizing: 'border-box'
   },
   metricCard: {
-    backgroundColor: 'rgba(30, 41, 59, 0.35)', border: '1px solid rgba(255, 255, 255, 0.03)',
+    backgroundColor: 'rgba(245, 235, 218, 0.5)', border: '1px solid rgba(180,140,90,0.12)',
     borderRadius: '14px', padding: '25px', transition: 'all 0.3s ease', position: 'relative', overflow: 'hidden', width: '100%', boxSizing: 'border-box'
   },
   gridContainer: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', width: '100%', marginTop: '40px', boxSizing: 'border-box' },
   toast: {
-    position: 'fixed', bottom: '30px', right: '30px', backgroundColor: '#0b1329',
-    borderLeft: '4px solid #38bdf8', borderTop: '1px solid rgba(255,255,255,0.04)',
-    borderRight: '1px solid rgba(255, 255, 255, 0.04)', borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
-    padding: '14px 20px', borderRadius: '6px', boxShadow: '0 20px 45px rgba(0,0,0,0.6)',
-    zIndex: 9999, display: 'flex', alignItems: 'center', gap: '10px', color: '#fff', fontSize: '14px'
+    position: 'fixed', bottom: '30px', right: '30px', backgroundColor: '#fdf3e3',
+    borderLeft: '4px solid #b07d3a', borderTop: '1px solid rgba(180,140,90,0.15)',
+    borderRight: '1px solid rgba(180,140,90,0.15)', borderBottom: '1px solid rgba(180,140,90,0.15)',
+    padding: '14px 20px', borderRadius: '6px', boxShadow: '0 20px 45px rgba(180,140,90,0.15)',
+    zIndex: 9999, display: 'flex', alignItems: 'center', gap: '10px', color: '#2c1f0e', fontSize: '14px'
   },
-  
   adminOverlay: {
     position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-    backgroundColor: 'rgba(3, 7, 18, 0.85)', backdropFilter: 'blur(16px)',
+    backgroundColor: 'rgba(253,248,242,0.80)', backdropFilter: 'blur(16px)',
     zIndex: 99999, display: 'flex', alignItems: 'center',
     justifyContent: 'center', padding: '20px', boxSizing: 'border-box'
   },
   adminModal: {
-    backgroundColor: '#0f172a', border: '1px solid rgba(255,255,255,0.1)',
+    backgroundColor: '#fffbf4', border: '1px solid rgba(180,140,90,0.18)',
     borderRadius: '16px', padding: '30px', maxWidth: '650px', width: '100%',
-    boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)', maxHeight: '90vh', overflowY: 'auto'
+    boxShadow: '0 25px 50px -12px rgba(180,140,90,0.18)', maxHeight: '90vh', overflowY: 'auto'
   },
   adminInput: {
-    width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)',
-    backgroundColor: '#020617', color: '#fff', fontSize: '14px', outline: 'none', marginTop: '6px',
+    width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid rgba(180,140,90,0.2)',
+    backgroundColor: '#fdf8f0', color: '#2c1f0e', fontSize: '14px', outline: 'none', marginTop: '6px',
     marginBottom: '16px', fontFamily: 'sans-serif'
   },
-  adminLabel: { fontSize: '12px', color: '#38bdf8', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' },
-  adminSectionDivider: { borderTop: '1px solid rgba(255,255,255,0.1)', margin: '20px 0 15px 0', paddingTop: '10px', color: '#e2e8f0', fontSize: '14px', fontWeight: 'bold' }
+  adminLabel: { fontSize: '12px', color: '#b07d3a', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' },
+  adminSectionDivider: { borderTop: '1px solid rgba(180,140,90,0.15)', margin: '20px 0 15px 0', paddingTop: '10px', color: '#2c1f0e', fontSize: '14px', fontWeight: 'bold' }
 };
 
 const responsiveStyles = `
   html, body {
     margin: 0 !important;
     padding: 0 !important;
-    background-color: #0b0f19 !important;
+    background-color: #fdf8f2 !important;
     overflow-x: hidden !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -219,16 +214,14 @@ const responsiveStyles = `
     background: transparent !important;
   }
   .nav-custom-btn:hover {
-    color: #38bdf8 !important;
-    background-color: rgba(56, 189, 248, 0.06) !important;
-    border: 1px solid rgba(56, 189, 248, 0.15) !important;
+    color: #b07d3a !important;
+    background-color: rgba(176,125,58,0.07) !important;
+    border: 1px solid rgba(176,125,58,0.18) !important;
   }
   .login-btn-glow:hover {
     transform: translateY(-1px) !important;
-    box-shadow: 0 0 35px rgba(14,165,233,0.55) !important;
+    box-shadow: 0 0 35px rgba(176,125,58,0.38) !important;
   }
-  
-  /* FIXED RESPONSIVE GRID OVERLAP LOGIC */
   @media (max-width: 768px) {
     .navbar-container-box {
       flex-direction: column !important;
@@ -254,7 +247,7 @@ const responsiveStyles = `
 `;
 
 // ==========================================================
-// 2. EXCLUSIVE SOFT WHITE ANIMATION FOR HOME ONLY
+// 2. CREAM WARM PARTICLE ANIMATION
 // ==========================================================
 const HomeWhiteAnimationEngine = () => {
   const canvasRef = useRef(null);
@@ -324,7 +317,7 @@ const HomeWhiteAnimationEngine = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.18)'; 
+        ctx.fillStyle = 'rgba(176, 125, 58, 0.18)';
         ctx.fill();
 
         for (let j = i + 1; j < particleCount; j++) {
@@ -334,11 +327,11 @@ const HomeWhiteAnimationEngine = () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < 120) {
-            const alpha = ((120 - dist) / 120) * 0.12; 
+            const alpha = ((120 - dist) / 120) * 0.10;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`; 
+            ctx.strokeStyle = `rgba(176, 125, 58, ${alpha})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -411,7 +404,6 @@ function App() {
 
   useEffect(() => {
     if (lockUntil <= 0) return;
-
     const calculateTime = () => {
       const remainingTime = Math.ceil((lockUntil - Date.now()) / 1000);
       if (remainingTime <= 0) {
@@ -425,7 +417,6 @@ function App() {
         setTimeLeft(remainingTime);
       }
     };
-
     calculateTime();
     const timerId = setInterval(calculateTime, 1000);
     return () => clearInterval(timerId);
@@ -464,7 +455,6 @@ function App() {
       triggerToast(`Console locked.`);
       return;
     }
-
     if (passcode === 'bhai163') { 
       setIsAuthorized(true);
       setFailedAttempts(0);
@@ -474,7 +464,6 @@ function App() {
       const updatedAttempts = failedAttempts + 1;
       setFailedAttempts(updatedAttempts);
       localStorage.setItem('admin_failed_attempts', updatedAttempts.toString());
-
       if (updatedAttempts >= 3) {
         const lockDurationTimestamp = Date.now() + 2 * 60 * 60 * 1000; 
         setLockUntil(lockDurationTimestamp);
@@ -508,21 +497,21 @@ function App() {
         <div style={styles.adminOverlay}>
           <div style={styles.adminModal}>
             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '20px', alignItems: 'center'}}>
-              <h2 style={{fontSize: '20px', fontWeight: '700', color: '#fff'}}>🔧 Website Live Editor Core</h2>
+              <h2 style={{fontSize: '20px', fontWeight: '700', color: '#2c1f0e'}}>🔧 Website Live Editor Core</h2>
               <button 
                 onClick={() => { setIsAdminOpen(false); setIsAuthorized(false); setPasscode(''); }}
-                style={{background: 'none', border: 'none', color: '#64748b', fontSize: '18px', cursor: 'pointer'}}
+                style={{background: 'none', border: 'none', color: '#9a7a50', fontSize: '18px', cursor: 'pointer'}}
               >✕</button>
             </div>
 
             {Date.now() < lockUntil ? (
               <div style={{textAlign: 'center', padding: '20px 0'}}>
                 <div style={{fontSize: '44px', marginBottom: '15px'}}>🔒</div>
-                <h4 style={{color: '#ef4444', fontWeight: 'bold', fontSize: '16px'}}>SECURITY CONSOLE LOCKED</h4>
-                <p style={{color: '#94a3b8', fontSize: '14px', marginTop: '6px', lineHeight: '1.5'}}>
+                <h4 style={{color: '#c0392b', fontWeight: 'bold', fontSize: '16px'}}>SECURITY CONSOLE LOCKED</h4>
+                <p style={{color: '#7a6048', fontSize: '14px', marginTop: '6px', lineHeight: '1.5'}}>
                   Too many incorrect authentication parameters. Cooldown active.
                 </p>
-                <div style={{marginTop: '20px', padding: '12px', backgroundColor: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.15)', borderRadius: '8px', color: '#f87171', fontWeight: 'bold', fontSize: '15px', fontFamily: 'sans-serif'}}>
+                <div style={{marginTop: '20px', padding: '12px', backgroundColor: 'rgba(192,57,43,0.06)', border: '1px solid rgba(192,57,43,0.15)', borderRadius: '8px', color: '#c0392b', fontWeight: 'bold', fontSize: '15px', fontFamily: 'sans-serif'}}>
                   Cooldown: {formatTimeRemaining(timeLeft)}
                 </div>
               </div>
@@ -537,12 +526,12 @@ function App() {
                   placeholder="••••••••"
                   autoComplete="new-password"
                 />
-                <div style={{fontSize: '11px', color: '#64748b', marginBottom: '12px'}}>Remaining Entry Node Tokens: {3 - failedAttempts}/3</div>
+                <div style={{fontSize: '11px', color: '#9a7a50', marginBottom: '12px'}}>Remaining Entry Node Tokens: {3 - failedAttempts}/3</div>
                 <button type="submit" style={{...styles.auditBtn, width: '100%'}}>Verify Dashboard</button>
               </form>
             ) : (
               <div style={{display: 'flex', flexDirection: 'column'}}>
-                <p style={{fontSize: '13px', color: '#22c55e', marginBottom: '15px'}}>✓ Connected. Change any field below to see live changes on website.</p>
+                <p style={{fontSize: '13px', color: '#2d8a55', marginBottom: '15px'}}>✓ Connected. Change any field below to see live changes on website.</p>
                 
                 <div style={styles.adminSectionDivider}>🏠 Home Section Content</div>
                 <label style={styles.adminLabel}>Home Subtitle / Paragraph</label>
@@ -583,7 +572,7 @@ function App() {
 
                 <button 
                   onClick={() => { setIsAdminOpen(false); setIsAuthorized(false); setPasscode(''); triggerToast("Changes deployed successfully!"); }}
-                  style={{...styles.auditBtn, background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', marginTop: '15px', marginBottom: '10px'}}
+                  style={{...styles.auditBtn, background: 'linear-gradient(135deg, #2d8a55 0%, #1a6b3c 100%)', marginTop: '15px', marginBottom: '10px'}}
                 >
                   Save & Live Deploy
                 </button>
@@ -593,13 +582,12 @@ function App() {
         </div>
       )}
 
-      {/* FIXED NAVBAR STRIP INTERFACE */}
+      {/* NAVBAR */}
       <header style={styles.header}>
         <nav className="navbar-container-box" style={styles.navbar}>
           <div style={styles.logoWrapper} onClick={() => scrollToNode(homeRef)}>
             <span style={styles.logoText}>DigiGrow</span>
           </div>
-          
           <ul className="right-nav-wrapper" style={styles.navRightContainer}>
             <li><button onClick={() => scrollToNode(homeRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'home' ? styles.activeLink : {})}}>Home</button></li>
             <li><button onClick={() => scrollToNode(aboutRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'about' ? styles.activeLink : {})}}>About</button></li>
@@ -614,7 +602,7 @@ function App() {
         </nav>
       </header>
 
-      {/* 1. HOME SECTION WITH HIGHLIGHTS */}
+      {/* 1. HOME SECTION */}
       <section id="home" style={styles.scrollSection} ref={homeRef}>
         <HomeWhiteAnimationEngine />
         <div style={styles.viewWrapper}>
@@ -637,28 +625,28 @@ function App() {
           </div>
           <div style={styles.glassCard}>
             <div style={{display: 'flex', flexDirection: 'column', gap: '26px'}}>
-              <p style={{color: '#cbd5e1', lineHeight: '1.8', fontSize: '17px'}}>{liveData.aboutDesc}</p>
-              <h3 style={{color: '#38bdf8', fontSize: '18px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '15px'}}>Our Core Features Grid:</h3>
+              <p style={{color: '#4a3520', lineHeight: '1.8', fontSize: '17px'}}>{liveData.aboutDesc}</p>
+              <h3 style={{color: '#b07d3a', fontSize: '18px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '15px'}}>Our Core Features Grid:</h3>
               <div style={styles.gridContainer}>
                 <div style={styles.metricCard}>
                   <div style={{fontSize: '20px', marginBottom: '10px'}}>📱</div>
-                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#fff', marginBottom: '6px'}}>Social Media Management</h4>
-                  <p style={{color: '#64748b', fontSize: '14px', lineHeight: '1.5'}}>Sahi strategy aur rules ke saath pages ko manage aur daily brand reputation grow karna.</p>
+                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#1e1208', marginBottom: '6px'}}>Social Media Management</h4>
+                  <p style={{color: '#8a6a45', fontSize: '14px', lineHeight: '1.5'}}>Sahi strategy aur rules ke saath pages ko manage aur daily brand reputation grow karna.</p>
                 </div>
                 <div style={styles.metricCard}>
                   <div style={{fontSize: '20px', marginBottom: '10px'}}>📈</div>
-                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#fff', marginBottom: '6px'}}>Search Engine Optimization (SEO)</h4>
-                  <p style={{color: '#64748b', fontSize: '14px', lineHeight: '1.5'}}>Google search result ranking ko improve karke free customer traffic laana.</p>
+                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#1e1208', marginBottom: '6px'}}>Search Engine Optimization (SEO)</h4>
+                  <p style={{color: '#8a6a45', fontSize: '14px', lineHeight: '1.5'}}>Google search result ranking ko improve karke free customer traffic laana.</p>
                 </div>
                 <div style={styles.metricCard}>
                   <div style={{fontSize: '20px', marginBottom: '10px'}}>💻</div>
-                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#fff', marginBottom: '6px'}}>High-End Website Development</h4>
-                  <p style={{color: '#64748b', fontSize: '14px', lineHeight: '1.5'}}>Tez chalne wali modern custom single page websites jo business ka trust build karein.</p>
+                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#1e1208', marginBottom: '6px'}}>High-End Website Development</h4>
+                  <p style={{color: '#8a6a45', fontSize: '14px', lineHeight: '1.5'}}>Tez chalne wali modern custom single page websites jo business ka trust build karein.</p>
                 </div>
                 <div style={styles.metricCard}>
                   <div style={{fontSize: '20px', marginBottom: '10px'}}>🎯</div>
-                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#fff', marginBottom: '6px'}}>Targeted Google & Meta Ads</h4>
-                  <p style={{color: '#64748b', fontSize: '14px', lineHeight: '1.5'}}>Sahi logon ko low investment cost par real-time products aur business ads show karna.</p>
+                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#1e1208', marginBottom: '6px'}}>Targeted Google & Meta Ads</h4>
+                  <p style={{color: '#8a6a45', fontSize: '14px', lineHeight: '1.5'}}>Sahi logon ko low investment cost par real-time products aur business ads show karna.</p>
                 </div>
               </div>
             </div>
@@ -677,11 +665,11 @@ function App() {
             <div style={styles.glassCard}>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
                 <div style={{fontSize: '28px'}}>📱</div>
-                <span style={{fontSize: '11px', color: '#6366f1', fontWeight: '600', border: '1px solid rgba(99,102,241,0.2)', padding: '2px 10px', borderRadius: '12px'}}>ORGANIC MANAGEMENT</span>
+                <span style={{fontSize: '11px', color: '#7c5cbf', fontWeight: '600', border: '1px solid rgba(124,92,191,0.2)', padding: '2px 10px', borderRadius: '12px'}}>ORGANIC MANAGEMENT</span>
               </div>
-              <h3 style={{fontSize: '24px', fontWeight: '700', color: '#fff', marginBottom: '12px'}}>{liveData.service1Title}</h3>
-              <p style={{color: '#94a3b8', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px'}}>{liveData.service1Desc}</p>
-              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: '#cbd5e1'}}>
+              <h3 style={{fontSize: '24px', fontWeight: '700', color: '#1e1208', marginBottom: '12px'}}>{liveData.service1Title}</h3>
+              <p style={{color: '#7a6048', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px'}}>{liveData.service1Desc}</p>
+              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: '#4a3520'}}>
                 <li>✓ Daily Instagram Profile Strategy</li>
                 <li>✓ Professional Facebook Page Tuning</li>
                 <li>✓ High Engagement Creative Analytics</li>
@@ -690,11 +678,11 @@ function App() {
             <div style={styles.glassCard}>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
                 <div style={{fontSize: '28px'}}>🎯</div>
-                <span style={{fontSize: '11px', color: '#38bdf8', fontWeight: '600', border: '1px solid rgba(14,165,233,0.2)', padding: '2px 10px', borderRadius: '12px'}}>PAID CHANNELS</span>
+                <span style={{fontSize: '11px', color: '#b07d3a', fontWeight: '600', border: '1px solid rgba(176,125,58,0.25)', padding: '2px 10px', borderRadius: '12px'}}>PAID CHANNELS</span>
               </div>
-              <h3 style={{fontSize: '24px', fontWeight: '700', color: '#fff', marginBottom: '12px'}}>{liveData.service2Title}</h3>
-              <p style={{color: '#94a3b8', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px'}}>{liveData.service2Desc}</p>
-              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: '#cbd5e1'}}>
+              <h3 style={{fontSize: '24px', fontWeight: '700', color: '#1e1208', marginBottom: '12px'}}>{liveData.service2Title}</h3>
+              <p style={{color: '#7a6048', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px'}}>{liveData.service2Desc}</p>
+              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: '#4a3520'}}>
                 <li>✓ Targeted Google Search Campaigns</li>
                 <li>✓ High Converting Meta Video Lead Ads</li>
                 <li>✓ Daily Cost Management & Scaling Optimization</li>
@@ -703,11 +691,11 @@ function App() {
             <div style={styles.glassCard}>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
                 <div style={{fontSize: '28px'}}>💻</div>
-                <span style={{fontSize: '11px', color: '#10b981', fontWeight: '600', border: '1px solid rgba(16,185,129,0.2)', padding: '2px 10px', borderRadius: '12px'}}>WEB ARCHITECTURE</span>
+                <span style={{fontSize: '11px', color: '#2d8a55', fontWeight: '600', border: '1px solid rgba(45,138,85,0.2)', padding: '2px 10px', borderRadius: '12px'}}>WEB ARCHITECTURE</span>
               </div>
-              <h3 style={{fontSize: '24px', fontWeight: '700', color: '#fff', marginBottom: '12px'}}>{liveData.service3Title}</h3>
-              <p style={{color: '#94a3b8', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px'}}>{liveData.service3Desc}</p>
-              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: '#cbd5e1'}}>
+              <h3 style={{fontSize: '24px', fontWeight: '700', color: '#1e1208', marginBottom: '12px'}}>{liveData.service3Title}</h3>
+              <p style={{color: '#7a6048', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px'}}>{liveData.service3Desc}</p>
+              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: '#4a3520'}}>
                 <li>✓ Smooth Interactive User Interfaces</li>
                 <li>✓ Lightning Fast Page Speed & Loading Time</li>
                 <li>✓ All Mobile Responsive Clean Design Layouts</li>
@@ -725,24 +713,22 @@ function App() {
             <p style={styles.subtitleText}>Hamari team se connect karke apne business growth plan ko discuss karein.</p>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '550px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
-            
             <div style={styles.metricCard}>
-              <span style={{fontSize: '11px', color: '#38bdf8', fontWeight: '600', letterSpacing: '0.5px'}}>📍 OUR LOCATION</span>
-              <p style={{fontSize: '18px', fontWeight: '600', marginTop: '6px', color: '#ffffff'}}>{liveData.contactLocation}</p>
+              <span style={{fontSize: '11px', color: '#b07d3a', fontWeight: '600', letterSpacing: '0.5px'}}>📍 OUR LOCATION</span>
+              <p style={{fontSize: '18px', fontWeight: '600', marginTop: '6px', color: '#1e1208'}}>{liveData.contactLocation}</p>
             </div>
             <div style={styles.metricCard}>
-              <span style={{fontSize: '11px', color: '#818cf8', fontWeight: '600', letterSpacing: '0.5px'}}>📧 EMAIL US</span>
-              <p style={{fontSize: '17px', fontWeight: '600', marginTop: '6px', color: '#ffffff'}}>{liveData.contactEmail}</p>
+              <span style={{fontSize: '11px', color: '#7c5cbf', fontWeight: '600', letterSpacing: '0.5px'}}>📧 EMAIL US</span>
+              <p style={{fontSize: '17px', fontWeight: '600', marginTop: '6px', color: '#1e1208'}}>{liveData.contactEmail}</p>
             </div>
             <div style={styles.metricCard}>
-              <span style={{fontSize: '11px', color: '#34d399', fontWeight: '600', letterSpacing: '0.5px'}}>📞 CALL US</span>
-              <p style={{fontSize: '18px', fontWeight: '600', marginTop: '6px', color: '#ffffff'}}>{liveData.contactPhone}</p>
+              <span style={{fontSize: '11px', color: '#2d8a55', fontWeight: '600', letterSpacing: '0.5px'}}>📞 CALL US</span>
+              <p style={{fontSize: '18px', fontWeight: '600', marginTop: '6px', color: '#1e1208'}}>{liveData.contactPhone}</p>
             </div>
-            
-            <div style={{...styles.metricCard, background: 'linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(99,102,241,0.05) 100%)', border: '1px solid rgba(56,189,248,0.2)'}}>
-              <span style={{fontSize: '11px', color: '#38bdf8', fontWeight: '800', letterSpacing: '1px'}}>🎉 OUR PROUD TRUST METRIC</span>
-              <p style={{fontSize: '22px', fontWeight: '800', marginTop: '6px', color: '#38bdf8', letterSpacing: '-0.5px'}}>{liveData.happyCustomersText}</p>
-              <p style={{color: '#94a3b8', fontSize: '13px', marginTop: '2px'}}>Trusted by growing brands and startups all over India.</p>
+            <div style={{...styles.metricCard, background: 'linear-gradient(135deg, rgba(176,125,58,0.10) 0%, rgba(200,160,90,0.05) 100%)', border: '1px solid rgba(176,125,58,0.22)'}}>
+              <span style={{fontSize: '11px', color: '#b07d3a', fontWeight: '800', letterSpacing: '1px'}}>🎉 OUR PROUD TRUST METRIC</span>
+              <p style={{fontSize: '22px', fontWeight: '800', marginTop: '6px', color: '#b07d3a', letterSpacing: '-0.5px'}}>{liveData.happyCustomersText}</p>
+              <p style={{color: '#9a7a50', fontSize: '13px', marginTop: '2px'}}>Trusted by growing brands and startups all over India.</p>
             </div>
           </div>
         </div>
