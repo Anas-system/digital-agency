@@ -56,7 +56,7 @@ const styles = {
     marginLeft: '10px', flexShrink: 0
   },
   scrollSection: {
-    minHeight: '100vh', paddingTop: '140px', paddingBottom: '100px',
+    minHeight: '100vh', paddingTop: '100px', paddingBottom: '100px',
     paddingLeft: '6%', paddingRight: '6%',
     display: 'flex', alignItems: 'center', justifyContent: 'center',
     position: 'relative', zIndex: 10, boxSizing: 'border-box',
@@ -165,17 +165,141 @@ const responsiveStyles = `
     background: rgba(176,125,58,0.18);
     margin-right: 6px;
   }
+  /* ── Hamburger Menu ── */
+  .hamburger-btn {
+    display: none;
+    background: transparent;
+    border: 1px solid rgba(176,125,58,0.25);
+    border-radius: 7px;
+    width: 36px; height: 36px;
+    cursor: pointer;
+    align-items: center; justify-content: center;
+    flex-direction: column; gap: 5px;
+    padding: 0;
+    outline: none;
+    transition: background 0.2s ease;
+    WebkitTapHighlightColor: transparent;
+    flex-shrink: 0;
+  }
+  .hamburger-btn:hover { background: rgba(138,94,30,0.08) !important; }
+  .hamburger-btn span {
+    display: block;
+    width: 18px; height: 1.8px;
+    background: #8a5e1e;
+    border-radius: 2px;
+    transition: all 0.25s ease;
+  }
+  .hamburger-btn.open span:nth-child(1) { transform: translateY(6.8px) rotate(45deg); }
+  .hamburger-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger-btn.open span:nth-child(3) { transform: translateY(-6.8px) rotate(-45deg); }
+
+  .mobile-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 5%;
+    background: rgba(255,249,242,0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(176,125,58,0.18);
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(44,31,14,0.13);
+    padding: 8px;
+    min-width: 170px;
+    z-index: 200;
+    display: flex; flex-direction: column; gap: 2px;
+    animation: dropIn 0.2s ease;
+  }
+  @keyframes dropIn {
+    from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .mobile-dropdown button {
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 8px !important;
+    color: #6b4f2e !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    font-family: 'Source Serif 4', serif !important;
+    padding: 10px 14px !important;
+    text-align: left !important;
+    cursor: pointer !important;
+    transition: all 0.18s ease !important;
+    width: 100% !important;
+    outline: none !important;
+    letter-spacing: 0.2px !important;
+    white-space: nowrap !important;
+  }
+  .mobile-dropdown button:hover { background: rgba(138,94,30,0.07) !important; color: #8a5e1e !important; }
+  .mobile-dropdown button.mob-active { background: rgba(176,125,58,0.09) !important; color: #8a5e1e !important; font-weight: 700 !important; border: 1px solid rgba(176,125,58,0.22) !important; }
+  .mobile-dropdown-divider { height: 1px; background: rgba(176,125,58,0.10); margin: 4px 6px; }
+
   @media (max-width: 900px) {
     .si-wrap { display: none !important; }
-    .navbar-container-box { flex-direction: row !important; gap: 0 !important; padding: 12px 4% !important; justify-content: space-between !important; align-items: center !important; }
-    .right-nav-wrapper { width: auto !important; flex-direction: row !important; justify-content: flex-end !important; align-items: center !important; gap: 0 !important; flex-wrap: nowrap !important; }
-    .right-nav-wrapper li { display: inline-flex !important; }
-    .right-nav-wrapper button { padding: 5px 7px !important; font-size: 11px !important; white-space: nowrap !important; }
-    .login-btn-glow { padding: 6px 11px !important; font-size: 11px !important; margin-left: 4px !important; }
+    .navbar-container-box { flex-direction: row !important; gap: 0 !important; padding: 12px 5% !important; justify-content: space-between !important; align-items: center !important; }
+    .right-nav-wrapper { display: flex !important; align-items: center !important; gap: 8px !important; }
+    .desktop-nav-items { display: none !important; }
+    .desktop-login-only { display: none !important; }
+    .hamburger-btn { display: flex !important; }
+    .hero-section-padding { 
+      padding-top: 74px !important; 
+      padding-bottom: 40px !important;
+      min-height: auto !important;
+      align-items: flex-start !important;
+    }
   }
-  @media (max-width: 400px) {
-    .right-nav-wrapper button { padding: 4px 5px !important; font-size: 10px !important; }
-    .login-btn-glow { padding: 5px 9px !important; font-size: 10px !important; }
+  @media (min-width: 901px) {
+    .hamburger-btn { display: none !important; }
+    .desktop-nav-items { display: contents !important; }
+    .desktop-login-only { display: inline-flex !important; }
+    .mobile-dropdown { display: none !important; }
+  }
+
+  .mob-login-item {
+    background: linear-gradient(135deg, rgba(138,94,30,0.08) 0%, rgba(138,94,30,0.04) 100%) !important;
+    color: #8a5e1e !important;
+    font-weight: 700 !important;
+    border: 1px solid rgba(138,94,30,0.20) !important;
+    border-radius: 8px !important;
+  }
+  .mob-login-item:hover { background: rgba(138,94,30,0.14) !important; }
+
+  /* ── Section Dividers ── */
+  .section-divider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 0;
+    position: relative;
+    z-index: 10;
+    background: transparent;
+    overflow: hidden;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(176,125,58,0.25), transparent);
+  }
+  .section-divider-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .section-divider-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: rgba(176,125,58,0.35);
+  }
+  .section-divider-diamond {
+    width: 7px; height: 7px;
+    background: #c49a45;
+    transform: rotate(45deg);
+    opacity: 0.55;
   }
 
   @keyframes heroFadeUp {
@@ -263,6 +387,7 @@ function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [passcode, setPasscode] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [failedAttempts, setFailedAttempts] = useState(() => parseInt(localStorage.getItem('admin_failed_attempts') || '0', 10));
   const [lockUntil, setLockUntil] = useState(() => parseInt(localStorage.getItem('admin_lock_timestamp') || '0', 10));
   const [timeLeft, setTimeLeft] = useState(0);
@@ -322,6 +447,11 @@ function App() {
   const scrollToSection = (id) => {
     const map = { home: homeRef, services: servicesRef, about: aboutRef, 'find-us': findUsRef };
     if (map[id]?.current) scrollToNode(map[id]);
+  };
+
+  const mobileNavClick = (ref) => {
+    setIsMobileMenuOpen(false);
+    scrollToNode(ref);
   };
 
   const handleAuthVerify = (e) => {
@@ -437,22 +567,46 @@ function App() {
 
       {/* ── NAVBAR ── */}
       <header style={styles.header}>
-        <nav className="navbar-container-box" style={styles.navbar}>
+        <nav className="navbar-container-box" style={{...styles.navbar, position: 'relative'}}>
           <div style={styles.logoWrapper} onClick={() => scrollToNode(homeRef)}>
             <span style={styles.logoText}>DigiGrow</span>
           </div>
-          <ul className="right-nav-wrapper" style={styles.navRightContainer}>
-            <li><button onClick={() => scrollToNode(homeRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'home' ? styles.activeLink : {})}}>Home</button></li>
-            <li><button onClick={() => scrollToNode(servicesRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'services' ? styles.activeLink : {})}}>Service</button></li>
-            <li><button onClick={() => scrollToNode(aboutRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'about' ? styles.activeLink : {})}}>About</button></li>
-            <li><button onClick={() => scrollToNode(findUsRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'find-us' ? styles.activeLink : {})}}>Find Us</button></li>
-            <li><button className="login-btn-glow" style={styles.auditBtn} onClick={() => setIsAdminOpen(true)}>Login</button></li>
-          </ul>
+          <div className="right-nav-wrapper" style={{display:'flex', alignItems:'center', gap:'8px'}}>
+            {/* Desktop nav links */}
+            <ul className="desktop-nav-items" style={styles.navRightContainer}>
+              <li><button onClick={() => scrollToNode(homeRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'home' ? styles.activeLink : {})}}>Home</button></li>
+              <li><button onClick={() => scrollToNode(servicesRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'services' ? styles.activeLink : {})}}>Service</button></li>
+              <li><button onClick={() => scrollToNode(aboutRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'about' ? styles.activeLink : {})}}>About</button></li>
+              <li><button onClick={() => scrollToNode(findUsRef)} className="nav-custom-btn" style={{...styles.linkButton, ...(activeSection === 'find-us' ? styles.activeLink : {})}}>Find Us</button></li>
+            </ul>
+            {/* Desktop Login — hidden on mobile */}
+            <button className="login-btn-glow desktop-login-only" style={styles.auditBtn} onClick={() => setIsAdminOpen(true)}>Login</button>
+            {/* Hamburger button — mobile only */}
+            <button
+              className={`hamburger-btn${isMobileMenuOpen ? ' open' : ''}`}
+              onClick={() => setIsMobileMenuOpen(v => !v)}
+              aria-label="Toggle menu"
+            >
+              <span/><span/><span/>
+            </button>
+          </div>
+
+          {/* Mobile dropdown */}
+          {isMobileMenuOpen && (
+            <div className="mobile-dropdown">
+              <button className={activeSection === 'home' ? 'mob-active' : ''} onClick={() => mobileNavClick(homeRef)}>🏠 Home</button>
+              <button className={activeSection === 'services' ? 'mob-active' : ''} onClick={() => mobileNavClick(servicesRef)}>⚡ Service</button>
+              <button className={activeSection === 'about' ? 'mob-active' : ''} onClick={() => mobileNavClick(aboutRef)}>👥 About</button>
+              <button className={activeSection === 'find-us' ? 'mob-active' : ''} onClick={() => mobileNavClick(findUsRef)}>📍 Find Us</button>
+              <div className="mobile-dropdown-divider"/>
+              <button className="mob-login-item" onClick={() => { setIsMobileMenuOpen(false); setIsAdminOpen(true); }}>🔐 Login</button>
+            </div>
+          )}
         </nav>
       </header>
 
       {/* ── HOME ── */}
-      <section id="home" style={{...styles.scrollSection, ...styles.sectionNormal}} ref={homeRef}>
+      <section id="home" className="hero-section-padding" style={{...styles.scrollSection, ...styles.sectionNormal}} ref={homeRef}>
         <div style={styles.viewWrapper}>
           <div style={styles.heroSection}>
             <h1 className="hero-title" style={styles.hugeTitle}>{liveData.homeTitle} <span style={styles.gradientBlueText}>DigiGrow</span></h1>
@@ -470,6 +624,15 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* ── DIVIDER ── */}
+      <div className="section-divider" style={{backgroundColor:'#faf6f0', padding:'0 6%'}}>
+        <div className="section-divider-inner">
+          <div className="section-divider-dot"/>
+          <div className="section-divider-diamond"/>
+          <div className="section-divider-dot"/>
+        </div>
+      </div>
 
       {/* ── SERVICES ── */}
       <section id="services" style={{...styles.scrollSection, ...styles.sectionAlt}} ref={servicesRef}>
@@ -525,6 +688,15 @@ function App() {
         </div>
       </section>
 
+      {/* ── DIVIDER ── */}
+      <div className="section-divider" style={{backgroundColor:'#f2ebe0', padding:'0 6%'}}>
+        <div className="section-divider-inner">
+          <div className="section-divider-dot"/>
+          <div className="section-divider-diamond"/>
+          <div className="section-divider-dot"/>
+        </div>
+      </div>
+
       {/* ── ABOUT ── */}
       <section id="about" style={{...styles.scrollSection, ...styles.sectionNormal}} ref={aboutRef}>
         <div style={styles.viewWrapper}>
@@ -553,6 +725,15 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* ── DIVIDER ── */}
+      <div className="section-divider" style={{backgroundColor:'#faf6f0', padding:'0 6%'}}>
+        <div className="section-divider-inner">
+          <div className="section-divider-dot"/>
+          <div className="section-divider-diamond"/>
+          <div className="section-divider-dot"/>
+        </div>
+      </div>
 
       {/* ── FIND US ── */}
       <section id="find-us" style={{...styles.scrollSection, ...styles.sectionAlt}} ref={findUsRef}>
