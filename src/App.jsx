@@ -533,7 +533,7 @@ function App() {
       <section id="about" style={styles.scrollSection} ref={aboutRef}>
         <div style={styles.viewWrapper}>
           <div style={styles.sectionHeader}>
-            <h1 style={styles.hugeTitle}>{liveData.aboutHeader}</h1>
+            <h1 style={styles.hugeTitle}>Who We Are & <span style={styles.gradientBlueText}>What We Do</span></h1>
             <p style={styles.subtitleText}>{liveData.aboutSubtitle}</p>
           </div>
           <div style={styles.glassCard}>
