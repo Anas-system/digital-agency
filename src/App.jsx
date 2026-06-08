@@ -167,10 +167,15 @@ const responsiveStyles = `
   }
   @media (max-width: 900px) {
     .si-wrap { display: none !important; }
-    .navbar-container-box { flex-direction: column !important; gap: 14px !important; padding: 14px 4% !important; }
-    .right-nav-wrapper { width: 100% !important; flex-direction: row !important; justify-content: center !important; align-items: center !important; gap: 4px !important; flex-wrap: wrap !important; }
-    .right-nav-wrapper li { display: inline-block !important; }
-    .right-nav-wrapper button { padding: 6px 10px !important; font-size: 13px !important; }
+    .navbar-container-box { flex-direction: row !important; gap: 0 !important; padding: 12px 4% !important; justify-content: space-between !important; align-items: center !important; }
+    .right-nav-wrapper { width: auto !important; flex-direction: row !important; justify-content: flex-end !important; align-items: center !important; gap: 0 !important; flex-wrap: nowrap !important; }
+    .right-nav-wrapper li { display: inline-flex !important; }
+    .right-nav-wrapper button { padding: 5px 7px !important; font-size: 11px !important; white-space: nowrap !important; }
+    .login-btn-glow { padding: 6px 11px !important; font-size: 11px !important; margin-left: 4px !important; }
+  }
+  @media (max-width: 400px) {
+    .right-nav-wrapper button { padding: 4px 5px !important; font-size: 10px !important; }
+    .login-btn-glow { padding: 5px 9px !important; font-size: 10px !important; }
   }
 
   @keyframes heroFadeUp {
@@ -195,6 +200,9 @@ const responsiveStyles = `
     outline: none; WebkitTapHighlightColor: transparent;
   }
   .scroll-arrow svg { display: block; }
+
+  .wa-btn:hover { background: #1ebe5d !important; box-shadow: 0 4px 18px rgba(37,211,102,0.40) !important; transform: translateY(-1px) !important; }
+  .wa-call-btn:hover { background: rgba(37,211,102,0.08) !important; border-color: rgba(37,211,102,0.7) !important; }
 
   .site-footer {
     text-align: center; padding: 32px 6% 28px;
@@ -562,10 +570,65 @@ function App() {
               <span style={{fontSize:'10px',color:'#7c5cbf',fontWeight:'700',letterSpacing:'1.2px',textTransform:'uppercase'}}>Email Us</span>
               <p style={{fontSize:'16px',fontWeight:'500',marginTop:'8px',marginBottom:0,color:'#1a1008'}}>{liveData.contactEmail}</p>
             </div>
-            <div style={styles.metricCard} className="metric-card-hover">
-              <span style={{fontSize:'10px',color:'#2d8a55',fontWeight:'700',letterSpacing:'1.2px',textTransform:'uppercase'}}>Call Us</span>
-              <p style={{fontSize:'17px',fontWeight:'600',marginTop:'8px',marginBottom:0,color:'#1a1008'}}>{liveData.contactPhone}</p>
+            {/* ── CONTACT ACTIONS CARD ── */}
+            <div style={{
+              ...styles.metricCard,
+              background: 'linear-gradient(135deg, #fff9f2 0%, #f0faf4 100%)',
+              border: '1px solid rgba(37,211,102,0.20)',
+              padding: '24px'
+            }} className="metric-card-hover">
+              <span style={{fontSize:'10px', color:'#2d8a55', fontWeight:'700', letterSpacing:'1.2px', textTransform:'uppercase'}}>Call / WhatsApp</span>
+              <p style={{fontSize:'20px', fontWeight:'700', marginTop:'8px', marginBottom:'20px', color:'#1a1008', letterSpacing:'-0.3px'}}>{liveData.contactPhone}</p>
+              
+              {/* Divider */}
+              <div style={{borderTop:'1px solid rgba(0,0,0,0.06)', marginBottom:'20px'}}/>
+
+              <div style={{display:'flex', gap:'12px', flexWrap:'wrap'}}>
+                {/* WhatsApp Message */}
+                <a
+                  href={`https://wa.me/${liveData.contactPhone.replace(/\D/g,'')}`}
+                  target="_blank" rel="noopener noreferrer"
+                  className="wa-btn"
+                  style={{
+                    flex: 1, minWidth: '130px',
+                    display:'flex', alignItems:'center', justifyContent:'center', gap:'8px',
+                    backgroundColor:'#25D366', color:'#fff', fontWeight:'700',
+                    fontSize:'14px', padding:'13px 16px', borderRadius:'10px',
+                    textDecoration:'none',
+                    boxShadow:'0 3px 14px rgba(37,211,102,0.32)',
+                    transition:'all 0.2s ease', fontFamily:"'Source Serif 4', serif"
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+                    <circle cx="16" cy="16" r="16" fill="rgba(255,255,255,0.25)"/>
+                    <path d="M22.5 9.5A9.05 9.05 0 0 0 16 7a9 9 0 0 0-7.8 13.5L7 25l4.65-1.22A9 9 0 1 0 22.5 9.5zm-6.5 13.8a7.47 7.47 0 0 1-3.8-1.04l-.27-.16-2.76.72.74-2.7-.18-.28A7.5 7.5 0 1 1 16 23.3zm4.1-5.6c-.22-.11-1.32-.65-1.53-.73s-.35-.11-.5.11-.57.73-.7.88-.26.17-.48.06a6.1 6.1 0 0 1-1.8-1.11 6.77 6.77 0 0 1-1.25-1.55c-.13-.22 0-.34.1-.45s.22-.26.33-.39a1.53 1.53 0 0 0 .22-.37.41.41 0 0 0 0-.39c-.06-.11-.5-1.2-.68-1.64s-.36-.37-.5-.38h-.42a.81.81 0 0 0-.59.28 2.47 2.47 0 0 0-.77 1.84 4.3 4.3 0 0 0 .9 2.28 9.84 9.84 0 0 0 3.77 3.33c.53.23.94.37 1.26.47a3 3 0 0 0 1.4.09 2.27 2.27 0 0 0 1.49-1.05 1.84 1.84 0 0 0 .13-1.05c-.06-.09-.2-.14-.42-.25z" fill="#fff"/>
+                  </svg>
+                  WhatsApp
+                </a>
+
+                {/* Call Button */}
+                <a
+                  href={`tel:${liveData.contactPhone}`}
+                  className="wa-call-btn"
+                  style={{
+                    flex: 1, minWidth: '130px',
+                    display:'flex', alignItems:'center', justifyContent:'center', gap:'8px',
+                    backgroundColor:'#fff', color:'#2d8a55', fontWeight:'700',
+                    fontSize:'14px', padding:'13px 16px', borderRadius:'10px',
+                    textDecoration:'none',
+                    border:'1.5px solid rgba(37,211,102,0.40)',
+                    boxShadow:'0 2px 8px rgba(44,31,14,0.06)',
+                    transition:'all 0.2s ease', fontFamily:"'Source Serif 4', serif"
+                  }}
+                >
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2d8a55" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                  Call Now
+                </a>
+              </div>
             </div>
+
             <div style={{...styles.metricCard, backgroundColor:'#fff4e6', border:'1px solid rgba(138,94,30,0.18)'}} className="metric-card-hover">
               <span style={{fontSize:'10px',color:'#8a5e1e',fontWeight:'700',letterSpacing:'1.2px',textTransform:'uppercase'}}>Trust Metric</span>
               <p style={{fontSize:'26px',fontWeight:'800',marginTop:'8px',marginBottom:'4px',color:'#8a5e1e',letterSpacing:'-0.5px'}}>{liveData.happyCustomersText}</p>
