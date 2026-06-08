@@ -60,7 +60,13 @@ const styles = {
     paddingLeft: '6%', paddingRight: '6%',
     display: 'flex', alignItems: 'center', justifyContent: 'center',
     position: 'relative', zIndex: 10, boxSizing: 'border-box',
-    borderBottom: '1px solid rgba(176,125,58,0.07)', width: '100%'
+    width: '100%'
+  },
+  sectionAlt: {
+    backgroundColor: '#f2ebe0',
+  },
+  sectionNormal: {
+    backgroundColor: '#faf6f0',
   },
   viewWrapper: { width: '100%', maxWidth: '1200px', margin: '0 auto', boxSizing: 'border-box' },
   heroSection: { display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', width: '100%', position: 'relative', zIndex: 20 },
@@ -113,6 +119,7 @@ const responsiveStyles = `
     margin: 0 !important; padding: 0 !important;
     background-color: #faf6f0 !important; overflow-x: hidden !important;
     width: 100% !important; box-sizing: border-box !important;
+    max-width: 100vw !important;
   }
   * { box-sizing: border-box !important; }
   .nav-custom-btn { background-color: transparent !important; background: transparent !important; }
@@ -123,7 +130,7 @@ const responsiveStyles = `
 
   /* ── Scroll Indicator ── */
   .si-wrap {
-    position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+    position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
     z-index: 200; display: flex; flex-direction: column; align-items: flex-end; gap: 0;
   }
   .si-row { display: flex; flex-direction: column; align-items: flex-end; }
@@ -135,9 +142,9 @@ const responsiveStyles = `
     font-size: 11px; font-weight: 600; letter-spacing: 1px;
     text-transform: uppercase; white-space: nowrap;
     font-family: 'Source Serif 4', serif;
-    opacity: 0; transform: translateX(8px);
+    opacity: 0; transform: translateX(4px);
     transition: opacity 0.22s ease, transform 0.22s ease;
-    pointer-events: none;
+    pointer-events: none; max-width: 80px; overflow: hidden;
   }
   .si-item:hover .si-label { opacity: 1; transform: translateX(0); }
   .si-dot {
@@ -166,7 +173,33 @@ const responsiveStyles = `
     .right-nav-wrapper button { padding: 6px 10px !important; font-size: 13px !important; }
   }
 
-  /* ── Hero entrance animation ── */
+  /* ── Mobile Section Pill ── */
+  @keyframes pillSlideUp   { from { opacity:0; transform: translateY(14px); } to { opacity:1; transform: translateY(0); } }
+  @keyframes pillSlideDown { from { opacity:1; transform: translateY(0); } to { opacity:0; transform: translateY(14px); } }
+  .section-pill {
+    display: none;
+  }
+  @media (max-width: 900px) {
+    .section-pill {
+      display: flex; align-items: center; gap: 8px;
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: rgba(255,249,242,0.96);
+      border: 1.5px solid rgba(138,94,30,0.25);
+      border-radius: 99px;
+      padding: 9px 20px;
+      font-size: 12px; font-weight: 700; color: #8a5e1e;
+      font-family: 'Source Serif 4', serif; letter-spacing: 0.8px; text-transform: uppercase;
+      box-shadow: 0 4px 20px rgba(44,31,14,0.13);
+      z-index: 500; pointer-events: none;
+      white-space: nowrap;
+    }
+    .section-pill.show { animation: pillSlideUp   0.3s ease both; }
+    .section-pill.hide { animation: pillSlideDown 0.3s ease both; }
+    .section-pill-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #8a5e1e; flex-shrink: 0;
+    }
+  }
   @keyframes heroFadeUp {
     from { opacity: 0; transform: translateY(28px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -190,29 +223,11 @@ const responsiveStyles = `
   }
   .scroll-arrow svg { display: block; }
 
-  /* ── Section Banner ── */
-  @keyframes bannerIn  { from { opacity:0; transform: translateX(30px); } to { opacity:1; transform: translateX(0); } }
-  @keyframes bannerOut { from { opacity:1; transform: translateX(0); } to { opacity:0; transform: translateX(30px); } }
-  .section-banner {
-    position: fixed; bottom: 90px; right: 24px;
-    background: #fff9f2; border: 1px solid rgba(138,94,30,0.22);
-    border-left: 3px solid #8a5e1e;
-    padding: 10px 18px; border-radius: 8px;
-    font-size: 13px; font-weight: 700; color: #8a5e1e;
-    font-family: 'Source Serif 4', serif; letter-spacing: 0.3px;
-    box-shadow: 0 6px 24px rgba(44,31,14,0.10);
-    z-index: 500; pointer-events: none;
-  }
-  .section-banner.entering { animation: bannerIn  0.3s ease both; }
-  .section-banner.leaving  { animation: bannerOut 0.3s ease both; }
-  @media (max-width: 900px) {
-    .section-banner { right: 12px; bottom: 20px; font-size: 12px; padding: 8px 14px; }
-  }
   .site-footer {
     text-align: center; padding: 32px 6% 28px;
-    border-top: 1px solid rgba(176,125,58,0.10);
+    border-top: 1px solid rgba(176,125,58,0.12);
     font-size: 13px; color: #a08060; letter-spacing: 0.2px;
-    background: #faf6f0;
+    background: #f2ebe0;
   }
   .site-footer strong { color: #8a5e1e; }
 `;
@@ -245,8 +260,9 @@ function ScrollIndicator({ activeSection, onDotClick }) {
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
-  const [sectionBanner, setSectionBanner] = useState({ visible: false, label: '' });
-  const sectionBannerTimer = useRef(null);
+  const [pill, setPill] = useState({ visible: false, hiding: false, label: '' });
+  const pillTimer = useRef(null);
+  const pillHideTimer = useRef(null);
   const [toast, setToast] = useState({ visible: false, message: '' });
   
   const [liveData, setLiveData] = useState({
@@ -301,7 +317,7 @@ function App() {
     return () => clearInterval(timerId);
   }, [lockUntil]);
 
-  const SECTION_LABELS = { home: '🏠 Home', services: '⚡ Service', about: '👥 About', 'find-us': '📍 Find Us' };
+  const PILL_LABELS = { services: '⚡ Service', about: '👥 About', 'find-us': '📍 Find Us' };
 
   useEffect(() => {
     const sectionRefs = [
@@ -314,16 +330,28 @@ function App() {
       (entries) => entries.forEach(e => {
         if (e.isIntersecting) {
           setActiveSection(e.target.id);
-          // Show section banner
-          if (sectionBannerTimer.current) clearTimeout(sectionBannerTimer.current);
-          setSectionBanner({ visible: true, label: SECTION_LABELS[e.target.id] || e.target.id });
-          sectionBannerTimer.current = setTimeout(() => setSectionBanner({ visible: false, label: '' }), 2000);
+          // Show pill only for non-home sections on mobile
+          if (e.target.id !== 'home' && PILL_LABELS[e.target.id]) {
+            if (pillTimer.current) clearTimeout(pillTimer.current);
+            if (pillHideTimer.current) clearTimeout(pillHideTimer.current);
+            setPill({ visible: true, hiding: false, label: PILL_LABELS[e.target.id] });
+            pillTimer.current = setTimeout(() => {
+              setPill(p => ({ ...p, hiding: true }));
+              pillHideTimer.current = setTimeout(() => setPill({ visible: false, hiding: false, label: '' }), 320);
+            }, 2200);
+          } else if (e.target.id === 'home') {
+            setPill({ visible: false, hiding: false, label: '' });
+          }
         }
       }),
       { root: null, rootMargin: '-20% 0px -50% 0px', threshold: 0 }
     );
     sectionRefs.forEach(item => { if (item.ref.current) observer.observe(item.ref.current); });
-    return () => { observer.disconnect(); if (sectionBannerTimer.current) clearTimeout(sectionBannerTimer.current); };
+    return () => {
+      observer.disconnect();
+      if (pillTimer.current) clearTimeout(pillTimer.current);
+      if (pillHideTimer.current) clearTimeout(pillHideTimer.current);
+    };
   }, []);
 
   const triggerToast = (msg) => {
@@ -381,9 +409,12 @@ function App() {
         <div style={styles.toast}><span>{toast.message}</span></div>
       )}
 
-      {/* ── SECTION BANNER ── */}
-      {sectionBanner.visible && (
-        <div className="section-banner entering">{sectionBanner.label}</div>
+      {/* ── MOBILE SECTION PILL ── */}
+      {pill.visible && (
+        <div className={`section-pill ${pill.hiding ? 'hide' : 'show'}`}>
+          <div className="section-pill-dot" />
+          {pill.label}
+        </div>
       )}
 
       {/* ── ADMIN MODAL ── */}
@@ -473,7 +504,7 @@ function App() {
       </header>
 
       {/* ── HOME ── */}
-      <section id="home" style={styles.scrollSection} ref={homeRef}>
+      <section id="home" style={{...styles.scrollSection, ...styles.sectionNormal}} ref={homeRef}>
         <div style={styles.viewWrapper}>
           <div style={styles.heroSection}>
             <h1 className="hero-title" style={styles.hugeTitle}>{liveData.homeTitle} <span style={styles.gradientBlueText}>DigiGrow</span></h1>
@@ -493,7 +524,7 @@ function App() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section id="services" style={styles.scrollSection} ref={servicesRef}>
+      <section id="services" style={{...styles.scrollSection, ...styles.sectionAlt}} ref={servicesRef}>
         <div style={styles.viewWrapper}>
           <div style={styles.sectionHeader}>
             <h1 style={styles.hugeTitle}>Our Premium <span style={styles.gradientBlueText}>Services</span></h1>
@@ -547,7 +578,7 @@ function App() {
       </section>
 
       {/* ── ABOUT ── */}
-      <section id="about" style={styles.scrollSection} ref={aboutRef}>
+      <section id="about" style={{...styles.scrollSection, ...styles.sectionNormal}} ref={aboutRef}>
         <div style={styles.viewWrapper}>
           <div style={styles.sectionHeader}>
             <h1 style={styles.hugeTitle}>Who We Are & <span style={styles.gradientBlueText}>What We Do</span></h1>
@@ -576,7 +607,7 @@ function App() {
       </section>
 
       {/* ── FIND US ── */}
-      <section id="find-us" style={styles.scrollSection} ref={findUsRef}>
+      <section id="find-us" style={{...styles.scrollSection, ...styles.sectionAlt}} ref={findUsRef}>
         <div style={styles.viewWrapper}>
           <div style={styles.sectionHeader}>
             <h1 style={styles.hugeTitle}>Find <span style={styles.gradientBlueText}>Us</span></h1>
