@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 // ===================================================
-// 1. CREAM MELT THEME — WARM IVORY SYSTEM
+// 1. CREAM MELT THEME — PROFESSIONAL EDITION
 // ===================================================
 const styles = {
   main: { 
-    backgroundColor: '#fdf8f2', 
+    backgroundColor: '#faf6f0', 
     minHeight: '100vh', 
     color: '#2c1f0e', 
     fontFamily: "'Source Serif 4', Georgia, 'Times New Roman', serif",
@@ -23,16 +23,16 @@ const styles = {
   ambientLighting: {
     position: 'fixed', top: '10%', left: '50%', transform: 'translate(-50%, -50%)',
     width: '120vw', height: '60vh',
-    background: 'radial-gradient(circle at 50% 30%, rgba(210,170,110,0.13) 0%, rgba(245,230,200,0.06) 50%, transparent 100%)',
+    background: 'radial-gradient(circle at 50% 30%, rgba(210,170,110,0.10) 0%, rgba(245,230,200,0.04) 50%, transparent 100%)',
     pointerEvents: 'none', zIndex: 2
   },
   header: {
-    backdropFilter: 'blur(24px)',
-    WebkitBackdropFilter: 'blur(24px)',
-    borderBottom: '1px solid rgba(180,140,90,0.18)',
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
+    borderBottom: '1px solid rgba(176,125,58,0.14)',
     position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-    backgroundColor: 'rgba(253, 248, 242, 0.88)', 
-    boxShadow: '0 4px 30px rgba(180,140,90,0.08), inset 0 1px 1px rgba(255,255,255,0.7)',
+    backgroundColor: 'rgba(250, 246, 240, 0.95)', 
+    boxShadow: '0 1px 0 rgba(176,125,58,0.08), 0 8px 32px rgba(44,31,14,0.06)',
     transition: 'all 0.3s ease',
     width: '100%'
   },
@@ -40,7 +40,7 @@ const styles = {
     display: 'flex', 
     justifyContent: 'space-between', 
     alignItems: 'center', 
-    padding: '16px 5%',
+    padding: '18px 6%',
     maxWidth: '1280px',
     margin: '0 auto',
     gap: '20px',
@@ -57,151 +57,162 @@ const styles = {
     flexShrink: 0
   },
   logoText: { 
-    fontSize: '26px', 
+    fontSize: '24px', 
     fontWeight: '800', 
-    letterSpacing: '-1px',
-    color: '#b07d3a', 
+    letterSpacing: '-0.5px',
+    color: '#8a5e1e', 
     userSelect: 'none',
-    textShadow: '0 0 20px rgba(176,125,58,0.2)'
   },
   navRightContainer: {
     display: 'flex',
     alignItems: 'center',
-    gap: '12px', 
+    gap: '4px', 
     listStyle: 'none',
     padding: 0,
     margin: 0,
     flexWrap: 'nowrap'
   },
   linkButton: { 
-    color: '#7a6048', 
+    color: '#6b4f2e', 
     background: 'transparent',
     backgroundColor: 'transparent',
     border: '1px solid transparent', 
     fontSize: '14px', 
     fontWeight: '500', 
-    transition: 'all 0.25s ease', 
-    padding: '8px 16px', 
+    transition: 'all 0.2s ease', 
+    padding: '8px 18px', 
     position: 'relative', 
-    letterSpacing: '0.3px', 
+    letterSpacing: '0.2px', 
     cursor: 'pointer',
     fontFamily: "'Source Serif 4', serif",
     outline: 'none',
-    borderRadius: '20px', 
+    borderRadius: '6px', 
     boxShadow: 'none',
     WebkitTapHighlightColor: 'transparent',
     whiteSpace: 'nowrap'
   },
   activeLink: { 
-    color: '#b07d3a', 
+    color: '#8a5e1e', 
     fontWeight: '600',
-    backgroundColor: 'rgba(176,125,58,0.10)',
-    border: '1px solid rgba(176,125,58,0.28)',
-    textShadow: '0 0 10px rgba(176,125,58,0.2)',
-    boxShadow: '0 4px 15px rgba(176,125,58,0.06)'
+    backgroundColor: 'rgba(176,125,58,0.09)',
+    border: '1px solid rgba(176,125,58,0.22)',
+    boxShadow: 'none'
   },
   auditBtn: { 
-    padding: '8px 18px', 
-    background: 'linear-gradient(135deg, #c9913a 0%, #a0692a 100%)', 
-    border: '1px solid rgba(255,255,255,0.25)', 
-    borderRadius: '20px', 
-    color: '#fff8ee', 
+    padding: '9px 22px', 
+    background: '#8a5e1e', 
+    border: 'none', 
+    borderRadius: '6px', 
+    color: '#fdf8f0', 
     fontWeight: '600', 
     cursor: 'pointer', 
     fontSize: '13px',
-    boxShadow: '0 4px 14px rgba(176,125,58,0.22)', 
-    transition: 'all 0.3s ease',
+    letterSpacing: '0.3px',
+    boxShadow: '0 2px 8px rgba(138,94,30,0.25)', 
+    transition: 'all 0.2s ease',
     fontFamily: "'Source Serif 4', serif",
     whiteSpace: 'nowrap',
     outline: 'none',
     WebkitTapHighlightColor: 'transparent',
-    marginLeft: '6px',
+    marginLeft: '10px',
     flexShrink: 0
   },
   scrollSection: {
     minHeight: '100vh', 
-    paddingTop: '150px', 
-    paddingBottom: '80px',
-    paddingLeft: '5%',
-    paddingRight: '5%',
+    paddingTop: '140px', 
+    paddingBottom: '100px',
+    paddingLeft: '6%',
+    paddingRight: '6%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
     zIndex: 10,
     boxSizing: 'border-box',
-    borderBottom: '1px solid rgba(180,140,90,0.08)',
+    borderBottom: '1px solid rgba(176,125,58,0.07)',
     width: '100%'
   },
   viewWrapper: { 
     width: '100%',
-    maxWidth: '1440px',
+    maxWidth: '1200px',
     margin: '0 auto',
     boxSizing: 'border-box'
   },
   heroSection: { display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', width: '100%', position: 'relative', zIndex: 20 },
-  sectionHeader: { textAlign: 'center', marginBottom: '50px', width: '100%' },
-  hugeTitle: { fontSize: 'clamp(32px, 7vw, 64px)', fontWeight: '700', lineHeight: '1.25', letterSpacing: '-1px', marginBottom: '24px', width: '100%', color: '#1e1208' },
-  gradientBlueText: { color: '#b07d3a' },
-  subtitleText: { color: '#7a6048', fontSize: 'clamp(15px, 3.8vw, 20px)', maxWidth: '760px', lineHeight: '1.7', margin: '0 auto', fontWeight: '300', width: '100%' },
+  sectionHeader: { textAlign: 'center', marginBottom: '56px', width: '100%' },
+  hugeTitle: { fontSize: 'clamp(30px, 6vw, 58px)', fontWeight: '700', lineHeight: '1.2', letterSpacing: '-0.5px', marginBottom: '20px', width: '100%', color: '#1a1008' },
+  gradientBlueText: { color: '#8a5e1e' },
+  subtitleText: { color: '#7a6048', fontSize: 'clamp(15px, 2.5vw, 18px)', maxWidth: '640px', lineHeight: '1.75', margin: '0 auto', fontWeight: '400', width: '100%' },
   topBadge: {
-    background: 'linear-gradient(135deg, rgba(176,125,58,0.12) 0%, rgba(200,160,90,0.10) 100%)',
-    border: '1px solid rgba(176,125,58,0.32)',
-    borderRadius: '30px',
-    padding: '6px 16px',
-    fontSize: '13px',
-    fontWeight: '600',
-    color: '#b07d3a',
-    letterSpacing: '0.5px',
-    marginBottom: '24px',
+    background: 'rgba(176,125,58,0.08)',
+    border: '1px solid rgba(176,125,58,0.25)',
+    borderRadius: '4px',
+    padding: '5px 14px',
+    fontSize: '11px',
+    fontWeight: '700',
+    color: '#8a5e1e',
+    letterSpacing: '1.5px',
+    marginBottom: '28px',
     display: 'inline-block',
-    boxShadow: '0 4px 20px rgba(176,125,58,0.10)',
     textTransform: 'uppercase'
   },
   glassCard: {
-    backgroundColor: 'rgba(255, 252, 245, 0.72)', 
-    backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-    border: '1px solid rgba(180,140,90,0.13)', borderRadius: '20px', padding: 'clamp(20px, 5vw, 40px)',
-    boxShadow: '0 20px 40px rgba(180,140,90,0.08)', transition: 'all 0.3s ease', width: '100%',
+    backgroundColor: '#fff9f2',
+    border: '1px solid rgba(176,125,58,0.12)', 
+    borderRadius: '12px', 
+    padding: 'clamp(24px, 4vw, 44px)',
+    boxShadow: '0 4px 24px rgba(44,31,14,0.06), 0 1px 4px rgba(44,31,14,0.04)', 
+    transition: 'all 0.3s ease', 
+    width: '100%',
     boxSizing: 'border-box'
   },
   metricCard: {
-    backgroundColor: 'rgba(245, 235, 218, 0.5)', border: '1px solid rgba(180,140,90,0.12)',
-    borderRadius: '14px', padding: '25px', transition: 'all 0.3s ease', position: 'relative', overflow: 'hidden', width: '100%', boxSizing: 'border-box'
+    backgroundColor: '#fff9f2',
+    border: '1px solid rgba(176,125,58,0.10)',
+    borderRadius: '10px', 
+    padding: '28px 24px', 
+    transition: 'box-shadow 0.2s ease', 
+    position: 'relative', 
+    overflow: 'hidden', 
+    width: '100%', 
+    boxSizing: 'border-box',
+    boxShadow: '0 2px 12px rgba(44,31,14,0.04)'
   },
-  gridContainer: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', width: '100%', marginTop: '40px', boxSizing: 'border-box' },
+  gridContainer: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', width: '100%', marginTop: '40px', boxSizing: 'border-box' },
   toast: {
-    position: 'fixed', bottom: '30px', right: '30px', backgroundColor: '#fdf3e3',
-    borderLeft: '4px solid #b07d3a', borderTop: '1px solid rgba(180,140,90,0.15)',
-    borderRight: '1px solid rgba(180,140,90,0.15)', borderBottom: '1px solid rgba(180,140,90,0.15)',
-    padding: '14px 20px', borderRadius: '6px', boxShadow: '0 20px 45px rgba(180,140,90,0.15)',
+    position: 'fixed', bottom: '30px', right: '30px', backgroundColor: '#fff9f2',
+    borderLeft: '3px solid #8a5e1e',
+    border: '1px solid rgba(176,125,58,0.18)',
+    borderLeftWidth: '3px',
+    borderLeftColor: '#8a5e1e',
+    padding: '14px 20px', borderRadius: '8px', boxShadow: '0 8px 32px rgba(44,31,14,0.12)',
     zIndex: 9999, display: 'flex', alignItems: 'center', gap: '10px', color: '#2c1f0e', fontSize: '14px'
   },
   adminOverlay: {
     position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-    backgroundColor: 'rgba(253,248,242,0.80)', backdropFilter: 'blur(16px)',
+    backgroundColor: 'rgba(250,246,240,0.85)', backdropFilter: 'blur(16px)',
     zIndex: 99999, display: 'flex', alignItems: 'center',
     justifyContent: 'center', padding: '20px', boxSizing: 'border-box'
   },
   adminModal: {
-    backgroundColor: '#fffbf4', border: '1px solid rgba(180,140,90,0.18)',
-    borderRadius: '16px', padding: '30px', maxWidth: '650px', width: '100%',
-    boxShadow: '0 25px 50px -12px rgba(180,140,90,0.18)', maxHeight: '90vh', overflowY: 'auto'
+    backgroundColor: '#fff9f2', border: '1px solid rgba(176,125,58,0.15)',
+    borderRadius: '12px', padding: '32px', maxWidth: '650px', width: '100%',
+    boxShadow: '0 20px 60px rgba(44,31,14,0.12)', maxHeight: '90vh', overflowY: 'auto'
   },
   adminInput: {
-    width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid rgba(180,140,90,0.2)',
+    width: '100%', padding: '12px 14px', borderRadius: '6px', border: '1px solid rgba(176,125,58,0.2)',
     backgroundColor: '#fdf8f0', color: '#2c1f0e', fontSize: '14px', outline: 'none', marginTop: '6px',
     marginBottom: '16px', fontFamily: 'sans-serif'
   },
-  adminLabel: { fontSize: '12px', color: '#b07d3a', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' },
-  adminSectionDivider: { borderTop: '1px solid rgba(180,140,90,0.15)', margin: '20px 0 15px 0', paddingTop: '10px', color: '#2c1f0e', fontSize: '14px', fontWeight: 'bold' }
+  adminLabel: { fontSize: '11px', color: '#8a5e1e', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.8px' },
+  adminSectionDivider: { borderTop: '1px solid rgba(176,125,58,0.12)', margin: '20px 0 15px 0', paddingTop: '12px', color: '#2c1f0e', fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px' }
 };
 
 const responsiveStyles = `
   html, body {
     margin: 0 !important;
     padding: 0 !important;
-    background-color: #fdf8f2 !important;
+    background-color: #faf6f0 !important;
     overflow-x: hidden !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -214,13 +225,23 @@ const responsiveStyles = `
     background: transparent !important;
   }
   .nav-custom-btn:hover {
-    color: #b07d3a !important;
-    background-color: rgba(176,125,58,0.07) !important;
-    border: 1px solid rgba(176,125,58,0.18) !important;
+    color: #8a5e1e !important;
+    background-color: rgba(138,94,30,0.07) !important;
+    border: 1px solid rgba(138,94,30,0.15) !important;
   }
   .login-btn-glow:hover {
+    background: #6e4a17 !important;
+    box-shadow: 0 4px 18px rgba(138,94,30,0.35) !important;
     transform: translateY(-1px) !important;
-    box-shadow: 0 0 35px rgba(176,125,58,0.38) !important;
+  }
+  .service-card:hover {
+    box-shadow: 0 8px 36px rgba(44,31,14,0.10) !important;
+    border-color: rgba(138,94,30,0.20) !important;
+    transform: translateY(-2px) !important;
+  }
+  .metric-card-hover:hover {
+    box-shadow: 0 6px 24px rgba(44,31,14,0.09) !important;
+    border-color: rgba(138,94,30,0.18) !important;
   }
   @media (max-width: 768px) {
     .navbar-container-box {
@@ -233,7 +254,7 @@ const responsiveStyles = `
       flex-direction: row !important;
       justify-content: center !important;
       align-items: center !important;
-      gap: 6px !important;
+      gap: 4px !important;
       flex-wrap: wrap !important;
     }
     .right-nav-wrapper li {
@@ -246,111 +267,7 @@ const responsiveStyles = `
   }
 `;
 
-// ==========================================================
-// 2. CREAM WARM PARTICLE ANIMATION
-// ==========================================================
-const HomeWhiteAnimationEngine = () => {
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    
-    let animationFrameId;
-    let width = (canvas.width = canvas.parentElement.offsetWidth);
-    let height = (canvas.height = canvas.parentElement.offsetHeight);
-    let mouse = { x: null, y: null, radius: 140 };
-
-    const handleMouseMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-    };
-    const handleMouseLeave = () => { mouse.x = null; mouse.y = null; };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
-
-    const handleResize = () => {
-      if (!canvas || !canvas.parentElement) return;
-      width = canvas.width = canvas.parentElement.offsetWidth;
-      height = canvas.height = canvas.parentElement.offsetHeight;
-    };
-    window.addEventListener('resize', handleResize);
-
-    const particles = [];
-    const particleCount = 75; 
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.35, 
-        vy: (Math.random() - 0.5) * 0.35,
-        radius: Math.random() * 1.5 + 0.5
-      });
-    }
-
-    const renderLoop = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      for (let i = 0; i < particleCount; i++) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
-
-        if (mouse.x !== null && mouse.y !== null) {
-          const dx = p.x - mouse.x;
-          const dy = p.y - mouse.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < mouse.radius) {
-            const force = (mouse.radius - dist) / mouse.radius;
-            const angle = Math.atan2(dy, dx);
-            p.x += Math.cos(angle) * force * 1.0;
-            p.y += Math.sin(angle) * force * 1.0;
-          }
-        }
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(176, 125, 58, 0.18)';
-        ctx.fill();
-
-        for (let j = i + 1; j < particleCount; j++) {
-          const p2 = particles[j];
-          const dx = p.x - p2.x;
-          const dy = p.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 120) {
-            const alpha = ((120 - dist) / 120) * 0.10;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(176, 125, 58, ${alpha})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
-      animationFrameId = requestAnimationFrame(renderLoop);
-    };
-    renderLoop();
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
-  return <div style={styles.canvasContainer}><canvas ref={canvasRef} /></div>;
-};
+// Animation removed as per user request
 
 // ===================================================
 // 3. MAIN APP MODULE
@@ -488,7 +405,6 @@ function App() {
       
       {toast.visible && (
         <div style={styles.toast}>
-          <span>ℹ️</span>
           <span>{toast.message}</span>
         </div>
       )}
@@ -497,7 +413,7 @@ function App() {
         <div style={styles.adminOverlay}>
           <div style={styles.adminModal}>
             <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '20px', alignItems: 'center'}}>
-              <h2 style={{fontSize: '20px', fontWeight: '700', color: '#2c1f0e'}}>🔧 Website Live Editor Core</h2>
+              <h2 style={{fontSize: '20px', fontWeight: '700', color: '#2c1f0e'}}>Website Live Editor</h2>
               <button 
                 onClick={() => { setIsAdminOpen(false); setIsAuthorized(false); setPasscode(''); }}
                 style={{background: 'none', border: 'none', color: '#9a7a50', fontSize: '18px', cursor: 'pointer'}}
@@ -506,7 +422,7 @@ function App() {
 
             {Date.now() < lockUntil ? (
               <div style={{textAlign: 'center', padding: '20px 0'}}>
-                <div style={{fontSize: '44px', marginBottom: '15px'}}>🔒</div>
+                <div style={{fontSize: '44px', marginBottom: '15px'}}>&#x1F512;</div>
                 <h4 style={{color: '#c0392b', fontWeight: 'bold', fontSize: '16px'}}>SECURITY CONSOLE LOCKED</h4>
                 <p style={{color: '#7a6048', fontSize: '14px', marginTop: '6px', lineHeight: '1.5'}}>
                   Too many incorrect authentication parameters. Cooldown active.
@@ -533,17 +449,17 @@ function App() {
               <div style={{display: 'flex', flexDirection: 'column'}}>
                 <p style={{fontSize: '13px', color: '#2d8a55', marginBottom: '15px'}}>✓ Connected. Change any field below to see live changes on website.</p>
                 
-                <div style={styles.adminSectionDivider}>🏠 Home Section Content</div>
+                <div style={styles.adminSectionDivider}>Home Section Content</div>
                 <label style={styles.adminLabel}>Home Subtitle / Paragraph</label>
                 <textarea rows="3" value={liveData.homeSubtitle} onChange={(e) => setLiveData({...liveData, homeSubtitle: e.target.value})} style={{...styles.adminInput, resize: 'none'}} />
 
-                <div style={styles.adminSectionDivider}>ℹ️ About Section Content</div>
+                <div style={styles.adminSectionDivider}>About Section Content</div>
                 <label style={styles.adminLabel}>About Heading Tagline</label>
                 <input type="text" value={liveData.aboutSubtitle} onChange={(e) => setLiveData({...liveData, aboutSubtitle: e.target.value})} style={styles.adminInput} />
                 <label style={styles.adminLabel}>About Main Long Description</label>
                 <textarea rows="4" value={liveData.aboutDesc} onChange={(e) => setLiveData({...liveData, aboutDesc: e.target.value})} style={{...styles.adminInput, resize: 'none'}} />
 
-                <div style={styles.adminSectionDivider}>💼 Services Block Content</div>
+                <div style={styles.adminSectionDivider}>Services Block Content</div>
                 <label style={styles.adminLabel}>Service 1 Title</label>
                 <input type="text" value={liveData.service1Title} onChange={(e) => setLiveData({...liveData, service1Title: e.target.value})} style={styles.adminInput} />
                 <label style={styles.adminLabel}>Service 1 Short Description</label>
@@ -559,7 +475,7 @@ function App() {
                 <label style={styles.adminLabel}>Service 3 Short Description</label>
                 <input type="text" value={liveData.service3Desc} onChange={(e) => setLiveData({...liveData, service3Desc: e.target.value})} style={styles.adminInput} />
 
-                <div style={styles.adminSectionDivider}>📍 Find Us / Contact Data</div>
+                <div style={styles.adminSectionDivider}>Find Us / Contact Data</div>
                 <label style={styles.adminLabel}>Our Location</label>
                 <input type="text" value={liveData.contactLocation} onChange={(e) => setLiveData({...liveData, contactLocation: e.target.value})} style={styles.adminInput} />
                 <label style={styles.adminLabel}>Email Us</label>
@@ -602,12 +518,9 @@ function App() {
         </nav>
       </header>
 
-      {/* 1. HOME SECTION */}
       <section id="home" style={styles.scrollSection} ref={homeRef}>
-        <HomeWhiteAnimationEngine />
         <div style={styles.viewWrapper}>
           <div style={styles.heroSection}>
-            <div style={styles.topBadge}>🚀 Next-Gen Marketing Engine</div>
             <h1 style={styles.hugeTitle}>
               {liveData.homeTitle} <span style={styles.gradientBlueText}>DigiGrow</span>
             </h1>
@@ -626,27 +539,23 @@ function App() {
           <div style={styles.glassCard}>
             <div style={{display: 'flex', flexDirection: 'column', gap: '26px'}}>
               <p style={{color: '#4a3520', lineHeight: '1.8', fontSize: '17px'}}>{liveData.aboutDesc}</p>
-              <h3 style={{color: '#b07d3a', fontSize: '18px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '15px'}}>Our Core Features Grid:</h3>
+              <h3 style={{color: '#8a5e1e', fontSize: '13px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1.5px', marginTop: '15px', marginBottom: '0'}}>Our Core Features</h3>
               <div style={styles.gridContainer}>
-                <div style={styles.metricCard}>
-                  <div style={{fontSize: '20px', marginBottom: '10px'}}>📱</div>
-                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#1e1208', marginBottom: '6px'}}>Social Media Management</h4>
-                  <p style={{color: '#8a6a45', fontSize: '14px', lineHeight: '1.5'}}>Sahi strategy aur rules ke saath pages ko manage aur daily brand reputation grow karna.</p>
+                <div style={styles.metricCard} className="metric-card-hover">
+                  <h4 style={{fontSize: '16px', fontWeight: '600', color: '#1a1008', marginBottom: '8px', letterSpacing: '-0.2px'}}>Social Media Management</h4>
+                  <p style={{color: '#8a6a45', fontSize: '14px', lineHeight: '1.6', margin: 0}}>Sahi strategy aur rules ke saath pages ko manage aur daily brand reputation grow karna.</p>
                 </div>
-                <div style={styles.metricCard}>
-                  <div style={{fontSize: '20px', marginBottom: '10px'}}>📈</div>
-                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#1e1208', marginBottom: '6px'}}>Search Engine Optimization (SEO)</h4>
-                  <p style={{color: '#8a6a45', fontSize: '14px', lineHeight: '1.5'}}>Google search result ranking ko improve karke free customer traffic laana.</p>
+                <div style={styles.metricCard} className="metric-card-hover">
+                  <h4 style={{fontSize: '16px', fontWeight: '600', color: '#1a1008', marginBottom: '8px', letterSpacing: '-0.2px'}}>Search Engine Optimization (SEO)</h4>
+                  <p style={{color: '#8a6a45', fontSize: '14px', lineHeight: '1.6', margin: 0}}>Google search result ranking ko improve karke free customer traffic laana.</p>
                 </div>
-                <div style={styles.metricCard}>
-                  <div style={{fontSize: '20px', marginBottom: '10px'}}>💻</div>
-                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#1e1208', marginBottom: '6px'}}>High-End Website Development</h4>
-                  <p style={{color: '#8a6a45', fontSize: '14px', lineHeight: '1.5'}}>Tez chalne wali modern custom single page websites jo business ka trust build karein.</p>
+                <div style={styles.metricCard} className="metric-card-hover">
+                  <h4 style={{fontSize: '16px', fontWeight: '600', color: '#1a1008', marginBottom: '8px', letterSpacing: '-0.2px'}}>High-End Website Development</h4>
+                  <p style={{color: '#8a6a45', fontSize: '14px', lineHeight: '1.6', margin: 0}}>Tez chalne wali modern custom single page websites jo business ka trust build karein.</p>
                 </div>
-                <div style={styles.metricCard}>
-                  <div style={{fontSize: '20px', marginBottom: '10px'}}>🎯</div>
-                  <h4 style={{fontSize: '19px', fontWeight: '600', color: '#1e1208', marginBottom: '6px'}}>Targeted Google & Meta Ads</h4>
-                  <p style={{color: '#8a6a45', fontSize: '14px', lineHeight: '1.5'}}>Sahi logon ko low investment cost par real-time products aur business ads show karna.</p>
+                <div style={styles.metricCard} className="metric-card-hover">
+                  <h4 style={{fontSize: '16px', fontWeight: '600', color: '#1a1008', marginBottom: '8px', letterSpacing: '-0.2px'}}>Targeted Google & Meta Ads</h4>
+                  <p style={{color: '#8a6a45', fontSize: '14px', lineHeight: '1.6', margin: 0}}>Sahi logon ko low investment cost par real-time products aur business ads show karna.</p>
                 </div>
               </div>
             </div>
@@ -662,44 +571,47 @@ function App() {
             <p style={styles.subtitleText}>Aapke business scale ko badhane ke liye custom targeted services plans.</p>
           </div>
           <div style={styles.gridContainer}>
-            <div style={styles.glassCard}>
-              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
-                <div style={{fontSize: '28px'}}>📱</div>
-                <span style={{fontSize: '11px', color: '#7c5cbf', fontWeight: '600', border: '1px solid rgba(124,92,191,0.2)', padding: '2px 10px', borderRadius: '12px'}}>ORGANIC MANAGEMENT</span>
+            <div style={{...styles.glassCard, transition: 'all 0.25s ease'}} className="service-card">
+              <div style={{marginBottom: '20px'}}>
+                <span style={{fontSize: '10px', color: '#7c5cbf', fontWeight: '700', border: '1px solid rgba(124,92,191,0.2)', padding: '3px 10px', borderRadius: '4px', letterSpacing: '1px'}}>ORGANIC MANAGEMENT</span>
               </div>
-              <h3 style={{fontSize: '24px', fontWeight: '700', color: '#1e1208', marginBottom: '12px'}}>{liveData.service1Title}</h3>
-              <p style={{color: '#7a6048', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px'}}>{liveData.service1Desc}</p>
-              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: '#4a3520'}}>
-                <li>✓ Daily Instagram Profile Strategy</li>
-                <li>✓ Professional Facebook Page Tuning</li>
-                <li>✓ High Engagement Creative Analytics</li>
-              </ul>
+              <h3 style={{fontSize: '22px', fontWeight: '700', color: '#1a1008', marginBottom: '12px', letterSpacing: '-0.3px'}}>{liveData.service1Title}</h3>
+              <p style={{color: '#7a6048', fontSize: '15px', lineHeight: '1.7', marginBottom: '24px'}}>{liveData.service1Desc}</p>
+              <div style={{borderTop: '1px solid rgba(176,125,58,0.10)', paddingTop: '20px'}}>
+                <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', color: '#5a4030'}}>
+                  <li style={{display: 'flex', alignItems: 'center', gap: '10px'}}><span style={{width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'rgba(124,92,191,0.12)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#7c5cbf', flexShrink: 0}}>✓</span>Daily Instagram Profile Strategy</li>
+                  <li style={{display: 'flex', alignItems: 'center', gap: '10px'}}><span style={{width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'rgba(124,92,191,0.12)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#7c5cbf', flexShrink: 0}}>✓</span>Professional Facebook Page Tuning</li>
+                  <li style={{display: 'flex', alignItems: 'center', gap: '10px'}}><span style={{width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'rgba(124,92,191,0.12)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#7c5cbf', flexShrink: 0}}>✓</span>High Engagement Creative Analytics</li>
+                </ul>
+              </div>
             </div>
-            <div style={styles.glassCard}>
-              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
-                <div style={{fontSize: '28px'}}>🎯</div>
-                <span style={{fontSize: '11px', color: '#b07d3a', fontWeight: '600', border: '1px solid rgba(176,125,58,0.25)', padding: '2px 10px', borderRadius: '12px'}}>PAID CHANNELS</span>
+            <div style={{...styles.glassCard, transition: 'all 0.25s ease'}} className="service-card">
+              <div style={{marginBottom: '20px'}}>
+                <span style={{fontSize: '10px', color: '#8a5e1e', fontWeight: '700', border: '1px solid rgba(138,94,30,0.22)', padding: '3px 10px', borderRadius: '4px', letterSpacing: '1px'}}>PAID CHANNELS</span>
               </div>
-              <h3 style={{fontSize: '24px', fontWeight: '700', color: '#1e1208', marginBottom: '12px'}}>{liveData.service2Title}</h3>
-              <p style={{color: '#7a6048', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px'}}>{liveData.service2Desc}</p>
-              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: '#4a3520'}}>
-                <li>✓ Targeted Google Search Campaigns</li>
-                <li>✓ High Converting Meta Video Lead Ads</li>
-                <li>✓ Daily Cost Management & Scaling Optimization</li>
-              </ul>
+              <h3 style={{fontSize: '22px', fontWeight: '700', color: '#1a1008', marginBottom: '12px', letterSpacing: '-0.3px'}}>{liveData.service2Title}</h3>
+              <p style={{color: '#7a6048', fontSize: '15px', lineHeight: '1.7', marginBottom: '24px'}}>{liveData.service2Desc}</p>
+              <div style={{borderTop: '1px solid rgba(176,125,58,0.10)', paddingTop: '20px'}}>
+                <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', color: '#5a4030'}}>
+                  <li style={{display: 'flex', alignItems: 'center', gap: '10px'}}><span style={{width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'rgba(138,94,30,0.10)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#8a5e1e', flexShrink: 0}}>✓</span>Targeted Google Search Campaigns</li>
+                  <li style={{display: 'flex', alignItems: 'center', gap: '10px'}}><span style={{width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'rgba(138,94,30,0.10)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#8a5e1e', flexShrink: 0}}>✓</span>High Converting Meta Video Lead Ads</li>
+                  <li style={{display: 'flex', alignItems: 'center', gap: '10px'}}><span style={{width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'rgba(138,94,30,0.10)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#8a5e1e', flexShrink: 0}}>✓</span>Daily Cost Management & Scaling Optimization</li>
+                </ul>
+              </div>
             </div>
-            <div style={styles.glassCard}>
-              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
-                <div style={{fontSize: '28px'}}>💻</div>
-                <span style={{fontSize: '11px', color: '#2d8a55', fontWeight: '600', border: '1px solid rgba(45,138,85,0.2)', padding: '2px 10px', borderRadius: '12px'}}>WEB ARCHITECTURE</span>
+            <div style={{...styles.glassCard, transition: 'all 0.25s ease'}} className="service-card">
+              <div style={{marginBottom: '20px'}}>
+                <span style={{fontSize: '10px', color: '#2d8a55', fontWeight: '700', border: '1px solid rgba(45,138,85,0.2)', padding: '3px 10px', borderRadius: '4px', letterSpacing: '1px'}}>WEB ARCHITECTURE</span>
               </div>
-              <h3 style={{fontSize: '24px', fontWeight: '700', color: '#1e1208', marginBottom: '12px'}}>{liveData.service3Title}</h3>
-              <p style={{color: '#7a6048', fontSize: '15px', lineHeight: '1.6', marginBottom: '20px'}}>{liveData.service3Desc}</p>
-              <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '14px', color: '#4a3520'}}>
-                <li>✓ Smooth Interactive User Interfaces</li>
-                <li>✓ Lightning Fast Page Speed & Loading Time</li>
-                <li>✓ All Mobile Responsive Clean Design Layouts</li>
-              </ul>
+              <h3 style={{fontSize: '22px', fontWeight: '700', color: '#1a1008', marginBottom: '12px', letterSpacing: '-0.3px'}}>{liveData.service3Title}</h3>
+              <p style={{color: '#7a6048', fontSize: '15px', lineHeight: '1.7', marginBottom: '24px'}}>{liveData.service3Desc}</p>
+              <div style={{borderTop: '1px solid rgba(176,125,58,0.10)', paddingTop: '20px'}}>
+                <ul style={{listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14px', color: '#5a4030'}}>
+                  <li style={{display: 'flex', alignItems: 'center', gap: '10px'}}><span style={{width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'rgba(45,138,85,0.10)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#2d8a55', flexShrink: 0}}>✓</span>Smooth Interactive User Interfaces</li>
+                  <li style={{display: 'flex', alignItems: 'center', gap: '10px'}}><span style={{width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'rgba(45,138,85,0.10)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#2d8a55', flexShrink: 0}}>✓</span>Lightning Fast Page Speed & Loading Time</li>
+                  <li style={{display: 'flex', alignItems: 'center', gap: '10px'}}><span style={{width: '18px', height: '18px', borderRadius: '50%', backgroundColor: 'rgba(45,138,85,0.10)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#2d8a55', flexShrink: 0}}>✓</span>All Mobile Responsive Clean Design Layouts</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -712,23 +624,23 @@ function App() {
             <h1 style={styles.hugeTitle}>Find <span style={styles.gradientBlueText}>Us</span></h1>
             <p style={styles.subtitleText}>Hamari team se connect karke apne business growth plan ko discuss karein.</p>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '550px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
-            <div style={styles.metricCard}>
-              <span style={{fontSize: '11px', color: '#b07d3a', fontWeight: '600', letterSpacing: '0.5px'}}>📍 OUR LOCATION</span>
-              <p style={{fontSize: '18px', fontWeight: '600', marginTop: '6px', color: '#1e1208'}}>{liveData.contactLocation}</p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '520px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
+            <div style={styles.metricCard} className="metric-card-hover">
+              <span style={{fontSize: '10px', color: '#8a5e1e', fontWeight: '700', letterSpacing: '1.2px', textTransform: 'uppercase'}}>Our Location</span>
+              <p style={{fontSize: '17px', fontWeight: '600', marginTop: '8px', marginBottom: 0, color: '#1a1008'}}>{liveData.contactLocation}</p>
             </div>
-            <div style={styles.metricCard}>
-              <span style={{fontSize: '11px', color: '#7c5cbf', fontWeight: '600', letterSpacing: '0.5px'}}>📧 EMAIL US</span>
-              <p style={{fontSize: '17px', fontWeight: '600', marginTop: '6px', color: '#1e1208'}}>{liveData.contactEmail}</p>
+            <div style={styles.metricCard} className="metric-card-hover">
+              <span style={{fontSize: '10px', color: '#7c5cbf', fontWeight: '700', letterSpacing: '1.2px', textTransform: 'uppercase'}}>Email Us</span>
+              <p style={{fontSize: '16px', fontWeight: '500', marginTop: '8px', marginBottom: 0, color: '#1a1008'}}>{liveData.contactEmail}</p>
             </div>
-            <div style={styles.metricCard}>
-              <span style={{fontSize: '11px', color: '#2d8a55', fontWeight: '600', letterSpacing: '0.5px'}}>📞 CALL US</span>
-              <p style={{fontSize: '18px', fontWeight: '600', marginTop: '6px', color: '#1e1208'}}>{liveData.contactPhone}</p>
+            <div style={styles.metricCard} className="metric-card-hover">
+              <span style={{fontSize: '10px', color: '#2d8a55', fontWeight: '700', letterSpacing: '1.2px', textTransform: 'uppercase'}}>Call Us</span>
+              <p style={{fontSize: '17px', fontWeight: '600', marginTop: '8px', marginBottom: 0, color: '#1a1008'}}>{liveData.contactPhone}</p>
             </div>
-            <div style={{...styles.metricCard, background: 'linear-gradient(135deg, rgba(176,125,58,0.10) 0%, rgba(200,160,90,0.05) 100%)', border: '1px solid rgba(176,125,58,0.22)'}}>
-              <span style={{fontSize: '11px', color: '#b07d3a', fontWeight: '800', letterSpacing: '1px'}}>🎉 OUR PROUD TRUST METRIC</span>
-              <p style={{fontSize: '22px', fontWeight: '800', marginTop: '6px', color: '#b07d3a', letterSpacing: '-0.5px'}}>{liveData.happyCustomersText}</p>
-              <p style={{color: '#9a7a50', fontSize: '13px', marginTop: '2px'}}>Trusted by growing brands and startups all over India.</p>
+            <div style={{...styles.metricCard, backgroundColor: '#fff4e6', border: '1px solid rgba(138,94,30,0.18)'}} className="metric-card-hover">
+              <span style={{fontSize: '10px', color: '#8a5e1e', fontWeight: '700', letterSpacing: '1.2px', textTransform: 'uppercase'}}>Trust Metric</span>
+              <p style={{fontSize: '26px', fontWeight: '800', marginTop: '8px', marginBottom: '4px', color: '#8a5e1e', letterSpacing: '-0.5px'}}>{liveData.happyCustomersText}</p>
+              <p style={{color: '#9a7a50', fontSize: '13px', marginTop: 0, marginBottom: 0}}>Trusted by growing brands and startups all over India.</p>
             </div>
           </div>
         </div>
